@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export", // Always export statically
-  basePath: "/HadiKhan007.github.io",
-  assetPrefix: "/HadiKhan007.github.io/",
+  // Enable static export only for production builds
+  ...(process.env.NODE_ENV === "production"
+    ? {
+        output: "export",
+        basePath: "/HadiKhan007.github.io",
+        assetPrefix: "/HadiKhan007.github.io/",
+      }
+    : {}),
   images: {
     unoptimized: true,
   },
