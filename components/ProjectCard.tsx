@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaEye } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
@@ -9,6 +10,7 @@ type Props = {
   image: string;
   technologies?: string[];
   live?: string;
+  slug?: string;
 };
 
 export default function ProjectCard({
@@ -17,7 +19,16 @@ export default function ProjectCard({
   image,
   technologies = [],
   live,
+  slug,
 }: Props) {
+  const router = useRouter();
+
+  const handleViewDetails = () => {
+    if (slug) {
+      router.push(`/projects/${slug}`);
+    }
+  };
+
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -54,16 +65,26 @@ export default function ProjectCard({
           </div>
         )}
 
-        <div className="flex justify-center">
+        <div className="flex flex-col gap-3">
+          {slug && (
+            <button
+              onClick={handleViewDetails}
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-sm rounded-lg transition-all duration-300 hover:shadow-lg"
+            >
+              <FaEye className="text-sm" />
+              View Details
+            </button>
+          )}
+
           {live && live !== "#" && (
             <a
               href={live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors duration-300"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors duration-300 border border-white/20"
             >
               <FaExternalLinkAlt className="text-sm" />
-              View Project
+              Live Demo
             </a>
           )}
         </div>

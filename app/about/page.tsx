@@ -56,16 +56,16 @@ export default function About() {
               seamless user experiences that solve real-world problems.
             </p>
             <p className="text-gray-300 leading-relaxed mb-4">
-              I've successfully developed and deployed multiple apps including
-              Spendsail (Expense Management with OCR), Tijarat (eCommerce
-              platform), and Billion Pound (Fitness tracking). Each project has
-              taught me valuable lessons in scalability, performance, and
-              user-centric design.
+              I&apos;ve successfully developed and deployed multiple apps
+              including Spendsail (Expense Management with OCR), Tijarat
+              (eCommerce platform), and Billion Pound (Fitness tracking). Each
+              project has taught me valuable lessons in scalability,
+              performance, and user-centric design.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community.
+              When I&apos;m not coding, you&apos;ll find me exploring new
+              technologies, contributing to open-source projects, or sharing
+              knowledge with the developer community.
             </p>
           </motion.div>
 

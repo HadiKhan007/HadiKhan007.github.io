@@ -12,6 +12,7 @@ export default function Projects() {
       image: "/images/BillionPound/b1.jpg",
       technologies: ["React Native", "Firebase", "Redux", "Charts"],
       live: "#",
+      slug: "billionpound",
     },
     {
       title: "SpotSwap",
@@ -20,6 +21,7 @@ export default function Projects() {
       image: "/images/SpotSwap/s1.png",
       technologies: ["React Native", "Firebase", "Maps API", "Stripe"],
       live: "#",
+      slug: "spotswap",
     },
     {
       title: "Tijarat",
@@ -28,6 +30,7 @@ export default function Projects() {
       image: "/images/Tijarat/t1.png",
       technologies: ["React Native", "Redux Toolkit", "Firebase", "Stripe"],
       live: "#",
+      slug: "tijarat",
     },
     {
       title: "WinRate",
@@ -36,6 +39,7 @@ export default function Projects() {
       image: "/images/WinRate/w1.png",
       technologies: ["React Native", "Firebase", "Charts", "Gaming APIs"],
       live: "#",
+      slug: "winrate",
     },
   ];
 
