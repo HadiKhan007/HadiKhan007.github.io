@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Only enable static export for production builds
-  ...(process.env.NODE_ENV === "production" && {
-    output: "export",
-    basePath: "/HadiKhan007.github.io",
-    assetPrefix: "/HadiKhan007.github.io/",
-  }),
+  output: "export", // Always export statically
+  basePath: "/HadiKhan007.github.io",
+  assetPrefix: "/HadiKhan007.github.io/",
   images: {
     unoptimized: true,
   },
