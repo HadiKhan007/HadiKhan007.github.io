@@ -4,8 +4,6 @@ const nextConfig = {
   ...(process.env.NODE_ENV === "production"
     ? {
         output: "export",
-        basePath: "/",
-        assetPrefix: "/",
       }
     : {}),
   images: {
