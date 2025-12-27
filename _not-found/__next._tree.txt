@@ -1,0 +1,2 @@
+:HL["/HadiKhan007.github.io/_next/static/chunks/a15c81b73e4682c2.css","style"]
+0:{"buildId":"aByK3J8ttAxa7JX-VfRG0","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"/_not-found","paramType":null,"paramKey":"/_not-found","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
