@@ -1,7 +1,16 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import {
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaPaperPlane,
+  FaStar,
+  FaRocket,
+  FaHeart,
+} from "react-icons/fa";
 
 type FormData = {
   name: string;
@@ -24,139 +33,277 @@ export default function Contact() {
     reset();
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-      <div className="max-w-6xl w-full bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-gray-300">
-            Let&apos;s create something amazing together
-          </p>
-        </div>
+  const contactMethods = [
+    {
+      icon: FaEnvelope,
+      title: "Email",
+      value: "alihaidercs17@gmail.com",
+      href: "mailto:alihaidercs17@gmail.com",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: FaGithub,
+      title: "GitHub",
+      value: "HadiKhan007",
+      href: "https://github.com/HadiKhan007",
+      color: "from-gray-600 to-gray-800",
+    },
+    {
+      icon: FaLinkedin,
+      title: "LinkedIn",
+      value: "Ali Haider",
+      href: "https://www.linkedin.com/in/alihaider17/",
+      color: "from-blue-600 to-blue-800",
+    },
+  ];
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-white mb-6">
-              Contact Information
-            </h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <FaEnvelope className="text-purple-400 text-2xl" />
-                <div>
-                  <p className="text-gray-300">Email</p>
-                  <a
-                    href="mailto:alihaidercs17@gmail.com"
-                    className="text-white hover:text-purple-400 transition-colors"
-                  >
-                    alihaidercs17@gmail.com
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <FaGithub className="text-purple-400 text-2xl" />
-                <div>
-                  <p className="text-gray-300">GitHub</p>
-                  <a
-                    href="https://github.com/HadiKhan007"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-purple-400 transition-colors"
-                  >
-                    HadiKhan007
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <FaLinkedin className="text-purple-400 text-2xl" />
-                <div>
-                  <p className="text-gray-300">LinkedIn</p>
-                  <a
-                    href="https://www.linkedin.com/in/alihaider17/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-purple-400 transition-colors"
-                  >
-                    Ali Haider
-                  </a>
-                </div>
-              </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 opacity-10">
+          <FaRocket className="text-purple-400 text-8xl float-animation" />
+        </div>
+        <div className="absolute bottom-20 right-10 opacity-10">
+          <FaHeart
+            className="text-pink-400 text-7xl float-animation"
+            style={{ animationDelay: "2s" }}
+          />
+        </div>
+        <div className="absolute top-1/2 left-1/4 opacity-5">
+          <FaStar
+            className="text-yellow-400 text-6xl float-animation"
+            style={{ animationDelay: "4s" }}
+          />
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+          >
+            <FaPaperPlane className="text-purple-400" />
+            <span className="text-purple-300 font-medium">Get In Touch</span>
+            <FaPaperPlane className="text-purple-400" />
+          </motion.div>
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
+            <span className="gradient-text">Let&apos;s Connect</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Ready to bring your ideas to life? Let&apos;s collaborate and create
+            something extraordinary together. I&apos;m always excited to work on
+            innovative projects.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div className="text-center lg:text-left">
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+                <span className="gradient-text">Contact Information</span>
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Feel free to reach out through any of these channels
+              </p>
             </div>
-          </div>
+
+            <div className="space-y-6">
+              {contactMethods.map((method, index) => (
+                <motion.div
+                  key={method.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+
+                  <div className="relative glass-dark rounded-2xl p-6 hover-lift">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`p-4 rounded-xl bg-gradient-to-r ${method.color} pulse-glow`}
+                      >
+                        <method.icon className="text-white text-2xl" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-purple-300 transition-colors">
+                          {method.title}
+                        </h3>
+                        <a
+                          href={method.href}
+                          target={
+                            method.href.startsWith("http")
+                              ? "_blank"
+                              : undefined
+                          }
+                          rel={
+                            method.href.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                          className="text-gray-300 hover:text-purple-400 transition-colors text-lg"
+                        >
+                          {method.value}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Additional Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+
+              <div className="relative glass-dark rounded-2xl p-6 hover-lift">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl">
+                    <FaRocket className="text-white text-xl" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">
+                    Quick Response
+                  </h3>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  I typically respond to messages within 24 hours. Whether you
+                  have a project idea, collaboration opportunity, or just want
+                  to connect, I&apos;m here to help bring your vision to life.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div>
-            <h2 className="text-2xl font-semibold text-white mb-6">
-              Send a Message
-            </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-gray-300 mb-2">
-                  Name
-                </label>
-                <input
-                  {...register("name", { required: "Name is required" })}
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-3 bg-white/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Your Name"
-                />
-                {errors.name && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.name.message}
-                  </p>
-                )}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+
+            <div className="relative glass-dark rounded-3xl p-8 lg:p-10">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl">
+                  <FaPaperPlane className="text-white text-xl" />
+                </div>
+                <h2 className="text-3xl font-bold text-white">
+                  Send a Message
+                </h2>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-gray-300 mb-2">
-                  Email
-                </label>
-                <input
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^\S+@\S+$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-3 bg-white/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="your.email@example.com"
-                />
-                {errors.email && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  {...register("message", { required: "Message is required" })}
-                  id="message"
-                  rows={5}
-                  className="w-full px-4 py-3 bg-white/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                  placeholder="Your message here..."
-                />
-                {errors.message && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-gray-300 mb-2 font-medium"
+                  >
+                    Name
+                  </label>
+                  <input
+                    {...register("name", { required: "Name is required" })}
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    placeholder="Your Name"
+                  />
+                  {errors.name && (
+                    <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
+                      <span>⚠️</span> {errors.name.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-gray-300 mb-2 font-medium"
+                  >
+                    Email
+                  </label>
+                  <input
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    placeholder="your.email@example.com"
+                  />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
+                      <span>⚠️</span> {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-gray-300 mb-2 font-medium"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    {...register("message", {
+                      required: "Message is required",
+                    })}
+                    id="message"
+                    rows={6}
+                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+                    placeholder="Tell me about your project or idea..."
+                  />
+                  {errors.message && (
+                    <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
+                      <span>⚠️</span> {errors.message.message}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 hover-lift pulse-glow"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    <FaPaperPlane className="text-lg" />
+                    Send Message
+                  </span>
+                </button>
+              </form>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

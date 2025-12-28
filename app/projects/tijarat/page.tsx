@@ -48,7 +48,7 @@ export default function Tijarat() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24">
       {/* Header */}
       <div className="bg-slate-900/50 backdrop-blur-lg border-b border-purple-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -232,6 +232,7 @@ export default function Tijarat() {
                 className="group relative overflow-hidden rounded-xl bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300"
               >
                 <div className="aspect-video relative bg-gray-900 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image}
                     alt={`Tijarat Screenshot ${index + 1}`}
