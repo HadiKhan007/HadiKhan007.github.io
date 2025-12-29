@@ -37,7 +37,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Close mobile menu on route change
   useEffect(() => {
     const handleRouteChange = () => {
       setIsOpen(false);
@@ -45,6 +44,19 @@ export default function Header() {
 
     handleRouteChange();
   }, [pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+    }
+
+    return () => {
+      document.body.classList.remove("menu-open");
+    };
+  }, [isOpen]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -155,13 +167,14 @@ export default function Header() {
                 })}
               </nav>
 
-              {/* Enhanced Mobile menu button */}
+              {/* Enhanced Mobile menu button - Android optimized */}
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleMenu}
-                className="md:hidden relative p-3 text-white hover:text-purple-400 transition-all duration-300 rounded-xl hover:bg-white/10 focus-professional"
+                className="md:hidden relative p-4 text-white hover:text-purple-400 transition-all duration-300 rounded-xl hover:bg-white/10 focus-professional min-w-[48px] min-h-[48px] flex items-center justify-center"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
+                style={{ WebkitTapHighlightColor: "transparent" }}
               >
                 <motion.div
                   animate={isOpen ? "open" : "closed"}
@@ -192,26 +205,40 @@ export default function Header() {
               </motion.button>
             </div>
 
-            {/* Enhanced Mobile Navigation */}
+            {/* Enhanced Mobile Navigation - Android optimized */}
             <AnimatePresence>
               {isOpen && (
                 <>
-                  {/* Backdrop */}
+                  {/* Backdrop - Android optimized */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+                    className="fixed inset-0 bg-black/80 backdrop-blur-lg z-[100] md:hidden mobile-menu-backdrop"
                     onClick={() => setIsOpen(false)}
+                    style={{
+                      WebkitBackdropFilter: "blur(12px)",
+                      backdropFilter: "blur(12px)",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      width: "100vw",
+                      height: "100vh",
+                    }}
                   />
 
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="md:hidden absolute top-full left-4 right-4 glass-dark rounded-2xl mt-4 py-6 z-45 shadow-2xl border border-white/10 max-h-[80vh] overflow-y-auto"
+                    className="md:hidden fixed top-20 left-4 right-4 glass-dark rounded-2xl py-6 z-[110] shadow-2xl border border-white/10 mobile-menu overflow-y-auto"
+                    style={{
+                      WebkitOverflowScrolling: "touch",
+                      maxHeight: "calc(100vh - 6rem)",
+                    }}
                   >
                     <nav
                       className="flex flex-col space-y-2 px-6"
@@ -228,15 +255,16 @@ export default function Header() {
                           >
                             <Link
                               href={item.href}
-                              className={`flex items-center gap-4 px-4 py-4 text-gray-300 hover:text-white transition-all duration-300 rounded-xl group ${
+                              className={`flex items-center gap-4 px-4 py-5 text-gray-300 hover:text-white transition-all duration-300 rounded-xl group min-h-[60px] ${
                                 isActive
                                   ? "text-white bg-white/10 border-l-4 border-purple-400"
-                                  : "hover:bg-white/5"
+                                  : "hover:bg-white/5 active:bg-white/10"
                               }`}
                               onClick={() => setIsOpen(false)}
+                              style={{ WebkitTapHighlightColor: "transparent" }}
                             >
                               <motion.div
-                                className={`p-3 rounded-xl transition-all duration-300 ${
+                                className={`p-3 rounded-xl transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center ${
                                   isActive
                                     ? "bg-gradient-to-r from-purple-500/40 to-pink-500/40"
                                     : "bg-gradient-to-r from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30"
@@ -275,7 +303,7 @@ export default function Header() {
                       })}
                     </nav>
 
-                    {/* Enhanced Mobile CTA */}
+                    {/* Enhanced Mobile CTA - Android optimized */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -284,8 +312,9 @@ export default function Header() {
                     >
                       <Link
                         href="/contact"
-                        className="w-full flex items-center justify-center gap-3 px-6 py-4 btn-primary hover-lift focus-professional"
+                        className="w-full flex items-center justify-center gap-3 px-6 py-5 btn-primary hover-lift focus-professional min-h-[56px] rounded-xl"
                         onClick={() => setIsOpen(false)}
+                        style={{ WebkitTapHighlightColor: "transparent" }}
                       >
                         <FaEnvelope className="text-lg" />
                         <span className="font-semibold">Get In Touch</span>

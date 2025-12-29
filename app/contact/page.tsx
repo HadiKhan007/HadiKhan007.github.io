@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   FaEnvelope,
   FaGithub,
@@ -10,6 +12,8 @@ import {
   FaStar,
   FaRocket,
   FaHeart,
+  FaCheckCircle,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 
 type FormData = {
@@ -19,6 +23,12 @@ type FormData = {
 };
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   const {
     register,
     handleSubmit,
@@ -26,11 +36,57 @@ export default function Contact() {
     reset,
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    // For now, just log the data. In a real app, send to backend or email service.
-    console.log(data);
-    alert("Thank you for your message! I will get back to you soon.");
-    reset();
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error(
+          "EmailJS configuration is missing. Please check your environment variables."
+        );
+      }
+
+      if (
+        serviceId === "your_service_id_here" ||
+        templateId === "your_template_id_here" ||
+        publicKey === "your_public_key_here"
+      ) {
+        throw new Error(
+          "EmailJS configuration is using placeholder values. Please update your .env.local file with actual EmailJS credentials."
+        );
+      }
+
+      const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        message: data.message,
+        to_name: "Ali Haider",
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      setSubmitStatus({
+        type: "success",
+        message: "Thank you for your message! I will get back to you soon.",
+      });
+      reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: `Failed to send message: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }. Please try again or contact me directly at alihaidercs17@gmail.com`,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactMethods = [
@@ -220,6 +276,26 @@ export default function Contact() {
                 </h2>
               </div>
 
+              {/* Status Messages */}
+              {submitStatus.type && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
+                    submitStatus.type === "success"
+                      ? "bg-green-500/20 border border-green-500/30 text-green-300"
+                      : "bg-red-500/20 border border-red-500/30 text-red-300"
+                  }`}
+                >
+                  {submitStatus.type === "success" ? (
+                    <FaCheckCircle className="text-green-400 flex-shrink-0" />
+                  ) : (
+                    <FaExclamationTriangle className="text-red-400 flex-shrink-0" />
+                  )}
+                  <p className="text-sm">{submitStatus.message}</p>
+                </motion.div>
+              )}
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div>
                   <label
@@ -294,11 +370,33 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 hover-lift pulse-glow"
+                  disabled={isSubmitting}
+                  className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 hover-lift pulse-glow ${
+                    isSubmitting
+                      ? "bg-gray-600 cursor-not-allowed opacity-50"
+                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  } text-white`}
                 >
                   <span className="flex items-center justify-center gap-2">
-                    <FaPaperPlane className="text-lg" />
-                    Send Message
+                    {isSubmitting ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                          className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                        />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane className="text-lg" />
+                        Send Message
+                      </>
+                    )}
                   </span>
                 </button>
               </form>
