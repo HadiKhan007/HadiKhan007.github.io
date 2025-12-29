@@ -41,7 +41,7 @@ export default function Contact() {
 
   // Debug: Check if environment variables are loaded
   useEffect(() => {
-    console.log("EmailJS Configuration:", {
+    console.log("📧 EmailJS Configuration:", {
       serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
       templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
       publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
@@ -53,26 +53,44 @@ export default function Contact() {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      // EmailJS configuration
-      const serviceId =
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_g2fyp4k";
-      const templateId =
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_7ljzhyf";
-      const publicKey =
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "5m45IzjeBEvmngDG9";
+      // Use CORRECT values
+      const serviceId = "service_g2fyp4k";
+      const templateId = "template_7ljzhyf"; // CORRECT TEMPLATE ID
+      const publicKey = "5m45IzjeBEvmngDG9";
 
-      console.log("Sending email with data:", data);
+      console.log("📤 Sending email with:", data);
 
-      // Template parameters - adjust these based on your EmailJS template variables
+      // Get first letter for avatar
+      const firstLetter = data.name.charAt(0).toUpperCase();
+
+      // Simple timestamp
+      const time = new Date().toLocaleString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const year = new Date().getFullYear().toString();
+
+      // IMPORTANT: Use the exact variable names from your EmailJS template
+      // Based on your template, it should be: {{name}}, {{email}}, {{message}}, {{time}}, {{year}}
       const templateParams = {
-        to_name: "Ali Haider",
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        time: time,
+        year: year,
+        reply_to: data.email,
+        // Also include common alternative names for compatibility
         from_name: data.name,
         from_email: data.email,
-        message: data.message,
-        reply_to: data.email,
+        to_name: "Ali Haider",
       };
 
-      console.log("Template params:", templateParams);
+      console.log("📝 Template parameters:", templateParams);
 
       // Send email using EmailJS
       const response = await emailjs.send(
@@ -82,31 +100,27 @@ export default function Contact() {
         publicKey
       );
 
-      console.log("EmailJS response:", response);
+      console.log("✅ Email sent successfully:", response);
 
-      if (response.status === 200 || response.status === 201) {
-        setSubmitStatus({
-          type: "success",
-          message: "Thank you for your message! I will get back to you soon.",
-        });
-        reset();
-      } else {
-        throw new Error(`Failed with status: ${response.status}`);
-      }
+      setSubmitStatus({
+        type: "success",
+        message:
+          "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+      });
+      reset();
     } catch (error: any) {
-      console.error("Full error details:", error);
+      console.error("❌ Error sending email:", error);
 
-      // Extract meaningful error message
-      let errorMessage =
-        "Failed to send message. Please try again or contact me directly at alihaidercs17@gmail.com";
+      let errorMessage = "Failed to send message. ";
 
       if (error.text) {
-        errorMessage = `EmailJS Error: ${error.text}`;
+        errorMessage += `Error: ${error.text}`;
       } else if (error.message) {
-        errorMessage = error.message;
-      } else if (error.status) {
-        errorMessage = `EmailJS returned status: ${error.status}`;
+        errorMessage += error.message;
       }
+
+      errorMessage +=
+        " Please try again or email me directly at alihaidercs17@gmail.com";
 
       setSubmitStatus({
         type: "error",
@@ -117,31 +131,43 @@ export default function Contact() {
     }
   };
 
-  // Test function - fix the public key here too
+  // Test with CORRECT template ID
   const testEmailJS = async () => {
     try {
-      console.log("Testing EmailJS connection...");
+      console.log("🧪 Testing EmailJS...");
 
       const testParams = {
-        to_name: "Ali Haider",
+        name: "Test User",
+        email: "test@example.com",
+        message: "This is a test message from the contact form",
+        time: new Date().toLocaleString(),
+        year: new Date().getFullYear().toString(),
+        reply_to: "test@example.com",
         from_name: "Test User",
         from_email: "test@example.com",
-        message: "This is a test message from the contact form",
-        reply_to: "test@example.com",
+        to_name: "Ali Haider",
       };
 
       const result = await emailjs.send(
-        "service_g2fyp4k",
-        "template_7ljzhyf",
+        "service_g2fyp4k", // Service ID
+        "template_7ljzhyf", // CORRECT Template ID
         testParams,
-        "5m45IzjeBEvmngDG9" // Use PUBLIC key here too
+        "5m45IzjeBEvmngDG9" // Public Key
       );
 
-      console.log("✅ Test successful:", result);
-      alert("Test email sent successfully!");
-    } catch (error) {
+      console.log("✅ Test successful!", result);
+      alert("✅ Test email sent successfully! Check your inbox.");
+    } catch (error: any) {
       console.error("❌ Test failed:", error);
-      alert("Test failed: " + (error as any).text || error);
+
+      let alertMessage = "Test failed: ";
+      if (error.text) {
+        alertMessage += error.text;
+      } else if (error.message) {
+        alertMessage += error.message;
+      }
+
+      alert(alertMessage);
     }
   };
 
@@ -192,6 +218,15 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
         {/* Debug button - remove in production */}
+        <button
+          onClick={testEmailJS}
+          className="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm z-50"
+          style={{
+            display: process.env.NODE_ENV === "development" ? "block" : "none",
+          }}
+        >
+          Test EmailJS
+        </button>
 
         {/* Hero Section */}
         <motion.div
@@ -387,8 +422,8 @@ export default function Contact() {
                     {...register("email", {
                       required: "Email is required",
                       pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: "Invalid email address",
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Please enter a valid email address",
                       },
                     })}
                     type="email"
@@ -413,6 +448,10 @@ export default function Contact() {
                   <textarea
                     {...register("message", {
                       required: "Message is required",
+                      minLength: {
+                        value: 10,
+                        message: "Message must be at least 10 characters",
+                      },
                     })}
                     id="message"
                     rows={6}
@@ -477,64 +516,6 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
-
-      {/* Add these styles to your global CSS or component */}
-      <style jsx global>{`
-        .float-animation {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        .gradient-text {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .glass {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-dark {
-          background: rgba(15, 23, 42, 0.7);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hover-lift {
-          transition: transform 0.3s ease;
-        }
-
-        .hover-lift:hover {
-          transform: translateY(-5px);
-        }
-
-        .pulse-glow {
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0%,
-          100% {
-            box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
-          }
-          70% {
-            box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
-          }
-        }
-      `}</style>
     </div>
   );
 }
