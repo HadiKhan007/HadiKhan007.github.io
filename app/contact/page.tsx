@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
@@ -22,6 +22,9 @@ type FormData = {
   message: string;
 };
 
+// Initialize EmailJS with your PUBLIC key
+emailjs.init("5m45IzjeBEvmngDG9");
+
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
@@ -36,54 +39,109 @@ export default function Contact() {
     reset,
   } = useForm<FormData>();
 
+  // Debug: Check if environment variables are loaded
+  useEffect(() => {
+    console.log("EmailJS Configuration:", {
+      serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+      publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    });
+  }, []);
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
     try {
       // EmailJS configuration
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      const serviceId =
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_g2fyp4k";
+      const templateId =
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_7ljzhyf";
+      const publicKey =
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "5m45IzjeBEvmngDG9";
 
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error(
-          "EmailJS configuration is missing. Please check your environment variables."
-        );
-      }
+      console.log("Sending email with data:", data);
 
-      if (
-        serviceId === "your_service_id_here" ||
-        templateId === "your_template_id_here" ||
-        publicKey === "your_public_key_here"
-      ) {
-        throw new Error(
-          "EmailJS configuration is using placeholder values. Please update your .env.local file with actual EmailJS credentials."
-        );
-      }
-
+      // Template parameters - adjust these based on your EmailJS template variables
       const templateParams = {
-        name: data.name,
-        email: data.email,
+        to_name: "Ali Haider",
+        from_name: data.name,
+        from_email: data.email,
         message: data.message,
+        reply_to: data.email,
       };
 
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      console.log("Template params:", templateParams);
+
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+
+      console.log("EmailJS response:", response);
+
+      if (response.status === 200 || response.status === 201) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you for your message! I will get back to you soon.",
+        });
+        reset();
+      } else {
+        throw new Error(`Failed with status: ${response.status}`);
+      }
+    } catch (error: any) {
+      console.error("Full error details:", error);
+
+      // Extract meaningful error message
+      let errorMessage =
+        "Failed to send message. Please try again or contact me directly at alihaidercs17@gmail.com";
+
+      if (error.text) {
+        errorMessage = `EmailJS Error: ${error.text}`;
+      } else if (error.message) {
+        errorMessage = error.message;
+      } else if (error.status) {
+        errorMessage = `EmailJS returned status: ${error.status}`;
+      }
 
       setSubmitStatus({
-        type: "success",
-        message: "Thank you for your message! I will get back to you soon.",
-      });
-      reset();
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      setSubmitStatus({
         type: "error",
-        message:
-          "Failed to send message. Please try again or contact me directly at alihaidercs17@gmail.com",
+        message: errorMessage,
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  // Test function - fix the public key here too
+  const testEmailJS = async () => {
+    try {
+      console.log("Testing EmailJS connection...");
+
+      const testParams = {
+        to_name: "Ali Haider",
+        from_name: "Test User",
+        from_email: "test@example.com",
+        message: "This is a test message from the contact form",
+        reply_to: "test@example.com",
+      };
+
+      const result = await emailjs.send(
+        "service_g2fyp4k",
+        "template_7ljzhyf",
+        testParams,
+        "5m45IzjeBEvmngDG9" // Use PUBLIC key here too
+      );
+
+      console.log("✅ Test successful:", result);
+      alert("Test email sent successfully!");
+    } catch (error) {
+      console.error("❌ Test failed:", error);
+      alert("Test failed: " + (error as any).text || error);
     }
   };
 
@@ -133,6 +191,8 @@ export default function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+        {/* Debug button - remove in production */}
+
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -398,10 +458,83 @@ export default function Contact() {
                   </span>
                 </button>
               </form>
+
+              {/* Fallback message */}
+              {submitStatus.type === "error" && (
+                <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                  <p className="text-red-300 text-sm text-center">
+                    If the form isn't working, please email me directly at{" "}
+                    <a
+                      href="mailto:alihaidercs17@gmail.com"
+                      className="text-white font-semibold underline hover:text-purple-300"
+                    >
+                      alihaidercs17@gmail.com
+                    </a>
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Add these styles to your global CSS or component */}
+      <style jsx global>{`
+        .float-animation {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .glass {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-dark {
+          background: rgba(15, 23, 42, 0.7);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hover-lift {
+          transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-5px);
+        }
+
+        .pulse-glow {
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0%,
+          100% {
+            box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+          }
+        }
+      `}</style>
     </div>
   );
 }
