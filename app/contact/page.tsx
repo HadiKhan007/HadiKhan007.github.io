@@ -63,10 +63,9 @@ export default function Contact() {
       }
 
       const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
+        name: data.name,
+        email: data.email,
         message: data.message,
-        to_name: "Ali Haider",
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -80,9 +79,8 @@ export default function Contact() {
       console.error("EmailJS error:", error);
       setSubmitStatus({
         type: "error",
-        message: `Failed to send message: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }. Please try again or contact me directly at alihaidercs17@gmail.com`,
+        message:
+          "Failed to send message. Please try again or contact me directly at alihaidercs17@gmail.com",
       });
     } finally {
       setIsSubmitting(false);
