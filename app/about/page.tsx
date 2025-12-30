@@ -233,7 +233,7 @@ export default function About() {
                   <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-purple-400 to-pink-400 shadow-2xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/images/alihaider.jpeg"
+                      src="/images/alihaider.png"
                       alt="Ali Haider - React Native Developer"
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {

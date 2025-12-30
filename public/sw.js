@@ -5,7 +5,7 @@ const STATIC_CACHE_URLS = [
   "/about",
   "/contact",
   "/projects",
-  "/images/alihaider.jpeg",
+  "/images/alihaider.png",
   "/favicon.ico",
 ];
 
