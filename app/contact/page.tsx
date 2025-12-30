@@ -132,44 +132,6 @@ export default function Contact() {
   };
 
   // Test with CORRECT template ID
-  const testEmailJS = async () => {
-    try {
-      console.log("🧪 Testing EmailJS...");
-
-      const testParams = {
-        name: "Test User",
-        email: "test@example.com",
-        message: "This is a test message from the contact form",
-        time: new Date().toLocaleString(),
-        year: new Date().getFullYear().toString(),
-        reply_to: "test@example.com",
-        from_name: "Test User",
-        from_email: "test@example.com",
-        to_name: "Ali Haider",
-      };
-
-      const result = await emailjs.send(
-        "service_g2fyp4k", // Service ID
-        "template_7ljzhyf", // CORRECT Template ID
-        testParams,
-        "5m45IzjeBEvmngDG9" // Public Key
-      );
-
-      console.log("✅ Test successful!", result);
-      alert("✅ Test email sent successfully! Check your inbox.");
-    } catch (error: any) {
-      console.error("❌ Test failed:", error);
-
-      let alertMessage = "Test failed: ";
-      if (error.text) {
-        alertMessage += error.text;
-      } else if (error.message) {
-        alertMessage += error.message;
-      }
-
-      alert(alertMessage);
-    }
-  };
 
   const contactMethods = [
     {
@@ -218,15 +180,6 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
         {/* Debug button - remove in production */}
-        <button
-          onClick={testEmailJS}
-          className="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm z-50"
-          style={{
-            display: process.env.NODE_ENV === "development" ? "block" : "none",
-          }}
-        >
-          Test EmailJS
-        </button>
 
         {/* Hero Section */}
         <motion.div

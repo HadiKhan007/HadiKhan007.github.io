@@ -13,6 +13,8 @@ import {
   FaUsers,
   FaAward,
   FaLightbulb,
+  FaDownload, // Add this import
+  FaFilePdf, // Add this import
 } from "react-icons/fa";
 
 // Generate particles at module level to avoid React purity issues
@@ -32,6 +34,17 @@ const particles = generateParticles();
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  // Function to handle resume download
+  const handleResumeDownload = () => {
+    // Create a temporary link element
+    const link = document.createElement("a");
+    link.href = "/AliHaider.pdf";
+    link.download = "AliHaiderResume.pdf"; // You can customize the downloaded file name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -133,6 +146,15 @@ export default function Home() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-xl"></div>
               </Link>
+
+              {/* RESUME DOWNLOAD BUTTON */}
+              <button
+                onClick={handleResumeDownload}
+                className="inline-flex items-center gap-2 px-4 py-3 border-2 border-green-400 text-green-400 hover:bg-purple-400 hover:text-white font-medium rounded-xl transition-all duration-300 hover-lift glass-card"
+              >
+                <FaDownload />
+                Download CV
+              </button>
 
               <Link
                 href="/contact"
@@ -405,7 +427,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Enhanced Call to Action */}
+          {/* Enhanced Call to Action with Resume Download Option */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -413,20 +435,22 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mt-16"
           >
-            <div className="inline-flex items-center gap-4 px-8 py-4 glass-card rounded-full hover-lift">
-              <motion.span
-                className="text-purple-300 font-medium"
-                animate={{ opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                Ready to start your project?
-              </motion.span>
-              <Link
-                href="/contact"
-                className="btn-secondary hover-lift focus-professional"
-              >
-                Let&apos;s Talk
-              </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="inline-flex items-center gap-4 px-8 py-4 glass-card rounded-full hover-lift">
+                <motion.span
+                  className="text-purple-300 font-medium"
+                  animate={{ opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  Ready to start your project?
+                </motion.span>
+                <Link
+                  href="/contact"
+                  className="btn-secondary hover-lift focus-professional"
+                >
+                  Let&apos;s Talk
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
