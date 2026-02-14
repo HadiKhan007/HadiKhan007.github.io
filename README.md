@@ -70,8 +70,40 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deploy to GitHub Pages (hadikhan007.github.io)
+
+This portfolio is set up to deploy to **https://hadikhan007.github.io/**.
+
+### Option A: Automatic deployment (GitHub Actions)
+
+1. Create a repo named `hadikhan007.github.io` on GitHub (for root URL).
+2. Push your code to the `main` branch:
+   ```bash
+   git remote add origin https://github.com/HadiKhan007/hadikhan007.github.io.git
+   git push -u origin main
+   ```
+3. Go to **Settings → Pages** in your repo.
+4. Under "Build and deployment", set **Source** to **GitHub Actions**.
+5. Push any change to trigger the workflow. Your site will be live at https://hadikhan007.github.io/
+
+### Option B: Manual deployment (gh-pages)
+
+```bash
+npm run build
+npx gh-pages -d out
+```
+
+Then in **Settings → Pages**, set the source to the `gh-pages` branch and `/ (root)`.
+
+### Important for user site
+
+- Repo must be named `hadikhan007.github.io` for the root URL.
+- If you use a different repo name (e.g. `portfolio`), the site will be at `https://hadikhan007.github.io/portfolio/` and you’ll need to add `basePath: '/portfolio'` in `next.config.ts`.
+
+---
+
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can also deploy to [Vercel](https://vercel.com/new) for server-side features if needed.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
