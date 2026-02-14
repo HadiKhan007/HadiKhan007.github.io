@@ -158,7 +158,7 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 opacity-10">
@@ -204,9 +204,8 @@ export default function Contact() {
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Ready to bring your ideas to life? Let&apos;s collaborate and create
-            something extraordinary together. I&apos;m always excited to work on
-            innovative projects.
+            Got a web or mobile app in mind? Let&apos;s build it end-to-end—from
+            UI to backend. Full stack development, on time, built to scale.
           </p>
         </motion.div>
 
@@ -294,9 +293,9 @@ export default function Contact() {
                   </h3>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  I typically respond to messages within 24 hours. Whether you
-                  have a project idea, collaboration opportunity, or just want
-                  to connect, I&apos;m here to help bring your vision to life.
+                  I typically respond within 24 hours. Need a full stack app—web,
+                  mobile, or both? MVP to production. Let&apos;s build something
+                  that scales.
                 </p>
               </div>
             </motion.div>

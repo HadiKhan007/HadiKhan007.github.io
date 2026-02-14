@@ -51,7 +51,7 @@ export default function ProjectCard({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -12, scale: 1.02 }}
+      whileHover={{ y: -6, scale: 1.01 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="group relative overflow-hidden rounded-2xl card-professional hover-lift focus-professional"
       onHoverStart={() => setIsHovered(true)}
@@ -69,7 +69,7 @@ export default function ProjectCard({
             transition={{ type: "spring", stiffness: 200, damping: 10 }}
             className="absolute top-4 right-4 z-30"
           >
-            <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold rounded-full shadow-lg">
+            <div className="flex items-center gap-1 px-3 py-1 bg-indigo-500/90 text-white text-xs font-semibold rounded-lg">
               <FaStar className="text-xs animate-pulse" />
               Featured
             </div>
@@ -78,7 +78,7 @@ export default function ProjectCard({
       </AnimatePresence>
 
       {/* Enhanced animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-pink-600/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl"></div>
 
       {/* Image container with enhanced overlay */}
       <div className="relative h-56 overflow-hidden rounded-t-2xl">
@@ -89,13 +89,13 @@ export default function ProjectCard({
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center"
             >
-              <div className="w-12 h-12 border-4 border-purple-400/30 border-t-purple-400 rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-2 border-indigo-500/30 border-t-indigo-400 rounded-full animate-spin"></div>
             </motion.div>
           )}
         </AnimatePresence>
 
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-transparent to-pink-500/20 z-10"
+          className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10"
           animate={{ opacity: isHovered ? 0.8 : 0.3 }}
           transition={{ duration: 0.3 }}
         />
@@ -201,7 +201,7 @@ export default function ProjectCard({
       {/* Enhanced content section */}
       <div className="relative z-10 p-6">
         <motion.h3
-          className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300"
+          className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300"
           animate={{ color: isHovered ? "#c084fc" : "#ffffff" }}
           transition={{ duration: 0.3 }}
         >
@@ -235,7 +235,7 @@ export default function ProjectCard({
                     stiffness: 300,
                   }}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="px-3 py-1.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-xs font-medium rounded-full border border-purple-400/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-300 cursor-default"
+                  className="px-3 py-1.5 bg-white/5 text-slate-300 text-xs font-medium rounded-lg border border-white/10 hover:border-indigo-500/30 transition-all duration-300 cursor-default"
                 >
                   {tech}
                 </motion.span>
@@ -300,7 +300,7 @@ export default function ProjectCard({
 
       {/* Enhanced decorative elements */}
       <motion.div
-        className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl"
+        className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"
         animate={{
           scale: isHovered ? 1.2 : 1,
           opacity: isHovered ? 0.6 : 0.3,
@@ -308,7 +308,7 @@ export default function ProjectCard({
         transition={{ duration: 0.5 }}
       />
       <motion.div
-        className="absolute -bottom-10 -left-10 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-lg"
+        className="absolute -bottom-10 -left-10 w-20 h-20 bg-indigo-400/8 rounded-full blur-lg"
         animate={{
           scale: isHovered ? 1.3 : 1,
           opacity: isHovered ? 0.5 : 0.2,
@@ -316,7 +316,7 @@ export default function ProjectCard({
         transition={{ duration: 0.7 }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-full blur-2xl"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl"
         animate={{
           scale: isHovered ? 1.5 : 1,
           opacity: isHovered ? 0.4 : 0.1,

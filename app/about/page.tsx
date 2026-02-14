@@ -19,50 +19,56 @@ import {
   FaTrophy,
   FaMagic,
 } from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiExpress,
+  SiMongodb,
+  SiPostgresql,
+} from "react-icons/si";
 
 export default function About() {
   const skills = [
+    {
+      name: "Next.js",
+      icon: SiNextdotjs,
+      level: 90,
+      color: "from-slate-400 to-slate-600",
+      description: "Full-stack React framework",
+    },
     {
       name: "React Native",
       icon: FaMobileAlt,
       level: 95,
       color: "from-blue-500 to-cyan-500",
-      description: "Cross-platform mobile development",
+      description: "Cross-platform mobile apps",
     },
     {
-      name: "React",
-      icon: FaReact,
-      level: 90,
-      color: "from-cyan-500 to-blue-500",
-      description: "Modern web development",
-    },
-    {
-      name: "Firebase",
-      icon: FaFire,
-      level: 85,
-      color: "from-orange-500 to-red-500",
-      description: "Backend & authentication",
-    },
-    {
-      name: "Node.js",
+      name: "Node.js & Express.js",
       icon: FaNodeJs,
-      level: 80,
+      level: 88,
       color: "from-green-500 to-emerald-500",
-      description: "Server-side development",
+      description: "APIs & backend services",
     },
     {
-      name: "Redux",
-      icon: FaTools,
+      name: "MongoDB & NoSQL",
+      icon: SiMongodb,
       level: 85,
-      color: "from-purple-500 to-indigo-500",
-      description: "State management",
+      color: "from-green-600 to-green-800",
+      description: "Document databases",
     },
     {
-      name: "REST APIs",
-      icon: FaDatabase,
-      level: 90,
-      color: "from-indigo-500 to-purple-500",
-      description: "API integration",
+      name: "PostgreSQL & SQL",
+      icon: SiPostgresql,
+      level: 85,
+      color: "from-blue-600 to-blue-800",
+      description: "Relational databases",
+    },
+    {
+      name: "Firebase & APIs",
+      icon: FaFire,
+      level: 88,
+      color: "from-orange-500 to-red-500",
+      description: "Auth, Firestore, cloud",
     },
   ];
 
@@ -121,18 +127,12 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 relative overflow-hidden">
-      {/* Animated Background */}
+    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
+      {/* Pro-level Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/5 rounded-full blur-2xl animate-pulse"
-          style={{ animationDelay: "4s" }}
-        ></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/8 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-400/6 rounded-full blur-3xl"></div>
       </div>
 
       {/* Floating Elements */}
@@ -180,7 +180,7 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 backdrop-blur-sm mb-8"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card border border-white/10 mb-8"
           >
             <FaMagic className="text-purple-400 animate-pulse" />
             <span className="text-purple-300 font-semibold tracking-wide">
@@ -195,13 +195,9 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
           >
-            <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-              Crafting Digital
-            </span>
+            <span className="text-white/95">Crafting Digital</span>
             <br />
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Experiences
-            </span>
+            <span className="gradient-text">Experiences</span>
           </motion.h1>
 
           <motion.p
@@ -210,8 +206,9 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light"
           >
-            Passionate about creating exceptional mobile experiences that bring
-            ideas to life with cutting-edge technology and innovative solutions.
+            Full stack developer building web & mobile apps end-to-end. From UI
+            to APIs, databases to deployment seamless UX, robust backends, and
+            scalable architecture in every project.
           </motion.p>
         </motion.div>
 
@@ -234,7 +231,7 @@ export default function About() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/alihaider.png"
-                      alt="Ali Haider - React Native Developer"
+                      alt="Ali Haider - Full Stack React Native Developer"
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {
                         e.currentTarget.style.display = "none";
@@ -267,10 +264,10 @@ export default function About() {
                   Ali Haider
                 </h2>
                 <p className="text-purple-300 font-medium text-lg mb-4">
-                  React Native Developer
+                  Full Stack React Native Developer
                 </p>
                 <p className="text-gray-400 text-sm">
-                  Building the future, one app at a time
+                  Web + Mobile • Frontend + Backend • End to end
                 </p>
               </div>
             </div>
@@ -319,12 +316,10 @@ export default function About() {
         >
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Technical Expertise
-              </span>
+              <span className="gradient-text">Technical Expertise</span>
             </h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Mastering the technologies that power modern mobile applications
+              Next.js • Node.js • Express • MongoDB • PostgreSQL • SQL & NoSQL
             </p>
           </div>
 
@@ -421,13 +416,12 @@ export default function About() {
                   {card === 1 ? (
                     <div className="space-y-4 text-gray-300 leading-relaxed">
                       <p>
-                        Professional mobile developer with 4.5+ years of
-                        experience building high-quality applications for iOS
-                        and Android platforms using React Native.
+                        Full stack developer with 4.5+ years building scalable
+                        web and mobile apps. React Native, Node.js, Firebase
+                        from UI to APIs, databases to deployment.
                       </p>
                       <p>
-                        Successfully developed and deployed multiple apps
-                        including{" "}
+                        Delivered 15+ projects including{" "}
                         <span className="text-purple-300 font-semibold">
                           Tijarat
                         </span>{" "}
@@ -435,20 +429,22 @@ export default function About() {
                         <span className="text-purple-300 font-semibold">
                           Billion Pound
                         </span>{" "}
-                        (Fitness tracking), and{" "}
+                        (Fitness), and{" "}
                         <span className="text-purple-300 font-semibold">
                           SpotSwap
                         </span>{" "}
-                        (Trading platform).
+                        (Trading platform). Each with robust backends, clean
+                        architecture, and polished UX.
                       </p>
                       <p>
-                        Passionate about creating exceptional mobile experiences
-                        that combine cutting-edge technology with intuitive
-                        design to solve real-world problems.
+                        I build end-to-end: responsive interfaces, REST APIs,
+                        auth flows, real-time data, and cloud deployment.
+                        Focused on products that perform, scale, and ship on
+                        time.
                       </p>
                       <p className="text-purple-200 font-medium">
-                        When not coding, I explore new technologies and
-                        contribute to the developer community.
+                        Always exploring the stack TypeScript, modern tooling,
+                        and best practices.
                       </p>
                     </div>
                   ) : (
@@ -457,11 +453,11 @@ export default function About() {
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-3 flex-shrink-0"></div>
                         <div>
                           <h4 className="text-lg font-semibold text-white mb-1">
-                            Cross-Platform Expertise
+                            Full Stack Range
                           </h4>
                           <p className="text-gray-300 leading-relaxed text-sm">
-                            Proficient in React Native for seamless iOS and
-                            Android development.
+                            React Native, React web, Node.js APIs, Firebase
+                            front to back.
                           </p>
                         </div>
                       </div>
@@ -470,11 +466,11 @@ export default function About() {
                         <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
                         <div>
                           <h4 className="text-lg font-semibold text-white mb-1">
-                            Performance Optimization
+                            Backend & APIs
                           </h4>
                           <p className="text-gray-300 leading-relaxed text-sm">
-                            Expert in state management, code splitting, and
-                            smooth user interactions.
+                            REST design, auth, databases, real-time sync, and
+                            serverless.
                           </p>
                         </div>
                       </div>
@@ -483,11 +479,10 @@ export default function About() {
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
                         <div>
                           <h4 className="text-lg font-semibold text-white mb-1">
-                            Modern Tech Stack
+                            Scalable Architecture
                           </h4>
                           <p className="text-gray-300 leading-relaxed text-sm">
-                            TypeScript, hooks, REST APIs, Firebase, and agile
-                            development practices.
+                            Clean code, TypeScript, state management, CI/CD.
                           </p>
                         </div>
                       </div>
@@ -499,8 +494,8 @@ export default function About() {
                             UI/UX Excellence
                           </h4>
                           <p className="text-gray-300 leading-relaxed text-sm">
-                            Creating intuitive, accessible interfaces with
-                            smooth animations.
+                            Intuitive interfaces, 60fps animations, polished
+                            mobile & web.
                           </p>
                         </div>
                       </div>

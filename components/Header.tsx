@@ -100,12 +100,11 @@ export default function Header() {
                   aria-label="Ali Haider - Home"
                 >
                   <motion.div
-                    className="relative w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-purple-500/25 transition-shadow duration-300"
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.5 }}
+                    className="relative w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 transition-shadow duration-300"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <span className="text-white font-bold text-lg">AH</span>
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </motion.div>
                   <span className="gradient-text font-extrabold tracking-tight">
                     Ali Haider
@@ -141,8 +140,8 @@ export default function Header() {
                           <item.icon
                             className={`text-sm transition-colors duration-300 ${
                               isActive
-                                ? "text-purple-300"
-                                : "text-purple-400 group-hover:text-purple-300"
+                                ? "text-indigo-300"
+                                : "text-slate-400 group-hover:text-indigo-300"
                             }`}
                           />
                         </motion.div>
@@ -152,7 +151,7 @@ export default function Header() {
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-indigo-400 rounded-full"
                           transition={{
                             type: "spring",
                             stiffness: 500,
@@ -161,7 +160,7 @@ export default function Header() {
                         />
                       )}
                       {/* Hover indicator */}
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-8 rounded-full transition-all duration-300"></div>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-indigo-400 group-hover:w-8 rounded-full transition-all duration-300"></div>
                     </Link>
                   );
                 })}
@@ -171,7 +170,7 @@ export default function Header() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleMenu}
-                className="md:hidden relative p-4 text-white hover:text-purple-400 transition-all duration-300 rounded-xl hover:bg-white/10 focus-professional min-w-[48px] min-h-[48px] flex items-center justify-center"
+                className="md:hidden relative p-4 text-white hover:text-indigo-400 transition-all duration-300 rounded-xl hover:bg-white/10 focus-professional min-w-[48px] min-h-[48px] flex items-center justify-center"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
                 style={{ WebkitTapHighlightColor: "transparent" }}
@@ -266,8 +265,8 @@ export default function Header() {
                               <motion.div
                                 className={`p-3 rounded-xl transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center ${
                                   isActive
-                                    ? "bg-gradient-to-r from-purple-500/40 to-pink-500/40"
-                                    : "bg-gradient-to-r from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30"
+                                    ? "bg-indigo-500/30"
+                                    : "bg-white/5 group-hover:bg-white/10"
                                 }`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -275,8 +274,8 @@ export default function Header() {
                                 <item.icon
                                   className={`text-lg transition-colors duration-300 ${
                                     isActive
-                                      ? "text-purple-300"
-                                      : "text-purple-400 group-hover:text-purple-300"
+                                    ? "text-indigo-300"
+                                    : "text-slate-400 group-hover:text-indigo-300"
                                   }`}
                                 />
                               </motion.div>
@@ -285,7 +284,7 @@ export default function Header() {
                                   {item.label}
                                 </span>
                                 {isActive && (
-                                  <span className="text-xs text-purple-400 font-medium">
+                                  <span className="text-xs text-indigo-400 font-medium">
                                     Current page
                                   </span>
                                 )}

@@ -19,18 +19,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ali Haider - React Native Developer",
+  title: "Ali Haider - Full Stack React Native Developer",
   description:
-    "Professional portfolio of Ali Haider, a skilled React Native developer specializing in mobile app development.",
-  keywords: ["React Native", "Mobile Developer", "iOS", "Android", "Portfolio"],
+    "Full Stack Developer: Next.js, React Native, Node.js, Express, MongoDB, PostgreSQL, SQL & NoSQL. Scalable web & mobile apps—15+ projects delivered.",
+  keywords: [
+    "Full Stack Developer",
+    "Next.js",
+    "React Native",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "PostgreSQL",
+    "SQL",
+    "NoSQL",
+    "Firebase",
+    "Mobile Developer",
+    "Web Developer",
+    "iOS",
+    "Android",
+    "Portfolio",
+  ],
   authors: [{ name: "Ali Haider" }],
   creator: "Ali Haider",
   publisher: "Ali Haider",
   robots: "index, follow",
   openGraph: {
-    title: "Ali Haider - React Native Developer",
+    title: "Ali Haider - Full Stack React Native Developer",
     description:
-      "Professional portfolio showcasing mobile app development expertise",
+      "Full stack web & mobile solutions. Scalable apps, seamless UX, robust backend. React Native, Node.js, Firebase. Let's build.",
     type: "website",
   },
 };
@@ -40,7 +56,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#8b5cf6",
+  themeColor: "#6366f1",
   colorScheme: "dark",
 };
 
@@ -60,7 +76,7 @@ export default function RootLayout({
         />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="theme-color" content="#6366f1" />
         <meta name="color-scheme" content="dark" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -68,7 +84,7 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <meta name="msapplication-TileColor" content="#8b5cf6" />
+        <meta name="msapplication-TileColor" content="#6366f1" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body

@@ -65,13 +65,13 @@ export default function Projects() {
   ];
 
   const stats = [
-    { number: "15+", label: "Projects Completed", icon: FaRocket },
-    { number: "10+", label: "Technologies Used", icon: FaCode },
-    { number: "100%", label: "Client Satisfaction", icon: FaStar },
+    { number: "15+", label: "Projects Delivered", icon: FaRocket },
+    { number: "12+", label: "Tech Stack Tools", icon: FaCode },
+    { number: "4.5+", label: "Years Experience", icon: FaStar },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
       {/* Enhanced Background Elements */}
       <motion.div style={{ y: y1, opacity }} className="absolute inset-0">
         <motion.div
@@ -210,9 +210,9 @@ export default function Projects() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8"
           >
-            A showcase of my recent work in mobile app development, featuring
-            innovative solutions built with cutting-edge technologies and
-            exceptional user experiences.
+            Full stack projects Next.js, React Native, Node.js, Express,
+            MongoDB, PostgreSQL, SQL & NoSQL. Web & mobile apps with scalable
+            backends.
           </motion.p>
 
           {/* Stats Grid */}

@@ -8,14 +8,15 @@ import {
   FaMobile,
   FaRocket,
   FaHandSparkles,
-  FaStar,
   FaCheckCircle,
   FaUsers,
   FaAward,
   FaLightbulb,
-  FaDownload, // Add this import
-  FaFilePdf, // Add this import
+  FaDownload,
+  FaDatabase,
+  FaServer,
 } from "react-icons/fa";
+import ProjectCard from "../components/ProjectCard";
 
 // Generate particles at module level to avoid React purity issues
 const generateParticles = () => {
@@ -47,7 +48,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
       {/* Enhanced Animated Background Particles */}
       <div className="particles-container">
         {particles.map((particle, i) => (
@@ -60,14 +61,14 @@ export default function Home() {
                 i % 3 === 0
                   ? "var(--primary)"
                   : i % 3 === 1
-                  ? "var(--secondary)"
-                  : "var(--accent)"
+                    ? "var(--secondary)"
+                    : "var(--accent)"
               }, ${
                 i % 3 === 0
                   ? "var(--primary-dark)"
                   : i % 3 === 1
-                  ? "var(--secondary-dark)"
-                  : "var(--accent-dark)"
+                    ? "var(--secondary-dark)"
+                    : "var(--accent-dark)"
               })`,
             }}
           />
@@ -79,8 +80,8 @@ export default function Home() {
         style={{ y }}
         className="relative overflow-hidden min-h-screen flex items-center"
       >
-        <div className="absolute inset-0 animated-gradient opacity-10"></div>
-        <div className="absolute inset-0 animated-gradient-subtle opacity-5"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),transparent)]"></div>
+        <div className="absolute inset-0 animated-gradient-subtle opacity-60"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10">
           <div className="text-center">
@@ -94,16 +95,40 @@ export default function Home() {
                 type: "spring",
                 stiffness: 100,
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-card mb-8 text-sm font-medium text-purple-300 hover-glow cursor-pointer"
+              className="flex flex-col items-center gap-4 mb-8"
             >
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card text-sm font-medium text-slate-300">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span className="font-medium tracking-wide">
+                  Available for new projects
+                </span>
+              </div>
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap items-center justify-center gap-2 max-w-2xl"
               >
-                <FaHandSparkles className="text-yellow-400" />
+                {[
+                  "Next.js",
+                  "React Native",
+                  "Node.js",
+                  "Express.js",
+                  "MongoDB",
+                  "PostgreSQL",
+                  "NoSQL",
+                  "SQL",
+                  "TypeScript",
+                  "Firebase",
+                ].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-400 hover:bg-white/[0.08] hover:border-indigo-500/30 hover:text-slate-200 transition-all duration-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </motion.div>
-              <span className="font-semibold">Available for new projects</span>
-              <FaStar className="text-yellow-400 animate-pulse" />
             </motion.div>
 
             <motion.h1
@@ -122,12 +147,12 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
-              A passionate{" "}
-              <span className="text-purple-400 font-semibold">
-                React Native developer
+              <span className="text-indigo-400 font-semibold">
+                Full Stack React Native developer
               </span>{" "}
-              crafting exceptional mobile experiences that bring ideas to life
-              with cutting-edge technology and pixel-perfect design.
+              building scalable web & mobile apps from end to end. Seamless UX,
+              robust backends, modern stack turning vision into products that
+              perform and scale.
             </motion.p>
 
             <motion.div
@@ -138,19 +163,18 @@ export default function Home() {
             >
               <Link
                 href="/projects"
-                className="group relative btn-primary hover-lift pulse-glow overflow-hidden focus-professional"
+                className="group relative btn-primary overflow-hidden focus-professional"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   View My Work
                   <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-xl"></div>
               </Link>
 
               {/* RESUME DOWNLOAD BUTTON */}
               <button
                 onClick={handleResumeDownload}
-                className="inline-flex items-center gap-2 px-4 py-3 border-2 border-green-400 text-green-400 hover:bg-purple-400 hover:text-white font-medium rounded-xl transition-all duration-300 hover-lift glass-card"
+                className="inline-flex items-center gap-2 px-4 py-3 border border-white/20 text-slate-300 hover:bg-white/10 hover:border-white/30 font-medium rounded-xl transition-all duration-300 glass-card"
               >
                 <FaDownload />
                 Download CV
@@ -158,7 +182,7 @@ export default function Home() {
 
               <Link
                 href="/contact"
-                className="group px-8 py-4 border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold rounded-xl transition-all duration-300 hover-lift glass-card focus-professional"
+                className="group px-8 py-4 btn-secondary rounded-xl focus-professional"
               >
                 <span className="flex items-center gap-2">
                   <FaHandSparkles />
@@ -214,7 +238,7 @@ export default function Home() {
                 >
                   <div className="card-professional p-6 hover-scale">
                     <motion.div
-                      className={`inline-flex p-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 mb-4 ${stat.color}`}
+                      className={`inline-flex p-3 rounded-xl bg-white/5 border border-white/10 mb-4 ${stat.color}`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{
                         type: "spring",
@@ -250,7 +274,7 @@ export default function Home() {
             ease: "easeInOut",
           }}
         >
-          <FaCode className="text-purple-400 text-7xl hover-glow cursor-pointer" />
+          <FaCode className="text-indigo-500/30 text-7xl" />
         </motion.div>
 
         <motion.div
@@ -266,7 +290,7 @@ export default function Home() {
             delay: 2,
           }}
         >
-          <FaMobile className="text-pink-400 text-6xl hover-glow cursor-pointer" />
+          <FaMobile className="text-indigo-400/25 text-6xl" />
         </motion.div>
 
         <motion.div
@@ -298,14 +322,14 @@ export default function Home() {
             delay: 6,
           }}
         >
-          <FaHandSparkles className="text-yellow-400 text-4xl hover-glow cursor-pointer" />
+          <FaDatabase className="text-indigo-400/25 text-4xl" />
         </motion.div>
       </motion.section>
 
-      {/* Enhanced Skills Preview Section */}
-      <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/20 to-transparent"></div>
-        <div className="absolute inset-0 animated-gradient-subtle opacity-30"></div>
+      {/* Pro-level Skills Section */}
+      <section className="py-24 lg:py-36 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent"></div>
+        <div className="absolute inset-0 animated-gradient-subtle opacity-80"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -328,8 +352,9 @@ export default function Home() {
               <span className="gradient-text">What I Do</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              I specialize in creating high-performance mobile applications
-              using cutting-edge technologies and modern development practices.
+              End-to-end development Next.js, React Native, Node.js, Express,
+              MongoDB, PostgreSQL, SQL & NoSQL. Scalable web & mobile from idea
+              to production.
             </p>
           </motion.div>
 
@@ -337,41 +362,41 @@ export default function Home() {
             {[
               {
                 icon: FaMobile,
-                title: "Mobile Development",
+                title: "Mobile & Web Apps",
                 description:
-                  "Building cross-platform apps with React Native for iOS and Android with pixel-perfect UI and smooth performance.",
+                  "Cross-platform React Native apps for iOS & Android, plus React web apps. Pixel-perfect UI, 60fps animations, native feel.",
                 gradient: "from-purple-500 to-pink-500",
                 delay: 0.1,
                 features: [
-                  "Cross-platform",
-                  "Pixel-perfect UI",
-                  "Smooth Performance",
+                  "React Native & Next.js",
+                  "TypeScript",
+                  "Responsive Design",
                 ],
               },
               {
-                icon: FaCode,
-                title: "Full-Stack Solutions",
+                icon: FaServer,
+                title: "Backend & APIs",
                 description:
-                  "Integrating Firebase, Redux, and REST APIs for complete app ecosystems with real-time data and offline support.",
+                  "Node.js APIs, Firebase, REST/GraphQL. Auth, databases, real-time sync, and serverless architecture that scales.",
                 gradient: "from-blue-500 to-cyan-500",
                 delay: 0.2,
                 features: [
-                  "Firebase Integration",
-                  "Redux State Management",
-                  "REST APIs",
+                  "Node.js & Express.js",
+                  "MongoDB, PostgreSQL, SQL",
+                  "REST & API Design",
                 ],
               },
               {
                 icon: FaRocket,
-                title: "Performance Optimization",
+                title: "Full Stack Delivery",
                 description:
-                  "Delivering scalable, high-quality apps that exceed expectations with optimized code and exceptional user experience.",
+                  "From MVP to production. Clean architecture, scalable systems, and deployment pipelines that ship on time.",
                 gradient: "from-green-500 to-emerald-500",
                 delay: 0.3,
                 features: [
-                  "Scalable Architecture",
-                  "Optimized Code",
-                  "Exceptional UX",
+                  "End-to-End Builds",
+                  "CI/CD & Deployment",
+                  "Performance First",
                 ],
               },
             ].map((service) => (
@@ -383,16 +408,16 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
 
-                <div className="relative card-professional p-8 hover-lift h-full group-hover:border-purple-400/50 transition-colors duration-300">
+                <div className="relative card-professional p-8 hover-lift h-full group-hover:border-indigo-500/20 transition-colors duration-300">
                   <div
                     className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${service.gradient} mb-6 pulse-glow group-hover:scale-110 transition-transform duration-300`}
                   >
                     <service.icon className="text-white text-3xl" />
                   </div>
 
-                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors duration-300">
+                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors duration-300">
                     {service.title}
                   </h3>
 
@@ -420,29 +445,91 @@ export default function Home() {
                     ))}
                   </ul>
 
-                  {/* Decorative gradient orb */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Enhanced Call to Action with Resume Download Option */}
+          {/* Featured Projects Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-20"
+          >
+            <div className="flex items-center justify-between mb-12">
+              <h3 className="text-2xl sm:text-3xl font-bold">
+                <span className="gradient-text">Featured Work</span>
+              </h3>
+              <Link
+                href="/projects"
+                className="group flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
+              >
+                View All Projects
+                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  title: "Billion Pound",
+                  description:
+                    "Comprehensive fitness and gym tracking app with workout plans, progress analytics, and personalized recommendations.",
+                  image: "/images/BillionPound/b1.jpg",
+                  technologies: ["React Native", "Firebase", "Redux", "Charts"],
+                  live: "#",
+                  slug: "billionpound",
+                  featured: true,
+                  github: "#",
+                },
+                {
+                  title: "Tijarat",
+                  description:
+                    "Full-featured eCommerce platform with authentication, product catalog, cart, and payment integration.",
+                  image: "/images/Tijarat/t1.png",
+                  technologies: [
+                    "React Native",
+                    "Redux Toolkit",
+                    "Firebase",
+                    "Stripe",
+                  ],
+                  live: "#",
+                  slug: "tijarat",
+                  featured: true,
+                  github: "#",
+                },
+              ].map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  viewport={{ once: true }}
+                >
+                  <ProjectCard {...project} />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Enhanced Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-center mt-16"
+            className="text-center mt-20"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <div className="inline-flex items-center gap-4 px-8 py-4 glass-card rounded-full hover-lift">
                 <motion.span
-                  className="text-purple-300 font-medium"
+                  className="text-slate-400 font-medium"
                   animate={{ opacity: [1, 0.7, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  Ready to start your project?
+                  Ready to build your next app?
                 </motion.span>
                 <Link
                   href="/contact"
