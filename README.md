@@ -74,6 +74,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 This portfolio is set up to deploy to **https://hadikhan007.github.io/**.
 
+> **If the old version keeps showing:** Set Pages Source to **GitHub Actions** (not "Deploy from a branch"). See [DEPLOYMENT_FIX.md](./DEPLOYMENT_FIX.md) for steps.
+
 ### Option A: Automatic deployment (GitHub Actions)
 
 1. Create a repo named `hadikhan007.github.io` on GitHub (for root URL).
