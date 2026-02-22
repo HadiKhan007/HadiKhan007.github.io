@@ -48,42 +48,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
-      {/* Enhanced Animated Background Particles */}
-      <div className="particles-container">
-        {particles.map((particle, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              ...particle,
-              background: `linear-gradient(135deg, ${
-                i % 3 === 0
-                  ? "var(--primary)"
-                  : i % 3 === 1
-                    ? "var(--secondary)"
-                    : "var(--accent)"
-              }, ${
-                i % 3 === 0
-                  ? "var(--primary-dark)"
-                  : i % 3 === 1
-                    ? "var(--secondary-dark)"
-                    : "var(--accent-dark)"
-              })`,
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+      <div className="bg-animation" aria-hidden="true" />
 
       {/* Hero Section */}
       <motion.section
         style={{ y }}
         className="relative overflow-hidden min-h-screen flex items-center"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),transparent)]"></div>
-        <div className="absolute inset-0 animated-gradient-subtle opacity-60"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.12),transparent)]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 relative z-10">
           <div className="text-center">
             {/* Enhanced Floating Badge */}
             <motion.div
@@ -97,12 +71,15 @@ export default function Home() {
               }}
               className="flex flex-col items-center gap-4 mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card text-sm font-medium text-slate-300">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                <span className="font-medium tracking-wide">
-                  Available for new projects
-                </span>
-              </div>
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 100 }}
+                className="page-top-badge"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-pulse shrink-0" />
+                Available for new projects
+              </motion.h2>
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -123,7 +100,7 @@ export default function Home() {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-400 hover:bg-white/[0.08] hover:border-indigo-500/30 hover:text-slate-200 transition-all duration-300"
+                    className="tech-tag"
                   >
                     {tech}
                   </span>
@@ -145,9 +122,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg lg:text-xl text-[#94a3b8] mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              <span className="text-indigo-400 font-semibold">
+              <span className="text-[#6366f1] font-semibold">
                 Full Stack React Native developer
               </span>{" "}
               building scalable web & mobile apps from end to end. Seamless UX,
@@ -174,7 +151,7 @@ export default function Home() {
               {/* RESUME DOWNLOAD BUTTON */}
               <button
                 onClick={handleResumeDownload}
-                className="inline-flex items-center gap-2 px-4 py-3 border border-white/20 text-slate-300 hover:bg-white/10 hover:border-white/30 font-medium rounded-xl transition-all duration-300 glass-card"
+                className="inline-flex items-center gap-2 px-4 py-3 border border-white/10 text-[#94a3b8] hover:bg-white/5 font-medium rounded-xl transition-colors"
               >
                 <FaDownload />
                 Download CV
@@ -196,7 +173,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8 mt-16 max-w-4xl mx-auto"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-16 max-w-4xl mx-auto"
             >
               {[
                 {
@@ -236,7 +213,7 @@ export default function Home() {
                   }}
                   className="text-center group"
                 >
-                  <div className="card-professional p-6 hover-scale">
+                  <div className="rounded-2xl p-4 sm:p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 hover-lift transition-all duration-300 group/card">
                     <motion.div
                       className={`inline-flex p-3 rounded-xl bg-white/5 border border-white/10 mb-4 ${stat.color}`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -261,76 +238,39 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Enhanced Floating Elements with Better Animations */}
+        {/* Floating hero icons - premium touch */}
         <motion.div
-          className="absolute top-20 left-10 opacity-20 hidden lg:block"
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute top-24 left-12 opacity-[0.12] hidden lg:block pointer-events-none"
+          animate={{ y: [0, -15, 0], rotate: [0, 3, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <FaCode className="text-indigo-500/30 text-7xl" />
+          <FaCode className="text-[#6366f1] text-6xl" />
         </motion.div>
-
         <motion.div
-          className="absolute top-40 right-20 opacity-20 hidden lg:block"
-          animate={{
-            y: [0, -15, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
+          className="absolute top-48 right-24 opacity-[0.12] hidden lg:block pointer-events-none"
+          animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         >
-          <FaMobile className="text-indigo-400/25 text-6xl" />
+          <FaMobile className="text-[#ec4899] text-5xl" />
         </motion.div>
-
         <motion.div
-          className="absolute bottom-32 left-20 opacity-20 hidden lg:block"
-          animate={{
-            y: [0, -25, 0],
-            rotate: [0, 10, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
+          className="absolute bottom-40 left-20 opacity-[0.12] hidden lg:block pointer-events-none"
+          animate={{ y: [0, -18, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         >
-          <FaRocket className="text-blue-400 text-5xl hover-glow cursor-pointer" />
+          <FaRocket className="text-[#06b6d4] text-5xl" />
         </motion.div>
-
         <motion.div
-          className="absolute bottom-20 right-32 opacity-20 hidden lg:block"
-          animate={{
-            y: [0, -18, 0],
-            rotate: [0, -8, 0],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6,
-          }}
+          className="absolute bottom-24 right-28 opacity-[0.12] hidden lg:block pointer-events-none"
+          animate={{ y: [0, -14, 0], rotate: [0, -4, 0] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         >
-          <FaDatabase className="text-indigo-400/25 text-4xl" />
+          <FaDatabase className="text-[#6366f1] text-4xl" />
         </motion.div>
       </motion.section>
 
-      {/* Pro-level Skills Section */}
-      <section className="py-24 lg:py-36 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent"></div>
-        <div className="absolute inset-0 animated-gradient-subtle opacity-80"></div>
-
+      <section className="py-12 sm:py-16 lg:py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.03] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -340,18 +280,18 @@ export default function Home() {
             className="text-center mb-16"
           >
             <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 120 }}
               viewport={{ once: true }}
-              className="inline-block p-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 mb-6"
+              className="inline-flex p-3 rounded-2xl bg-gradient-to-r from-[#6366f1]/20 to-[#ec4899]/20 mb-6 border border-white/10"
             >
-              <FaUsers className="text-3xl text-purple-400" />
+              <FaUsers className="text-3xl text-[#818cf8]" />
             </motion.div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6">
               <span className="gradient-text">What I Do</span>
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-[#94a3b8] max-w-3xl mx-auto leading-relaxed">
               End-to-end development Next.js, React Native, Node.js, Express,
               MongoDB, PostgreSQL, SQL & NoSQL. Scalable web & mobile from idea
               to production.
@@ -408,20 +348,20 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
 
-                <div className="relative card-professional p-8 hover-lift h-full group-hover:border-indigo-500/20 transition-colors duration-300">
+                <div className="relative rounded-2xl p-6 sm:p-8 bg-[#13131f] border border-white/[0.05] h-full hover:border-[#6366f1]/30 hover-lift transition-all duration-300 overflow-hidden group/card">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-[#ec4899]/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 rounded-2xl" />
                   <div
-                    className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${service.gradient} mb-6 pulse-glow group-hover:scale-110 transition-transform duration-300`}
+                    className={`relative inline-flex p-4 rounded-xl bg-gradient-to-r ${service.gradient} mb-6 pulse-glow group-hover/card:scale-110 transition-transform duration-300 shadow-lg`}
                   >
                     <service.icon className="text-white text-3xl" />
                   </div>
 
-                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-[#f8fafc] mb-4">
                     {service.title}
                   </h3>
 
-                  <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
+                  <p className="text-[#94a3b8] leading-relaxed mb-6">
                     {service.description}
                   </p>
 
@@ -437,7 +377,7 @@ export default function Home() {
                           delay: service.delay + featureIndex * 0.1,
                         }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors"
+                        className="flex items-center gap-2 text-sm text-[#64748b]"
                       >
                         <FaCheckCircle className="text-green-400 flex-shrink-0" />
                         {feature}
@@ -445,7 +385,6 @@ export default function Home() {
                     ))}
                   </ul>
 
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
                 </div>
               </motion.div>
             ))}
@@ -465,7 +404,7 @@ export default function Home() {
               </h3>
               <Link
                 href="/projects"
-                className="group flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
+                className="group flex items-center gap-2 text-[#6366f1] hover:text-[#818cf8] font-medium transition-colors"
               >
                 View All Projects
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -520,20 +459,16 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-center mt-20"
+            className="text-center mt-16 sm:mt-20"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <div className="inline-flex items-center gap-4 px-8 py-4 glass-card rounded-full hover-lift">
-                <motion.span
-                  className="text-slate-400 font-medium"
-                  animate={{ opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-4 px-4 sm:px-6 py-4 sm:py-3 rounded-2xl sm:rounded-full glass-card hover-lift w-full sm:w-auto max-w-md sm:max-w-none">
+                <span className="text-[#94a3b8] font-medium text-center sm:text-left">
                   Ready to build your next app?
-                </motion.span>
+                </span>
                 <Link
                   href="/contact"
-                  className="btn-secondary hover-lift focus-professional"
+                  className="btn-secondary hover-lift focus-professional whitespace-nowrap w-full sm:w-auto flex justify-center items-center min-h-[44px] px-6 py-3"
                 >
                   Let&apos;s Talk
                 </Link>

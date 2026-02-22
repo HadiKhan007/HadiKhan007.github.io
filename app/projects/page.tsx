@@ -2,21 +2,11 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import ProjectCard from "../../components/ProjectCard";
-import {
-  FaCode,
-  FaRocket,
-  FaHandSparkles,
-  FaStar,
-  FaGithub,
-  FaExternalLinkAlt,
-} from "react-icons/fa";
+import { FaCode, FaRocket, FaStar, FaHandSparkles } from "react-icons/fa";
 
 export default function Projects() {
   const { scrollYProgress } = useScroll();
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, -30]);
   const projects = [
     {
       title: "Billion Pound",
@@ -71,129 +61,34 @@ export default function Projects() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
-      {/* Enhanced Background Elements */}
-      <motion.div style={{ y: y1, opacity }} className="absolute inset-0">
-        <motion.div
-          className="absolute top-20 left-10 opacity-10"
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <FaCode className="text-purple-400 text-8xl" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-20 right-10 opacity-10"
-          animate={{
-            y: [0, -15, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3,
-          }}
-        >
-          <FaRocket className="text-pink-400 text-7xl" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-5"
-          animate={{
-            y: [0, -25, 0],
-            rotate: [0, 10, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6,
-          }}
-        >
-          <FaHandSparkles className="text-blue-400 text-9xl" />
-        </motion.div>
-
-        {/* Additional floating elements */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 opacity-5"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 10, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 9,
-          }}
-        >
-          <FaGithub className="text-green-400 text-6xl" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 opacity-5"
-          animate={{
-            y: [0, -20, 0],
-            x: [0, -15, 0],
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 12,
-          }}
-        >
-          <FaExternalLinkAlt className="text-cyan-400 text-5xl" />
-        </motion.div>
+    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+      <div className="bg-animation" aria-hidden="true" />
+      {/* Floating background elements */}
+      <motion.div className="absolute top-20 left-10 opacity-[0.08] hidden lg:block pointer-events-none" animate={{ y: [0, -20, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}>
+        <FaCode className="text-[#6366f1] text-7xl" />
       </motion.div>
-
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 animated-gradient-subtle opacity-20"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+      <motion.div className="absolute bottom-32 right-16 opacity-[0.08] hidden lg:block pointer-events-none" animate={{ y: [0, -15, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}>
+        <FaRocket className="text-[#ec4899] text-6xl" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
         {/* Enhanced Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+            className="text-center mb-12 sm:mb-16"
         >
-          {/* Enhanced badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.2,
-              type: "spring",
-              stiffness: 100,
-            }}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass-card mb-8 hover-glow cursor-pointer"
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 120 }}
+            className="page-top-badge"
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              <FaHandSparkles className="text-yellow-400 text-lg" />
-            </motion.div>
-            <span className="text-purple-300 font-semibold text-sm">
-              Featured Projects Showcase
-            </span>
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              <FaStar className="text-yellow-400 text-lg" />
-            </motion.div>
-          </motion.div>
+            <FaHandSparkles className="text-[#06b6d4] shrink-0" />
+            Featured Projects
+            <FaStar className="text-[#ec4899] shrink-0" />
+          </motion.h2>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -208,7 +103,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8"
+            className="text-base sm:text-lg text-[#94a3b8] max-w-3xl mx-auto leading-relaxed mb-8"
           >
             Full stack projects Next.js, React Native, Node.js, Express,
             MongoDB, PostgreSQL, SQL & NoSQL. Web & mobile apps with scalable
@@ -235,18 +130,14 @@ export default function Projects() {
                 }}
                 className="text-center"
               >
-                <div className="card-professional p-6 hover-scale">
-                  <motion.div
-                    className="inline-flex p-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 mb-4 text-purple-400"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
+                <div className="rounded-2xl p-5 sm:p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/20 hover-lift transition-all duration-300">
+                  <div className="inline-flex p-3 rounded-xl bg-[#1c1c2e] mb-4 text-[#6366f1]">
                     <stat.icon className="text-2xl" />
-                  </motion.div>
+                  </div>
                   <div className="text-2xl sm:text-3xl font-bold gradient-text mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-gray-400 text-sm font-medium">
+                  <div className="text-[#64748b] text-sm font-medium">
                     {stat.label}
                   </div>
                 </div>
@@ -257,8 +148,7 @@ export default function Projects() {
 
         {/* Enhanced Projects Grid */}
         <motion.div
-          style={{ y: y2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12 sm:mb-16"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -281,87 +171,32 @@ export default function Projects() {
 
         {/* Enhanced Call to Action Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center relative"
+          className="text-center"
         >
-          {/* Enhanced background decoration */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-pink-600/10 rounded-3xl blur-3xl"></div>
-          <div className="absolute inset-0 animated-gradient-subtle opacity-30 rounded-3xl"></div>
-
-          <motion.div
-            className="relative glass-card rounded-3xl p-8 lg:p-12 hover-lift"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="rounded-2xl p-6 sm:p-8 lg:p-10 bg-[#13131f] border border-white/[0.05] glass-card hover-lift relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#6366f1]/10 to-transparent rounded-full blur-2xl" />
             <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-                type: "spring",
-                stiffness: 200,
-              }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200 }}
               viewport={{ once: true }}
-              className="w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-8 pulse-glow hover-glow cursor-pointer"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#6366f1] to-[#ec4899] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#6366f1]/30"
             >
-              <FaHandSparkles className="text-white text-3xl" />
+              <FaRocket className="text-white text-xl sm:text-2xl" />
             </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
-            >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#f8fafc] mb-4">
               <span className="gradient-text">More Coming Soon</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
-            >
-              I&apos;m always working on new projects and exploring innovative
-              solutions. Check back later for exciting updates and new
-              creations!
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            >
-              <motion.div
-                className="px-6 py-3 glass rounded-full text-purple-300 font-medium hover-glow cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                🚀 Building something amazing...
-              </motion.div>
-              <motion.div
-                className="px-6 py-3 glass rounded-full text-pink-300 font-medium hover-glow cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                💡 Exploring new technologies...
-              </motion.div>
-            </motion.div>
-
-            {/* Additional decorative elements */}
-            <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-lg"></div>
-            <div className="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-md"></div>
-          </motion.div>
+            </h2>
+            <p className="text-[#94a3b8] text-sm sm:text-base max-w-xl mx-auto">
+              Building new projects and exploring new tech. Check back for updates.
+            </p>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }

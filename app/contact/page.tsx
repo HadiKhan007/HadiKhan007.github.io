@@ -1,17 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import {
   FaEnvelope,
   FaGithub,
   FaLinkedin,
   FaPaperPlane,
-  FaStar,
   FaRocket,
-  FaHeart,
   FaCheckCircle,
   FaExclamationTriangle,
 } from "react-icons/fa";
@@ -21,9 +18,6 @@ type FormData = {
   email: string;
   message: string;
 };
-
-// Initialize EmailJS with your PUBLIC key
-emailjs.init("5m45IzjeBEvmngDG9");
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,31 +33,19 @@ export default function Contact() {
     reset,
   } = useForm<FormData>();
 
-  // Debug: Check if environment variables are loaded
-  useEffect(() => {
-    console.log("📧 EmailJS Configuration:", {
-      serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-      templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-      publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-    });
-  }, []);
-
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      // Use CORRECT values
+      const { default: emailjs } = await import("@emailjs/browser");
+      emailjs.init("5m45IzjeBEvmngDG9");
+
       const serviceId = "service_g2fyp4k";
-      const templateId = "template_7ljzhyf"; // CORRECT TEMPLATE ID
+      const templateId = "template_7ljzhyf";
       const publicKey = "5m45IzjeBEvmngDG9";
 
-      console.log("📤 Sending email with:", data);
-
-      // Get first letter for avatar
-      const firstLetter = data.name.charAt(0).toUpperCase();
-
-      // Simple timestamp
+      // Timestamp
       const time = new Date().toLocaleString("en-US", {
         weekday: "long",
         year: "numeric",
@@ -90,9 +72,7 @@ export default function Contact() {
         to_name: "Ali Haider",
       };
 
-      console.log("📝 Template parameters:", templateParams);
-
-      // Send email using EmailJS
+      // Send email
       const response = await emailjs.send(
         serviceId,
         templateId,
@@ -100,27 +80,24 @@ export default function Contact() {
         publicKey
       );
 
-      console.log("✅ Email sent successfully:", response);
-
       setSubmitStatus({
         type: "success",
         message:
-          "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+          "Got it. I'll read your message and reply soon.",
       });
       reset();
-    } catch (error: any) {
-      console.error("❌ Error sending email:", error);
-
+    } catch (error: unknown) {
       let errorMessage = "Failed to send message. ";
-
-      if (error.text) {
-        errorMessage += `Error: ${error.text}`;
-      } else if (error.message) {
-        errorMessage += error.message;
+      if (error && typeof error === "object") {
+        if ("text" in error && typeof (error as { text?: string }).text === "string") {
+          errorMessage += (error as { text: string }).text;
+        } else if ("message" in error && typeof (error as { message?: string }).message === "string") {
+          errorMessage += (error as { message: string }).message;
+        }
       }
 
       errorMessage +=
-        " Please try again or email me directly at alihaidercs17@gmail.com";
+        " Email me directly at alihaidercs17@gmail.com if it keeps failing.";
 
       setSubmitStatus({
         type: "error",
@@ -131,56 +108,40 @@ export default function Contact() {
     }
   };
 
-  // Test with CORRECT template ID
-
   const contactMethods = [
     {
       icon: FaEnvelope,
       title: "Email",
       value: "alihaidercs17@gmail.com",
       href: "mailto:alihaidercs17@gmail.com",
-      color: "from-blue-500 to-cyan-500",
     },
     {
       icon: FaGithub,
       title: "GitHub",
       value: "HadiKhan007",
       href: "https://github.com/HadiKhan007",
-      color: "from-gray-600 to-gray-800",
     },
     {
       icon: FaLinkedin,
       title: "LinkedIn",
       value: "Ali Haider",
       href: "https://www.linkedin.com/in/alihaider17/",
-      color: "from-blue-600 to-blue-800",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 opacity-10">
-          <FaRocket className="text-purple-400 text-8xl float-animation" />
-        </div>
-        <div className="absolute bottom-20 right-10 opacity-10">
-          <FaHeart
-            className="text-pink-400 text-7xl float-animation"
-            style={{ animationDelay: "2s" }}
-          />
-        </div>
-        <div className="absolute top-1/2 left-1/4 opacity-5">
-          <FaStar
-            className="text-yellow-400 text-6xl float-animation"
-            style={{ animationDelay: "4s" }}
-          />
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+      <div className="bg-animation" aria-hidden="true" />
+      {/* Floating background elements */}
+      <motion.div className="absolute top-40 left-16 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -16, 0], rotate: [0, 4, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}>
+        <FaEnvelope className="text-[#6366f1] text-6xl" />
+      </motion.div>
+      <motion.div className="absolute bottom-40 right-20 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}>
+        <FaPaperPlane className="text-[#ec4899] text-5xl" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
-        {/* Debug button - remove in production */}
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -188,24 +149,22 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+            className="page-top-badge"
           >
-            <FaPaperPlane className="text-purple-400" />
-            <span className="text-purple-300 font-medium">Get In Touch</span>
-            <FaPaperPlane className="text-purple-400" />
-          </motion.div>
+            <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-pulse shrink-0" />
+            Available for new projects
+          </motion.h2>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="gradient-text">Let&apos;s Connect</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-[#f8fafc]">
+            <span className="gradient-text">Say hello</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Got a web or mobile app in mind? Let&apos;s build it end-to-end—from
-            UI to backend. Full stack development, on time, built to scale.
+          <p className="text-lg sm:text-xl text-[#94a3b8] max-w-2xl mx-auto leading-relaxed">
+            Have a project in mind? I check email daily.
           </p>
         </motion.div>
 
@@ -219,11 +178,12 @@ export default function Contact() {
             className="space-y-8"
           >
             <div className="text-center lg:text-left">
-              <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-                <span className="gradient-text">Contact Information</span>
+              <div className="section-tag mb-3">Reach me</div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[#f8fafc]">
+                Contact
               </h2>
-              <p className="text-gray-300 text-lg">
-                Feel free to reach out through any of these channels
+              <p className="text-[#94a3b8] text-lg">
+                Email, GitHub, LinkedIn—pick what works.
               </p>
             </div>
 
@@ -237,17 +197,16 @@ export default function Contact() {
                   viewport={{ once: true }}
                   className="group relative"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-
-                  <div className="relative glass-dark rounded-2xl p-6 hover-lift">
+                  <div className="relative rounded-3xl p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 transition-all duration-400 hover:-translate-y-1">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-4 rounded-xl bg-gradient-to-r ${method.color} pulse-glow`}
+                        className="p-4 rounded-xl"
+                        style={{ background: "var(--gradient-1)" }}
                       >
                         <method.icon className="text-white text-2xl" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-purple-300 transition-colors">
+                        <h3 className="text-xl font-semibold text-[#f8fafc] mb-1">
                           {method.title}
                         </h3>
                         <a
@@ -262,7 +221,7 @@ export default function Contact() {
                               ? "noopener noreferrer"
                               : undefined
                           }
-                          className="text-gray-300 hover:text-purple-400 transition-colors text-lg"
+                          className="text-[#94a3b8] hover:text-[#6366f1] transition-colors text-lg"
                         >
                           {method.value}
                         </a>
@@ -279,25 +238,22 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative rounded-3xl p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 glass-card hover-lift transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-
-              <div className="relative glass-dark rounded-2xl p-6 hover-lift">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl">
-                    <FaRocket className="text-white text-xl" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">
-                    Quick Response
-                  </h3>
+              <div className="flex items-center gap-4 mb-4">
+                <div
+                  className="p-3 rounded-xl"
+                  style={{ background: "var(--gradient-2)" }}
+                >
+                  <FaRocket className="text-white text-xl" />
                 </div>
-                <p className="text-gray-300 leading-relaxed">
-                  I typically respond within 24 hours. Need a full stack app—web,
-                  mobile, or both? MVP to production. Let&apos;s build something
-                  that scales.
-                </p>
+                <h3 className="text-xl font-semibold text-[#f8fafc]">
+                  Response time
+                </h3>
               </div>
+              <p className="text-[#94a3b8] leading-relaxed">
+                I aim for a reply within 24 hours. If you&apos;re on a tight deadline, mention it and I&apos;ll prioritize.
+              </p>
             </motion.div>
           </motion.div>
 
@@ -307,17 +263,19 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative group"
+            className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-
-            <div className="relative glass-dark rounded-3xl p-8 lg:p-10">
+            <div className="relative rounded-3xl p-8 lg:p-10 bg-[#13131f] border border-white/[0.05] glass-card hover-lift overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-[#6366f1]/10 to-transparent rounded-full blur-3xl" />
               <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl">
+                <div
+                  className="p-3 rounded-xl"
+                  style={{ background: "var(--gradient-1)" }}
+                >
                   <FaPaperPlane className="text-white text-xl" />
                 </div>
-                <h2 className="text-3xl font-bold text-white">
-                  Send a Message
+                <h2 className="text-3xl font-bold text-[#f8fafc]">
+                  Send a message
                 </h2>
               </div>
 
@@ -328,16 +286,16 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
                     submitStatus.type === "success"
-                      ? "bg-green-500/20 border border-green-500/30 text-green-300"
-                      : "bg-red-500/20 border border-red-500/30 text-red-300"
+                      ? "bg-[#10b981]/20 border border-[#10b981]/30"
+                      : "bg-[#ef4444]/20 border border-[#ef4444]/30"
                   }`}
                 >
                   {submitStatus.type === "success" ? (
-                    <FaCheckCircle className="text-green-400 flex-shrink-0" />
+                    <FaCheckCircle className="text-[#10b981] flex-shrink-0" />
                   ) : (
-                    <FaExclamationTriangle className="text-red-400 flex-shrink-0" />
+                    <FaExclamationTriangle className="text-[#ef4444] flex-shrink-0" />
                   )}
-                  <p className="text-sm">{submitStatus.message}</p>
+                  <p className="text-sm text-[#f8fafc]">{submitStatus.message}</p>
                 </motion.div>
               )}
 
@@ -345,7 +303,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-gray-300 mb-2 font-medium"
+                    className="block text-[#94a3b8] mb-2 font-medium"
                   >
                     Name
                   </label>
@@ -353,8 +311,8 @@ export default function Contact() {
                     {...register("name", { required: "Name is required" })}
                     type="text"
                     id="name"
-                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your Name"
+                    className="w-full px-4 py-4 bg-[#1c1c2e] border border-white/[0.08] rounded-xl text-[#f8fafc] placeholder-[#64748b] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-transparent transition-all duration-300"
+                    placeholder="Your name"
                   />
                   {errors.name && (
                     <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -366,7 +324,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-gray-300 mb-2 font-medium"
+                    className="block text-[#94a3b8] mb-2 font-medium"
                   >
                     Email
                   </label>
@@ -380,8 +338,8 @@ export default function Contact() {
                     })}
                     type="email"
                     id="email"
-                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your.email@example.com"
+                    className="w-full px-4 py-4 bg-[#1c1c2e] border border-white/[0.08] rounded-xl text-[#f8fafc] placeholder-[#64748b] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-transparent transition-all duration-300"
+                    placeholder="you@example.com"
                   />
                   {errors.email && (
                     <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -393,7 +351,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-gray-300 mb-2 font-medium"
+                    className="block text-[#94a3b8] mb-2 font-medium"
                   >
                     Message
                   </label>
@@ -407,8 +365,8 @@ export default function Contact() {
                     })}
                     id="message"
                     rows={6}
-                    className="w-full px-4 py-4 bg-white/10 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project or idea..."
+                    className="w-full px-4 py-4 bg-[#1c1c2e] border border-white/[0.08] rounded-xl text-[#f8fafc] placeholder-[#64748b] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-transparent transition-all duration-300 resize-none"
+                    placeholder="What are you working on? Budget, timeline, stack—whatever helps."
                   />
                   {errors.message && (
                     <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -420,11 +378,19 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 hover-lift pulse-glow ${
+                  className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0f] ${
                     isSubmitting
-                      ? "bg-gray-600 cursor-not-allowed opacity-50"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  } text-white`}
+                      ? "bg-[#1c1c2e] cursor-not-allowed opacity-50 text-[#64748b]"
+                      : "text-white hover:-translate-y-0.5"
+                  }`}
+                  style={
+                    !isSubmitting
+                      ? {
+                          background: "var(--gradient-1)",
+                          boxShadow: "0 10px 30px rgba(99, 102, 241, 0.3)",
+                        }
+                      : undefined
+                  }
                 >
                   <span className="flex items-center justify-center gap-2">
                     {isSubmitting ? (
@@ -452,12 +418,12 @@ export default function Contact() {
 
               {/* Fallback message */}
               {submitStatus.type === "error" && (
-                <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                  <p className="text-red-300 text-sm text-center">
-                    If the form isn't working, please email me directly at{" "}
+                <div className="mt-6 p-4 bg-[#ef4444]/10 border border-[#ef4444]/30 rounded-xl">
+                  <p className="text-[#94a3b8] text-sm text-center">
+                    Form acting up? Email me at{" "}
                     <a
                       href="mailto:alihaidercs17@gmail.com"
-                      className="text-white font-semibold underline hover:text-purple-300"
+                      className="text-[#f8fafc] font-semibold underline hover:text-[#6366f1]"
                     >
                       alihaidercs17@gmail.com
                     </a>

@@ -102,132 +102,70 @@ export default function About() {
   const highlights = [
     {
       icon: FaCode,
-      title: "Clean Architecture",
+      title: "Clean code",
       description:
-        "Building scalable, maintainable systems with modern design patterns and best practices.",
+        "Modular structure, easy to maintain and hand off.",
     },
     {
       icon: FaRocket,
-      title: "Performance First",
+      title: "Ship on time",
       description:
-        "Optimizing every aspect for lightning-fast experiences and exceptional user satisfaction.",
+        "Focus on what ships. MVP to production without overbuilding.",
     },
     {
       icon: FaLightbulb,
-      title: "Innovation Driven",
+      title: "Stack agnostic",
       description:
-        "Constantly exploring emerging technologies to deliver cutting-edge solutions.",
+        "Comfortable with new tools. Pick what fits the project.",
     },
     {
       icon: FaHeart,
-      title: "User Obsessed",
+      title: "User-focused",
       description:
-        "Every decision made with users at the center, creating meaningful digital experiences.",
+        "Clear flows, fast load times, no bloat.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] relative overflow-hidden">
-      {/* Pro-level Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/8 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-400/6 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-20 right-20 opacity-20"
-        >
-          <FaMagic className="text-purple-400 text-6xl" />
-        </motion.div>
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-          className="absolute bottom-32 left-16 opacity-20"
-        >
-          <FaCode className="text-pink-400 text-5xl" />
-        </motion.div>
-      </div>
+    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+      <div className="bg-animation" aria-hidden="true" />
+      {/* Floating background elements */}
+      <motion.div className="absolute top-32 right-20 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -18, 0], rotate: [0, 5, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}>
+        <FaCode className="text-[#6366f1] text-7xl" />
+      </motion.div>
+      <motion.div className="absolute bottom-48 left-16 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -14, 0], rotate: [0, -4, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
+        <FaRocket className="text-[#ec4899] text-6xl" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
-        {/* Hero Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
           className="text-center mb-20"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card border border-white/10 mb-8"
-          >
-            <FaMagic className="text-purple-400 animate-pulse" />
-            <span className="text-purple-300 font-semibold tracking-wide">
-              ABOUT ME
-            </span>
-            <FaMagic className="text-pink-400 animate-pulse" />
-          </motion.div>
+          <motion.h2 initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="page-top-badge">About</motion.h2>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
-          >
-            <span className="text-white/95">Crafting Digital</span>
-            <br />
-            <span className="gradient-text">Experiences</span>
-          </motion.h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-[#f8fafc]">
+            Ali <span className="gradient-text">Haider</span>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light"
-          >
-            Full stack developer building web & mobile apps end-to-end. From UI
-            to APIs, databases to deployment seamless UX, robust backends, and
-            scalable architecture in every project.
-          </motion.p>
+          <p className="text-xl text-[#94a3b8] max-w-2xl mx-auto leading-relaxed">
+            4.5 years building web and mobile apps. React Native, Node.js, Firebase. UI to backend.
+          </p>
         </motion.div>
 
-        {/* Profile & Achievements Section */}
         <div className="grid lg:grid-cols-2 gap-16 mb-24">
-          {/* Profile Card */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative group"
+            transition={{ duration: 0.5 }}
+            className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
-
-            <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 shadow-2xl">
-              <div className="text-center mb-8">
-                <div className="relative inline-block mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-full blur-xl animate-pulse"></div>
-                  <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-purple-400 to-pink-400 shadow-2xl">
+            <div className="text-center mb-8">
+              <div className="relative inline-block mb-6">
+                <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-2 border-white/[0.1]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/alihaider.png"
@@ -243,308 +181,208 @@ export default function About() {
                       }}
                     />
                     <div
-                      className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center"
+                      className="w-full h-full bg-[#1c1c2e] flex items-center justify-center"
                       style={{ display: "none" }}
                     >
-                      <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                          <span className="text-white text-2xl font-bold">
-                            AH
-                          </span>
-                        </div>
-                      </div>
+                      <span className="text-white text-3xl font-bold">AH</span>
                     </div>
-                  </div>
-                  <div className="absolute bottom-2 right-2 w-12 h-12 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center shadow-lg border-4 border-slate-900">
-                    <FaCheckCircle className="text-white text-lg" />
                   </div>
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-bold text-[#f8fafc] mb-1">
                   Ali Haider
-                </h2>
-                <p className="text-purple-300 font-medium text-lg mb-4">
+                </h3>
+                <p className="text-[#6366f1] font-medium mb-2">
                   Full Stack React Native Developer
                 </p>
-                <p className="text-gray-400 text-sm">
-                  Web + Mobile • Frontend + Backend • End to end
+                <p className="text-[#64748b] text-sm">
+                  Web + mobile. Frontend + backend.
                 </p>
-              </div>
             </div>
           </motion.div>
 
-          {/* Achievements Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="grid grid-cols-2 gap-6"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="grid grid-cols-2 gap-4"
           >
             {achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-                className="relative group"
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
+                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] text-center hover:border-[#6366f1]/20 hover-lift transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 text-center hover-lift">
-                  <div
-                    className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${achievement.color} mb-4 mx-auto`}
-                  >
-                    <achievement.icon className="text-white text-2xl" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    {achievement.description}
-                  </p>
+                <div
+                  className="inline-flex p-3 rounded-xl mb-3"
+                  style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                >
+                  <achievement.icon className="text-white text-xl" />
                 </div>
+                <h3 className="text-xl font-bold text-[#f8fafc] mb-0.5">
+                  {achievement.title}
+                </h3>
+                <p className="text-[#64748b] text-sm">
+                  {achievement.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Skills Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-24"
         >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              <span className="gradient-text">Technical Expertise</span>
+          <div className="text-center mb-12">
+            <div className="section-tag mb-3">Stack</div>
+            <h2 className="text-3xl font-bold text-[#f8fafc] mb-2">
+              Skills
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Next.js • Node.js • Express • MongoDB • PostgreSQL • SQL & NoSQL
+            <p className="text-[#94a3b8]">
+              Next.js, Node.js, MongoDB, PostgreSQL, Firebase
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 + index * 0.1 }}
-                className="relative group"
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
+                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 hover-lift transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 hover-lift">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div
-                      className={`p-3 rounded-xl bg-gradient-to-r ${skill.color}`}
-                    >
-                      <skill.icon className="text-white text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">
-                        {skill.name}
-                      </h3>
-                      <p className="text-gray-400 text-sm">
-                        {skill.description}
-                      </p>
-                    </div>
+                <div className="flex items-center gap-4 mb-4">
+                  <div
+                    className="p-3 rounded-xl"
+                    style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                  >
+                    <skill.icon className="text-white text-xl" />
                   </div>
-                  <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{
-                        duration: 1.5,
-                        delay: 1 + index * 0.1,
-                        ease: "easeOut",
-                      }}
-                      className={`h-2 rounded-full bg-gradient-to-r ${skill.color}`}
-                    />
+                  <div>
+                    <h3 className="text-lg font-bold text-[#f8fafc]">
+                      {skill.name}
+                    </h3>
+                    <p className="text-[#64748b] text-sm">
+                      {skill.description}
+                    </p>
                   </div>
-                  <p className="text-gray-400 text-sm">
-                    {skill.level}% Proficiency
-                  </p>
                 </div>
+                <div className="w-full bg-[#1c1c2e] rounded-full h-2 mb-1">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.level}%` }}
+                    transition={{ duration: 1, delay: 0.5 + index * 0.05, ease: "easeOut" }}
+                    className="h-2 rounded-full"
+                    style={{ background: "linear-gradient(90deg,#6366f1,#ec4899)" }}
+                  />
+                </div>
+                <p className="text-[#64748b] text-xs">{skill.level}%</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Story Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-24"
         >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                My Journey
-              </span>
+          <div className="text-center mb-12">
+            <div className="section-tag mb-3">Background</div>
+            <h2 className="text-3xl font-bold text-[#f8fafc]">
+              Experience
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              From passion to profession - the story behind the code
-            </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Story Cards */}
-            {[1, 2].map((card) => (
-              <motion.div
-                key={card}
-                initial={{ opacity: 0, x: card === 1 ? -30 : 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 1 + card * 0.2 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl">
-                      {card === 1 ? (
-                        <FaLightbulb className="text-white text-xl" />
-                      ) : (
-                        <FaRocket className="text-white text-xl" />
-                      )}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white">
-                      {card === 1 ? "My Story" : "What I Bring"}
-                    </h3>
-                  </div>
-
-                  {card === 1 ? (
-                    <div className="space-y-4 text-gray-300 leading-relaxed">
-                      <p>
-                        Full stack developer with 4.5+ years building scalable
-                        web and mobile apps. React Native, Node.js, Firebase
-                        from UI to APIs, databases to deployment.
-                      </p>
-                      <p>
-                        Delivered 15+ projects including{" "}
-                        <span className="text-purple-300 font-semibold">
-                          Tijarat
-                        </span>{" "}
-                        (eCommerce),{" "}
-                        <span className="text-purple-300 font-semibold">
-                          Billion Pound
-                        </span>{" "}
-                        (Fitness), and{" "}
-                        <span className="text-purple-300 font-semibold">
-                          SpotSwap
-                        </span>{" "}
-                        (Trading platform). Each with robust backends, clean
-                        architecture, and polished UX.
-                      </p>
-                      <p>
-                        I build end-to-end: responsive interfaces, REST APIs,
-                        auth flows, real-time data, and cloud deployment.
-                        Focused on products that perform, scale, and ship on
-                        time.
-                      </p>
-                      <p className="text-purple-200 font-medium">
-                        Always exploring the stack TypeScript, modern tooling,
-                        and best practices.
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="space-y-5">
-                      <div className="flex items-start gap-4">
-                        <div className="w-2 h-2 bg-purple-400 rounded-full mt-3 flex-shrink-0"></div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-white mb-1">
-                            Full Stack Range
-                          </h4>
-                          <p className="text-gray-300 leading-relaxed text-sm">
-                            React Native, React web, Node.js APIs, Firebase
-                            front to back.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-white mb-1">
-                            Backend & APIs
-                          </h4>
-                          <p className="text-gray-300 leading-relaxed text-sm">
-                            REST design, auth, databases, real-time sync, and
-                            serverless.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-white mb-1">
-                            Scalable Architecture
-                          </h4>
-                          <p className="text-gray-300 leading-relaxed text-sm">
-                            Clean code, TypeScript, state management, CI/CD.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <div className="w-2 h-2 bg-pink-400 rounded-full mt-3 flex-shrink-0"></div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-white mb-1">
-                            UI/UX Excellence
-                          </h4>
-                          <p className="text-gray-300 leading-relaxed text-sm">
-                            Intuitive interfaces, 60fps animations, polished
-                            mobile & web.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift">
+              <div className="flex items-center gap-4 mb-6">
+                <div
+                  className="p-3 rounded-xl"
+                  style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                >
+                  <FaLightbulb className="text-white text-xl" />
                 </div>
-              </motion.div>
-            ))}
+                <h3 className="text-xl font-bold text-[#f8fafc]">Background</h3>
+              </div>
+              <div className="space-y-4 text-[#94a3b8] leading-relaxed">
+                <p>
+                  4.5+ years in full stack. Built Tijarat (eCommerce), Billion Pound (fitness), SpotSwap (parking). React Native, Node.js, Firebase.
+                </p>
+                <p>
+                  I handle UI, APIs, auth, databases, and deployment. Shipped 15+ projects.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift">
+              <div className="flex items-center gap-4 mb-6">
+                <div
+                  className="p-3 rounded-xl"
+                  style={{ background: "linear-gradient(135deg,#06b6d4,#6366f1)" }}
+                >
+                  <FaRocket className="text-white text-xl" />
+                </div>
+                <h3 className="text-xl font-bold text-[#f8fafc]">What I do</h3>
+              </div>
+              <div className="space-y-4">
+                <div className="flex gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1] mt-2 shrink-0" />
+                  <p className="text-[#94a3b8] text-sm">React Native, web, Node.js, Firebase</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] mt-2 shrink-0" />
+                  <p className="text-[#94a3b8] text-sm">REST APIs, auth, real-time sync</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] mt-2 shrink-0" />
+                  <p className="text-[#94a3b8] text-sm">TypeScript, clean code, CI/CD</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Highlights Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-                Core Values
-              </span>
+          <div className="text-center mb-12">
+            <div className="section-tag mb-3">Approach</div>
+            <h2 className="text-3xl font-bold text-[#f8fafc]">
+              How I work
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              The principles that guide every project and decision I make
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {highlights.map((highlight, index) => (
               <motion.div
                 key={highlight.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 + index * 0.1 }}
-                className="relative group"
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
+                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] text-center hover:border-[#6366f1]/30 hover-lift transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 text-center hover-lift h-full">
-                  <div className="inline-flex p-4 rounded-xl bg-gradient-to-r from-green-400 to-blue-500 mb-4 mx-auto pulse-glow">
-                    <highlight.icon className="text-white text-2xl" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-300 transition-colors">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm leading-relaxed group-hover:text-gray-200 transition-colors">
-                    {highlight.description}
-                  </p>
+                <div
+                  className="inline-flex p-3 rounded-xl mb-4"
+                  style={{ background: "linear-gradient(135deg,#6366f1,#06b6d4)" }}
+                >
+                  <highlight.icon className="text-white text-xl" />
                 </div>
+                <h3 className="text-lg font-bold text-[#f8fafc] mb-2">
+                  {highlight.title}
+                </h3>
+                <p className="text-[#64748b] text-sm leading-relaxed">
+                  {highlight.description}
+                </p>
               </motion.div>
             ))}
           </div>

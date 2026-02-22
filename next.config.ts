@@ -1,24 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export for GitHub Pages deployment at hadikhan007.github.io
   output: "export",
-  images: {
-    unoptimized: true,
-  },
-  // Performance optimizations
+  images: { unoptimized: true },
   compress: true,
   poweredByHeader: false,
+  reactStrictMode: true,
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
+    optimizePackageImports: ["react-icons/fa", "react-icons/si"],
   },
   turbopack: {
-    // Turbopack optimizations for maximum performance
     rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
-      },
+      "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" },
     },
   },
 };

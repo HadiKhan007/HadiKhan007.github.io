@@ -50,27 +50,29 @@ export default function SpotSwap() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24">
-      {/* Header */}
-      <div className="bg-slate-900/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <button
-            onClick={() => router.push("/projects")}
-            className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-4"
-          >
-            <FaArrowLeft className="text-sm" />
-            Back to Projects
-          </button>
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 relative overflow-hidden">
+      <div className="bg-animation" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
+      <div className="relative z-10">
+        <div className="border-b border-white/[0.05] bg-[#13131f]/80 backdrop-blur-xl">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <button
+              onClick={() => router.push("/projects")}
+              className="flex items-center gap-2 text-[#94a3b8] hover:text-[#6366f1] transition-colors mb-4"
+            >
+              <FaArrowLeft className="text-sm" />
+              Back to Projects
+            </button>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              SpotSwap
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold text-[#f8fafc] mb-4">
+                SpotSwap
+              </h1>
+              <p className="text-xl text-[#94a3b8] max-w-3xl">
               A revolutionary parking spot sharing platform that connects
               parking space owners with drivers, featuring real-time
               availability, seamless booking, and integrated navigation.
@@ -88,10 +90,10 @@ export default function SpotSwap() {
           className="grid lg:grid-cols-2 gap-12 mb-16"
         >
           <div>
-            <h2 className="text-2xl font-bold text-white mb-6">
+            <h2 className="text-2xl font-bold text-[#f8fafc] mb-6">
               Project Overview
             </h2>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-[#94a3b8] mb-6 leading-relaxed">
               SpotSwap revolutionizes urban parking by creating a peer-to-peer
               marketplace for parking spaces. Users can list their unused
               parking spots and drivers can find and book available spaces in
@@ -100,16 +102,16 @@ export default function SpotSwap() {
             </p>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white mb-3">
+              <h3 className="text-lg font-semibold text-[#f8fafc] mb-3">
                 Key Features
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 text-gray-300"
+                    className="flex items-center gap-2 text-[#94a3b8]"
                   >
-                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <div className="w-2 h-2 rounded-full shrink-0" style={{ background: "#6366f1" }}></div>
                     {feature}
                   </div>
                 ))}
@@ -117,10 +119,10 @@ export default function SpotSwap() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white mb-3">
+              <h3 className="text-lg font-semibold text-[#f8fafc] mb-3">
                 Technical Architecture
               </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-[#94a3b8] text-sm leading-relaxed">
                 The platform leverages Firebase for real-time location services,
                 Stripe for secure payment processing, and Google Maps API for
                 precise navigation. The backend infrastructure ensures high
@@ -131,14 +133,14 @@ export default function SpotSwap() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">
+            <h3 className="text-lg font-semibold text-[#f8fafc] mb-4">
               Technologies Used
             </h3>
             <div className="flex flex-wrap gap-3">
               {technologies.map((tech, index) => (
                 <span
                   key={index}
-                  className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm font-medium border border-purple-500/30"
+                  className="tech-tag"
                 >
                   {tech}
                 </span>
@@ -154,60 +156,60 @@ export default function SpotSwap() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[#f8fafc] mb-8 text-center">
             Development Challenges & Solutions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
+            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
+              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
                 Real-time Location Accuracy
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-[#94a3b8] mb-4">
                 Challenge: Ensuring precise GPS coordinates and real-time
                 availability updates for parking spaces.
               </p>
-              <p className="text-purple-300 text-sm">
+              <p className="text-[#6366f1] text-sm">
                 Solution: Integrated Google Maps API with custom geofencing
                 algorithms and implemented WebSocket connections for instant
                 updates.
               </p>
             </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
+            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
+              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
                 Payment Security
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-[#94a3b8] mb-4">
                 Challenge: Implementing secure payment processing for
                 peer-to-peer transactions without holding funds.
               </p>
-              <p className="text-purple-300 text-sm">
+              <p className="text-[#6366f1] text-sm">
                 Solution: Integrated Stripe Connect for escrow services and
                 implemented multi-layer security with JWT tokens and encryption.
               </p>
             </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
+            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
+              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
                 Scalability for Urban Areas
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-[#94a3b8] mb-4">
                 Challenge: Handling high concurrent users in densely populated
                 urban areas during peak hours.
               </p>
-              <p className="text-purple-300 text-sm">
+              <p className="text-[#6366f1] text-sm">
                 Solution: Implemented microservices architecture with load
                 balancing and optimized database queries with geospatial
                 indexing.
               </p>
             </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
+            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
+              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
                 Trust & Safety
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-[#94a3b8] mb-4">
                 Challenge: Building user confidence in peer-to-peer parking
                 transactions.
               </p>
-              <p className="text-purple-300 text-sm">
+              <p className="text-[#6366f1] text-sm">
                 Solution: Implemented comprehensive verification system, user
                 ratings, secure messaging, and insurance integration.
               </p>
@@ -221,7 +223,7 @@ export default function SpotSwap() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[#f8fafc] mb-8 text-center">
             App Screenshots
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -232,9 +234,9 @@ export default function SpotSwap() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-xl bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300"
+                className="group relative overflow-hidden rounded-2xl bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 transition-colors"
               >
-                <div className="aspect-[9/16] relative bg-gray-900 rounded-lg overflow-hidden">
+                <div className="aspect-[9/16] relative bg-[#1c1c2e] rounded-lg overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image}
@@ -243,7 +245,7 @@ export default function SpotSwap() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <div className="absolute bottom-4 left-4 text-white font-medium">
+                <div className="absolute bottom-4 left-4 text-[#f8fafc] font-medium">
                   Screenshot {index + 1}
                 </div>
               </motion.div>
@@ -258,28 +260,29 @@ export default function SpotSwap() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Interested in this project?
+          <h3 className="text-2xl font-bold text-[#f8fafc] mb-4">
+            Want to work together?
           </h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            This is just one of my featured projects. Check out my other work or
-            get in touch to discuss how I can help bring your ideas to life.
+          <p className="text-[#94a3b8] mb-8 max-w-2xl mx-auto">
+            See more projects or reach out to discuss your next build.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => router.push("/projects")}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
+              className="text-white font-semibold py-3 px-8 rounded-xl transition-all hover:-translate-y-0.5"
+              style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)", boxShadow: "0 10px 30px rgba(99,102,241,0.3)" }}
             >
               View All Projects
             </button>
             <button
               onClick={() => router.push("/contact")}
-              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300"
+              className="border border-white/20 text-[#94a3b8] hover:bg-white/5 font-semibold py-3 px-8 rounded-xl transition-colors"
             >
-              Get In Touch
+              Contact
             </button>
           </div>
         </motion.div>
+      </div>
       </div>
     </div>
   );

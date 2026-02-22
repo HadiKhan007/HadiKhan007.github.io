@@ -2,40 +2,31 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import {
-  FaHome,
-  FaUser,
-  FaBriefcase,
-  FaEnvelope,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaHome, FaUser, FaBriefcase, FaEnvelope } from "react-icons/fa";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 20);
-
-      // Hide/show header based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -80,9 +71,9 @@ export default function Header() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
             isScrolled
-              ? "glass-dark shadow-2xl border-b border-white/10"
+              ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/[0.05]"
               : "bg-transparent"
           }`}
         >
@@ -98,15 +89,23 @@ export default function Header() {
                   href="/"
                   className="flex items-center gap-3 group focus-professional"
                   aria-label="Ali Haider - Home"
+                  prefetch
                 >
-                  <motion.div
-                    className="relative w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 transition-shadow duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
                   >
                     <span className="text-white font-bold text-lg">AH</span>
-                  </motion.div>
-                  <span className="gradient-text font-extrabold tracking-tight">
+                  </div>
+                  <span
+                    className="font-bold tracking-tight"
+                    style={{
+                      background: "linear-gradient(135deg,#6366f1,#ec4899)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
                     Ali Haider
                   </span>
                 </Link>
@@ -123,25 +122,25 @@ export default function Header() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`relative px-5 py-3 text-gray-300 hover:text-white transition-all duration-300 rounded-xl group font-medium ${
+                      className={`relative px-5 py-3 text-[#94a3b8] hover:text-[#f8fafc] transition-colors rounded-xl group font-medium ${
                         isActive ? "text-white bg-white/10" : "hover:bg-white/5"
                       }`}
                     >
                       <span className="flex items-center gap-3">
                         <motion.div
-                          className={`p-1.5 rounded-lg transition-all duration-300 ${
+                          className={`p-1.5 rounded-lg transition-colors ${
                             isActive
-                              ? "bg-gradient-to-r from-purple-500/30 to-pink-500/30"
-                              : "bg-gradient-to-r from-purple-500/10 to-pink-500/10 group-hover:from-purple-500/20 group-hover:to-pink-500/20"
+                              ? "bg-[#6366f1]/30"
+                              : "bg-white/5 group-hover:bg-white/10"
                           }`}
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <item.icon
-                            className={`text-sm transition-colors duration-300 ${
+                            className={`text-sm transition-colors ${
                               isActive
-                                ? "text-indigo-300"
-                                : "text-slate-400 group-hover:text-indigo-300"
+                                ? "text-[#818cf8]"
+                                : "text-[#94a3b8] group-hover:text-[#818cf8]"
                             }`}
                           />
                         </motion.div>
@@ -151,7 +150,7 @@ export default function Header() {
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-indigo-400 rounded-full"
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-[#6366f1] rounded-full"
                           transition={{
                             type: "spring",
                             stiffness: 500,
@@ -160,7 +159,7 @@ export default function Header() {
                         />
                       )}
                       {/* Hover indicator */}
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-indigo-400 group-hover:w-8 rounded-full transition-all duration-300"></div>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#6366f1] group-hover:w-8 rounded-full transition-all duration-300"></div>
                     </Link>
                   );
                 })}
@@ -170,7 +169,7 @@ export default function Header() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleMenu}
-                className="md:hidden relative p-4 text-white hover:text-indigo-400 transition-all duration-300 rounded-xl hover:bg-white/10 focus-professional min-w-[48px] min-h-[48px] flex items-center justify-center"
+                className="md:hidden relative p-4 text-white hover:text-[#818cf8] transition-colors rounded-xl hover:bg-white/10 focus-professional min-w-[48px] min-h-[48px] flex items-center justify-center"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
                 style={{ WebkitTapHighlightColor: "transparent" }}
@@ -233,7 +232,7 @@ export default function Header() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="md:hidden fixed top-20 left-4 right-4 glass-dark rounded-2xl py-6 z-[110] shadow-2xl border border-white/10 mobile-menu overflow-y-auto"
+                    className="md:hidden fixed top-20 left-4 right-4 rounded-2xl py-6 z-[110] mobile-menu overflow-y-auto bg-[#13131f] border border-white/[0.08] shadow-2xl"
                     style={{
                       WebkitOverflowScrolling: "touch",
                       maxHeight: "calc(100vh - 6rem)",
@@ -254,48 +253,17 @@ export default function Header() {
                           >
                             <Link
                               href={item.href}
-                              className={`flex items-center gap-4 px-4 py-5 text-gray-300 hover:text-white transition-all duration-300 rounded-xl group min-h-[60px] ${
+                              prefetch
+                              className={`flex items-center gap-4 px-4 py-4 rounded-xl group min-h-[52px] transition-colors ${
                                 isActive
-                                  ? "text-white bg-white/10 border-l-4 border-purple-400"
-                                  : "hover:bg-white/5 active:bg-white/10"
+                                  ? "text-[#f8fafc] bg-white/10 border-l-4 border-[#6366f1]"
+                                  : "text-[#94a3b8] hover:text-[#f8fafc] hover:bg-white/5"
                               }`}
                               onClick={() => setIsOpen(false)}
                               style={{ WebkitTapHighlightColor: "transparent" }}
                             >
-                              <motion.div
-                                className={`p-3 rounded-xl transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center ${
-                                  isActive
-                                    ? "bg-indigo-500/30"
-                                    : "bg-white/5 group-hover:bg-white/10"
-                                }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                <item.icon
-                                  className={`text-lg transition-colors duration-300 ${
-                                    isActive
-                                    ? "text-indigo-300"
-                                    : "text-slate-400 group-hover:text-indigo-300"
-                                  }`}
-                                />
-                              </motion.div>
-                              <div className="flex-1">
-                                <span className="font-semibold block">
-                                  {item.label}
-                                </span>
-                                {isActive && (
-                                  <span className="text-xs text-indigo-400 font-medium">
-                                    Current page
-                                  </span>
-                                )}
-                              </div>
-                              <FaChevronDown
-                                className={`text-xs transition-transform duration-300 ${
-                                  isActive
-                                    ? "rotate-[-90deg] text-purple-400"
-                                    : "text-gray-500 group-hover:text-gray-400"
-                                }`}
-                              />
+                              <item.icon className="text-lg shrink-0" />
+                              <span className="font-medium">{item.label}</span>
                             </Link>
                           </motion.div>
                         );

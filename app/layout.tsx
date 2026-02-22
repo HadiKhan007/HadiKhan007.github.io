@@ -9,13 +9,14 @@ const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
   preload: true,
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -85,10 +86,9 @@ export default function RootLayout({
           content="black-translucent"
         />
         <meta name="msapplication-TileColor" content="#6366f1" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-[#0a0a0f]`}
       >
         <Header />
         <main className="flex-grow">{children}</main>

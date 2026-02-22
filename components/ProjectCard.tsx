@@ -67,9 +67,9 @@ export default function ProjectCard({
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0, rotate: 180 }}
             transition={{ type: "spring", stiffness: 200, damping: 10 }}
-            className="absolute top-4 right-4 z-30"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30"
           >
-            <div className="flex items-center gap-1 px-3 py-1 bg-indigo-500/90 text-white text-xs font-semibold rounded-lg">
+            <div className="flex items-center gap-1 px-2.5 py-1 sm:px-3 bg-gradient-to-r from-[#6366f1] to-[#ec4899] text-white text-[10px] sm:text-xs font-semibold rounded-lg shadow-lg whitespace-nowrap">
               <FaStar className="text-xs animate-pulse" />
               Featured
             </div>
@@ -77,8 +77,8 @@ export default function ProjectCard({
         )}
       </AnimatePresence>
 
-      {/* Enhanced animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl"></div>
+      {/* Animated background gradient on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-[#ec4899]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
 
       {/* Image container with enhanced overlay */}
       <div className="relative h-56 overflow-hidden rounded-t-2xl">
@@ -87,9 +87,9 @@ export default function ProjectCard({
           {!imageLoaded && (
             <motion.div
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center"
+              className="absolute inset-0 bg-[#1c1c2e] flex items-center justify-center"
             >
-              <div className="w-12 h-12 border-2 border-indigo-500/30 border-t-indigo-400 rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-2 border-[#6366f1]/30 border-t-[#818cf8] rounded-full animate-spin"></div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -103,9 +103,11 @@ export default function ProjectCard({
           src={image}
           alt={`${title} project screenshot`}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
           onLoad={handleImageLoad}
           animate={{ scale: isHovered ? 1.1 : 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         />
 
         {/* Enhanced hover overlay with quick actions */}
@@ -162,8 +164,8 @@ export default function ProjectCard({
           )}
         </AnimatePresence>
 
-        {/* Enhanced technology badges */}
-        <div className="absolute top-4 left-4 z-20">
+        {/* Top tech tags - hidden on mobile to avoid overlap with Featured badge; bottom tags show full list */}
+        <div className="absolute top-4 left-4 z-20 hidden sm:block">
           <motion.div
             className="flex flex-wrap gap-2"
             animate={{ opacity: isHovered ? 0.8 : 1 }}
@@ -189,7 +191,7 @@ export default function ProjectCard({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="px-3 py-1.5 bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg"
+                  className="px-3 py-1.5 bg-gradient-to-r from-[#6366f1]/80 to-[#ec4899]/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg"
               >
                 +{technologies.length - 2} more
               </motion.span>
@@ -199,10 +201,10 @@ export default function ProjectCard({
       </div>
 
       {/* Enhanced content section */}
-      <div className="relative z-10 p-6">
+      <div className="relative z-10 p-4 sm:p-6">
         <motion.h3
           className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300"
-          animate={{ color: isHovered ? "#c084fc" : "#ffffff" }}
+          animate={{ color: isHovered ? "#818cf8" : "#ffffff" }}
           transition={{ duration: 0.3 }}
         >
           {title}
@@ -216,10 +218,10 @@ export default function ProjectCard({
           {description}
         </motion.p>
 
-        {/* Enhanced full technology list */}
+        {/* Full technology list - always visible, primary on mobile */}
         {technologies.length > 0 && (
           <motion.div
-            className="mb-5"
+            className="mb-4 sm:mb-5"
             animate={{ opacity: isHovered ? 1 : 0.9 }}
             transition={{ duration: 0.3 }}
           >
@@ -235,7 +237,7 @@ export default function ProjectCard({
                     stiffness: 300,
                   }}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="px-3 py-1.5 bg-white/5 text-slate-300 text-xs font-medium rounded-lg border border-white/10 hover:border-indigo-500/30 transition-all duration-300 cursor-default"
+                  className="px-3 py-1.5 bg-white/5 text-[#94a3b8] text-xs font-medium rounded-lg border border-white/10 hover:border-[#6366f1]/40 transition-all duration-300 cursor-default"
                 >
                   {tech}
                 </motion.span>
@@ -251,11 +253,11 @@ export default function ProjectCard({
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleViewDetails}
-              className="group/btn relative w-full overflow-hidden btn-primary hover-lift focus-professional"
+              className="group/btn relative w-full overflow-hidden btn-primary hover-lift focus-professional min-h-[44px]"
               aria-label={`View details for ${title}`}
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                <FaEye className="text-sm" />
+              <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
+                <FaEye className="text-sm shrink-0" />
                 View Details
               </span>
               <motion.div
@@ -300,7 +302,7 @@ export default function ProjectCard({
 
       {/* Enhanced decorative elements */}
       <motion.div
-        className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"
+        className="absolute -top-10 -right-10 w-24 h-24 bg-[#6366f1]/10 rounded-full blur-xl pointer-events-none"
         animate={{
           scale: isHovered ? 1.2 : 1,
           opacity: isHovered ? 0.6 : 0.3,
@@ -308,7 +310,7 @@ export default function ProjectCard({
         transition={{ duration: 0.5 }}
       />
       <motion.div
-        className="absolute -bottom-10 -left-10 w-20 h-20 bg-indigo-400/8 rounded-full blur-lg"
+        className="absolute -bottom-10 -left-10 w-20 h-20 bg-[#ec4899]/8 rounded-full blur-lg pointer-events-none"
         animate={{
           scale: isHovered ? 1.3 : 1,
           opacity: isHovered ? 0.5 : 0.2,
@@ -316,7 +318,7 @@ export default function ProjectCard({
         transition={{ duration: 0.7 }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#6366f1]/5 rounded-full blur-2xl pointer-events-none"
         animate={{
           scale: isHovered ? 1.5 : 1,
           opacity: isHovered ? 0.4 : 0.1,
