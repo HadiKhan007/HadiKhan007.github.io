@@ -32,11 +32,18 @@ jobs:
         uses: actions/configure-pages@v5
         # REMOVED static_site_generator: next — it injects basePath and breaks hadikhan007.github.io root URL.
 
+      - name: Verify project files
+        run: |
+          ls -la package.json package-lock.json next.config.ts 2>/dev/null || (echo "Missing project files" && exit 1)
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build with Next.js
         run: npx next build
+
+      - name: Verify build output
+        run: test -d ./out && echo "out/ exists" && ls -la ./out | head -20
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

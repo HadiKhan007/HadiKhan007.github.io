@@ -1,3 +1,5 @@
+import path from "node:path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
@@ -11,6 +13,7 @@ const nextConfig = {
     optimizePackageImports: ["react-icons/fa", "react-icons/si"],
   },
   turbopack: {
+    root: path.resolve(process.cwd()),
     rules: {
       "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" },
     },
