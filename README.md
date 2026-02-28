@@ -51,15 +51,18 @@ This portfolio includes a contact form that sends emails using EmailJS. To set i
 5. **Configure environment variables:**
 
    - Copy `.env.example` to `.env.local`
-   - Fill in your EmailJS credentials:
+   - Fill in your values:
 
    ```env
+   NEXT_PUBLIC_BASE_URL=https://yourusername.github.io
    NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
    NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
    ```
 
-6. **Test the contact form** to ensure emails are being sent correctly.
+6. **Add your CV:** Place `cv.pdf` in the `public/` folder for the Download CV button.
+
+7. **Test the contact form** to ensure emails are being sent correctly.
 
 ## Learn More
 
@@ -70,6 +73,14 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Before Publishing
+
+1. Add `cv.pdf` to the `public/` folder for the Download CV button.
+2. Copy `.env.example` to `.env.local` and set your EmailJS credentials (form works without env vars if using defaults).
+3. Run `npm run build` locally to verify the build succeeds.
+
+---
+
 ## Deploy to GitHub Pages (hadikhan007.github.io)
 
 This portfolio is set up to deploy to **https://hadikhan007.github.io/**.
@@ -79,14 +90,15 @@ This portfolio is set up to deploy to **https://hadikhan007.github.io/**.
 ### Option A: Automatic deployment (GitHub Actions)
 
 1. Create a repo named `hadikhan007.github.io` on GitHub (for root URL).
-2. Push your code to the `main` branch:
+2. (Optional) In **Settings → Secrets and variables → Actions → Variables**, add `NEXT_PUBLIC_BASE_URL` and EmailJS vars if your site URL or EmailJS setup differs.
+3. Push your code to the `main` branch:
    ```bash
    git remote add origin https://github.com/HadiKhan007/hadikhan007.github.io.git
    git push -u origin main
    ```
-3. Go to **Settings → Pages** in your repo.
-4. Under "Build and deployment", set **Source** to **GitHub Actions**.
-5. Push any change to trigger the workflow. Your site will be live at https://hadikhan007.github.io/
+4. Go to **Settings → Pages** in your repo.
+5. Under "Build and deployment", set **Source** to **GitHub Actions**.
+6. Push any change to trigger the workflow. Your site will be live at https://hadikhan007.github.io/
 
 ### Option B: Manual deployment (gh-pages)
 

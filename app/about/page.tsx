@@ -25,6 +25,7 @@ import {
   SiMongodb,
   SiPostgresql,
 } from "react-icons/si";
+import PageHero from "../../components/PageHero";
 
 export default function About() {
   const skills = [
@@ -127,7 +128,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-page)] relative overflow-hidden pb-16 sm:pb-24">
       <div className="bg-animation" aria-hidden="true" />
       {/* Floating background elements */}
       <motion.div className="absolute top-32 right-20 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -18, 0], rotate: [0, 5, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}>
@@ -138,33 +139,27 @@ export default function About() {
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-          className="text-center mb-20"
-        >
-          <motion.h2 initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="page-top-badge">About</motion.h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <PageHero
+          badge="About"
+          title={
+            <>
+              Ali <span className="gradient-text text-glow">Haider</span>
+            </>
+          }
+          subtitle="4.5 years building web and mobile apps. React Native, Node.js, Firebase. UI to backend."
+          gradientTitle={false}
+        />
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-[#f8fafc]">
-            Ali <span className="gradient-text">Haider</span>
-          </h1>
-
-          <p className="text-xl text-[#94a3b8] max-w-2xl mx-auto leading-relaxed">
-            4.5 years building web and mobile apps. React Native, Node.js, Firebase. UI to backend.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-16 mb-24">
+        <div className="grid lg:grid-cols-2 gap-10 mb-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift overflow-hidden"
+            className="rounded-2xl p-6 sm:p-7 bg-[var(--bg-card)] border border-[var(--border)] card-luxury overflow-hidden"
           >
-            <div className="text-center mb-8">
-              <div className="relative inline-block mb-6">
+            <div className="text-center mb-6">
+              <div className="relative inline-block mb-5">
                 <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-2 border-white/[0.1]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -181,7 +176,7 @@ export default function About() {
                       }}
                     />
                     <div
-                      className="w-full h-full bg-[#1c1c2e] flex items-center justify-center"
+                      className="w-full h-full bg-[var(--bg-elevated)] flex items-center justify-center"
                       style={{ display: "none" }}
                     >
                       <span className="text-white text-3xl font-bold">AH</span>
@@ -189,13 +184,13 @@ export default function About() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#f8fafc] mb-1">
+                <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-1">
                   Ali Haider
                 </h3>
                 <p className="text-[#6366f1] font-medium mb-2">
                   Full Stack React Native Developer
                 </p>
-                <p className="text-[#64748b] text-sm">
+                <p className="text-[var(--text-muted)] text-sm leading-7">
                   Web + mobile. Frontend + backend.
                 </p>
             </div>
@@ -213,18 +208,18 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
-                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] text-center hover:border-[#6366f1]/20 hover-lift transition-all duration-300"
+                className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)] card-luxury text-center"
               >
                 <div
                   className="inline-flex p-3 rounded-xl mb-3"
-                  style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                  style={{ background: "var(--gradient-1)" }}
                 >
                   <achievement.icon className="text-white text-xl" />
                 </div>
-                <h3 className="text-xl font-bold text-[#f8fafc] mb-0.5">
+                <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] mb-0.5">
                   {achievement.title}
                 </h3>
-                <p className="text-[#64748b] text-sm">
+                <p className="text-[var(--text-muted)] text-sm leading-7">
                   {achievement.description}
                 </p>
               </motion.div>
@@ -240,10 +235,10 @@ export default function About() {
         >
           <div className="text-center mb-12">
             <div className="section-tag mb-3">Stack</div>
-            <h2 className="text-3xl font-bold text-[#f8fafc] mb-2">
+            <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-2">
               Skills
             </h2>
-            <p className="text-[#94a3b8]">
+            <p className="text-[var(--text-secondary)]">
               Next.js, Node.js, MongoDB, PostgreSQL, Firebase
             </p>
           </div>
@@ -255,34 +250,34 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 hover-lift transition-all duration-300"
+                className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)] card-luxury"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div
                     className="p-3 rounded-xl"
-                    style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                    style={{ background: "var(--gradient-1)" }}
                   >
                     <skill.icon className="text-white text-xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#f8fafc]">
+                    <h3 className="font-heading text-lg font-bold text-[var(--text-primary)]">
                       {skill.name}
                     </h3>
-                    <p className="text-[#64748b] text-sm">
+                    <p className="text-[var(--text-muted)] text-sm leading-7">
                       {skill.description}
                     </p>
                   </div>
                 </div>
-                <div className="w-full bg-[#1c1c2e] rounded-full h-2 mb-1">
+                <div className="w-full bg-[var(--bg-elevated)] rounded-full h-2 mb-1">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.level}%` }}
                     transition={{ duration: 1, delay: 0.5 + index * 0.05, ease: "easeOut" }}
                     className="h-2 rounded-full"
-                    style={{ background: "linear-gradient(90deg,#6366f1,#ec4899)" }}
+                    style={{ background: "var(--gradient-1)" }}
                   />
                 </div>
-                <p className="text-[#64748b] text-xs">{skill.level}%</p>
+                <p className="text-[var(--text-muted)] text-xs">{skill.level}%</p>
               </motion.div>
             ))}
           </div>
@@ -296,23 +291,23 @@ export default function About() {
         >
           <div className="text-center mb-12">
             <div className="section-tag mb-3">Background</div>
-            <h2 className="text-3xl font-bold text-[#f8fafc]">
+            <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
               Experience
             </h2>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all">
               <div className="flex items-center gap-4 mb-6">
                 <div
                   className="p-3 rounded-xl"
-                  style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)" }}
+                  style={{ background: "var(--gradient-1)" }}
                 >
                   <FaLightbulb className="text-white text-xl" />
                 </div>
-                <h3 className="text-xl font-bold text-[#f8fafc]">Background</h3>
+                <h3 className="font-heading text-xl font-bold text-[var(--text-primary)]">Background</h3>
               </div>
-              <div className="space-y-4 text-[#94a3b8] leading-relaxed">
+              <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                 <p>
                   4.5+ years in full stack. Built Tijarat (eCommerce), Billion Pound (fitness), SpotSwap (parking). React Native, Node.js, Firebase.
                 </p>
@@ -322,28 +317,28 @@ export default function About() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-3xl p-8 bg-[#13131f] border border-white/[0.05] glass-card hover-lift">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all">
               <div className="flex items-center gap-4 mb-6">
                 <div
                   className="p-3 rounded-xl"
-                  style={{ background: "linear-gradient(135deg,#06b6d4,#6366f1)" }}
+                  style={{ background: "var(--gradient-2)" }}
                 >
                   <FaRocket className="text-white text-xl" />
                 </div>
-                <h3 className="text-xl font-bold text-[#f8fafc]">What I do</h3>
+                <h3 className="font-heading text-xl font-bold text-[var(--text-primary)]">What I do</h3>
               </div>
               <div className="space-y-4">
                 <div className="flex gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1] mt-2 shrink-0" />
-                  <p className="text-[#94a3b8] text-sm">React Native, web, Node.js, Firebase</p>
+                  <p className="text-[var(--text-secondary)] text-sm">React Native, web, Node.js, Firebase</p>
                 </div>
                 <div className="flex gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] mt-2 shrink-0" />
-                  <p className="text-[#94a3b8] text-sm">REST APIs, auth, real-time sync</p>
+                  <p className="text-[var(--text-secondary)] text-sm">REST APIs, auth, real-time sync</p>
                 </div>
                 <div className="flex gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] mt-2 shrink-0" />
-                  <p className="text-[#94a3b8] text-sm">TypeScript, clean code, CI/CD</p>
+                  <p className="text-[var(--text-secondary)] text-sm">TypeScript, clean code, CI/CD</p>
                 </div>
               </div>
             </motion.div>
@@ -357,7 +352,7 @@ export default function About() {
         >
           <div className="text-center mb-12">
             <div className="section-tag mb-3">Approach</div>
-            <h2 className="text-3xl font-bold text-[#f8fafc]">
+            <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
               How I work
             </h2>
           </div>
@@ -369,18 +364,18 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05] text-center hover:border-[#6366f1]/30 hover-lift transition-all duration-300"
+                className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)] card-luxury text-center"
               >
                 <div
                   className="inline-flex p-3 rounded-xl mb-4"
-                  style={{ background: "linear-gradient(135deg,#6366f1,#06b6d4)" }}
+                  style={{ background: "var(--gradient-2)" }}
                 >
                   <highlight.icon className="text-white text-xl" />
                 </div>
-                <h3 className="text-lg font-bold text-[#f8fafc] mb-2">
+                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
                   {highlight.title}
                 </h3>
-                <p className="text-[#64748b] text-sm leading-relaxed">
+                <p className="text-[var(--text-muted)] text-sm leading-relaxed">
                   {highlight.description}
                 </p>
               </motion.div>

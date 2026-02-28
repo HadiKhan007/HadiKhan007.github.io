@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   FaExternalLinkAlt,
   FaEye,
@@ -9,8 +10,10 @@ import {
   FaCode,
   FaStar,
 } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+const BLUR_DATA =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 224'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23f1f5f9' filter='url(%23b)'/%3E%3C/svg%3E";
 
 type Props = {
   title: string;
@@ -33,15 +36,10 @@ export default function ProjectCard({
   featured = false,
   github,
 }: Props) {
-  const router = useRouter();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleViewDetails = () => {
-    if (slug) {
-      router.push(`/projects/${slug}`);
-    }
-  };
+  const detailsUrl = slug ? `/projects/${slug}/` : "#";
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -49,11 +47,11 @@ export default function ProjectCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -6, scale: 1.01 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="group relative overflow-hidden rounded-2xl card-professional hover-lift focus-professional"
+      whileHover={{ y: -4, scale: 1.02 }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative overflow-hidden rounded-2xl card-luxury focus-professional"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       role="article"
@@ -87,9 +85,10 @@ export default function ProjectCard({
           {!imageLoaded && (
             <motion.div
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[#1c1c2e] flex items-center justify-center"
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-[var(--bg-elevated)] flex items-center justify-center"
             >
-              <div className="w-12 h-12 border-2 border-[#6366f1]/30 border-t-[#818cf8] rounded-full animate-spin"></div>
+              <div className="w-8 h-8 border-2 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -99,16 +98,23 @@ export default function ProjectCard({
           animate={{ opacity: isHovered ? 0.8 : 0.3 }}
           transition={{ duration: 0.3 }}
         />
-        <motion.img
-          src={image}
-          alt={`${title} project screenshot`}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-          onLoad={handleImageLoad}
+        <motion.div
+          className="absolute inset-0"
           animate={{ scale: isHovered ? 1.1 : 1 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <Image
+            src={image}
+            alt={`${title} project screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+            className="object-cover"
+            loading="lazy"
+            onLoad={handleImageLoad}
+            placeholder="blur"
+            blurDataURL={BLUR_DATA}
+          />
+        </motion.div>
 
         {/* Enhanced hover overlay with quick actions */}
         <AnimatePresence>
@@ -121,16 +127,16 @@ export default function ProjectCard({
               className="absolute inset-0 bg-black/70 backdrop-blur-sm z-20 flex items-center justify-center gap-4"
             >
               {slug && (
-                <motion.button
+                <motion.a
                   whileHover={{ scale: 1.15, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={handleViewDetails}
-                  className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+                  href={detailsUrl}
+                  className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 focus-professional"
                   title="View Project Details"
                   aria-label={`View details for ${title}`}
                 >
                   <FaEye size={20} />
-                </motion.button>
+                </motion.a>
               )}
 
               {live && live !== "#" && (
@@ -202,21 +208,15 @@ export default function ProjectCard({
 
       {/* Enhanced content section */}
       <div className="relative z-10 p-4 sm:p-6">
-        <motion.h3
-          className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300"
-          animate={{ color: isHovered ? "#818cf8" : "#ffffff" }}
-          transition={{ duration: 0.3 }}
+        <h3
+          className={`text-xl font-bold mb-3 transition-colors duration-200 ${isHovered ? "text-[var(--primary)]" : "text-[var(--text-primary)]"}`}
         >
           {title}
-        </motion.h3>
+        </h3>
 
-        <motion.p
-          className="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3"
-          animate={{ color: isHovered ? "#d1d5db" : "#9ca3af" }}
-          transition={{ duration: 0.3 }}
-        >
+        <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">
           {description}
-        </motion.p>
+        </p>
 
         {/* Full technology list - always visible, primary on mobile */}
         {technologies.length > 0 && (
@@ -237,7 +237,7 @@ export default function ProjectCard({
                     stiffness: 300,
                   }}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="px-3 py-1.5 bg-white/5 text-[#94a3b8] text-xs font-medium rounded-lg border border-white/10 hover:border-[#6366f1]/40 transition-all duration-300 cursor-default"
+                  className="px-3 py-1.5 bg-[var(--surface)] text-[var(--text-primary)] text-xs font-medium rounded-lg border border-[var(--border)] hover:border-[var(--primary)]/40 transition-all duration-300 cursor-default"
                 >
                   {tech}
                 </motion.span>
@@ -249,11 +249,11 @@ export default function ProjectCard({
         {/* Enhanced action buttons */}
         <div className="flex flex-col gap-3">
           {slug && (
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleViewDetails}
-              className="group/btn relative w-full overflow-hidden btn-primary hover-lift focus-professional min-h-[44px]"
+              href={detailsUrl}
+              className="group/btn relative w-full overflow-hidden btn-luxury hover-lift focus-professional min-h-[48px] flex items-center justify-center rounded-xl"
               aria-label={`View details for ${title}`}
             >
               <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
@@ -265,7 +265,7 @@ export default function ProjectCard({
                 animate={{ opacity: isHovered ? 0.2 : 0 }}
                 transition={{ duration: 0.3 }}
               />
-            </motion.button>
+            </motion.a>
           )}
 
           <div className="flex gap-2">

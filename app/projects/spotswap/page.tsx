@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function SpotSwap() {
-  const router = useRouter();
-
   const images = [
     "/images/SpotSwap/s1.png",
     "/images/SpotSwap/s2.png",
@@ -50,29 +47,29 @@ export default function SpotSwap() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] pt-24 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-page)] pt-24 relative overflow-hidden">
       <div className="bg-animation" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
       <div className="relative z-10">
-        <div className="border-b border-white/[0.05] bg-[#13131f]/80 backdrop-blur-xl">
+        <div className="border-b border-[var(--border)] bg-[var(--bg-card)]/80 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <button
-              onClick={() => router.push("/projects")}
-              className="flex items-center gap-2 text-[#94a3b8] hover:text-[#6366f1] transition-colors mb-4"
+            <a
+              href="/projects/"
+              className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[#6366f1] transition-colors duration-150 mb-4"
             >
               <FaArrowLeft className="text-sm" />
               Back to Projects
-            </button>
+            </a>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold text-[#f8fafc] mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-4">
                 SpotSwap
               </h1>
-              <p className="text-xl text-[#94a3b8] max-w-3xl">
+              <p className="text-xl text-[var(--text-secondary)] max-w-3xl">
               A revolutionary parking spot sharing platform that connects
               parking space owners with drivers, featuring real-time
               availability, seamless booking, and integrated navigation.
@@ -90,10 +87,10 @@ export default function SpotSwap() {
           className="grid lg:grid-cols-2 gap-12 mb-16"
         >
           <div>
-            <h2 className="text-2xl font-bold text-[#f8fafc] mb-6">
+            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
               Project Overview
             </h2>
-            <p className="text-[#94a3b8] mb-6 leading-relaxed">
+            <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
               SpotSwap revolutionizes urban parking by creating a peer-to-peer
               marketplace for parking spaces. Users can list their unused
               parking spots and drivers can find and book available spaces in
@@ -102,14 +99,14 @@ export default function SpotSwap() {
             </p>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-[#f8fafc] mb-3">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
                 Key Features
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 text-[#94a3b8]"
+                    className="flex items-center gap-2 text-[var(--text-secondary)]"
                   >
                     <div className="w-2 h-2 rounded-full shrink-0" style={{ background: "#6366f1" }}></div>
                     {feature}
@@ -119,10 +116,10 @@ export default function SpotSwap() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-[#f8fafc] mb-3">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
                 Technical Architecture
               </h3>
-              <p className="text-[#94a3b8] text-sm leading-relaxed">
+              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
                 The platform leverages Firebase for real-time location services,
                 Stripe for secure payment processing, and Google Maps API for
                 precise navigation. The backend infrastructure ensures high
@@ -133,7 +130,7 @@ export default function SpotSwap() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[#f8fafc] mb-4">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
               Technologies Used
             </h3>
             <div className="flex flex-wrap gap-3">
@@ -156,15 +153,15 @@ export default function SpotSwap() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold text-[#f8fafc] mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">
             Development Challenges & Solutions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
-              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
+            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
                 Real-time Location Accuracy
               </h3>
-              <p className="text-[#94a3b8] mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Challenge: Ensuring precise GPS coordinates and real-time
                 availability updates for parking spaces.
               </p>
@@ -174,11 +171,11 @@ export default function SpotSwap() {
                 updates.
               </p>
             </div>
-            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
-              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
+            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
                 Payment Security
               </h3>
-              <p className="text-[#94a3b8] mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Challenge: Implementing secure payment processing for
                 peer-to-peer transactions without holding funds.
               </p>
@@ -187,11 +184,11 @@ export default function SpotSwap() {
                 implemented multi-layer security with JWT tokens and encryption.
               </p>
             </div>
-            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
-              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
+            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
                 Scalability for Urban Areas
               </h3>
-              <p className="text-[#94a3b8] mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Challenge: Handling high concurrent users in densely populated
                 urban areas during peak hours.
               </p>
@@ -201,11 +198,11 @@ export default function SpotSwap() {
                 indexing.
               </p>
             </div>
-            <div className="rounded-2xl p-6 bg-[#13131f] border border-white/[0.05]">
-              <h3 className="text-xl font-semibold text-[#f8fafc] mb-4">
+            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
                 Trust & Safety
               </h3>
-              <p className="text-[#94a3b8] mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Challenge: Building user confidence in peer-to-peer parking
                 transactions.
               </p>
@@ -223,7 +220,7 @@ export default function SpotSwap() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="text-3xl font-bold text-[#f8fafc] mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">
             App Screenshots
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -234,9 +231,9 @@ export default function SpotSwap() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-2xl bg-[#13131f] border border-white/[0.05] hover:border-[#6366f1]/30 transition-colors"
+                className="group relative overflow-hidden rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)]/30 transition-colors"
               >
-                <div className="aspect-[9/16] relative bg-[#1c1c2e] rounded-lg overflow-hidden">
+                <div className="aspect-[9/16] relative bg-[var(--bg-elevated)] rounded-lg overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image}
@@ -245,7 +242,7 @@ export default function SpotSwap() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <div className="absolute bottom-4 left-4 text-[#f8fafc] font-medium">
+                <div className="absolute bottom-4 left-4 text-[var(--text-primary)] font-medium">
                   Screenshot {index + 1}
                 </div>
               </motion.div>
@@ -260,26 +257,26 @@ export default function SpotSwap() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <h3 className="text-2xl font-bold text-[#f8fafc] mb-4">
+          <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
             Want to work together?
           </h3>
-          <p className="text-[#94a3b8] mb-8 max-w-2xl mx-auto">
+          <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
             See more projects or reach out to discuss your next build.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => router.push("/projects")}
-              className="text-white font-semibold py-3 px-8 rounded-xl transition-all hover:-translate-y-0.5"
+            <a
+              href="/projects/"
+              className="text-white font-semibold py-3 px-8 rounded-xl transition-all duration-150 hover:-translate-y-0.5"
               style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)", boxShadow: "0 10px 30px rgba(99,102,241,0.3)" }}
             >
               View All Projects
-            </button>
-            <button
-              onClick={() => router.push("/contact")}
-              className="border border-white/20 text-[#94a3b8] hover:bg-white/5 font-semibold py-3 px-8 rounded-xl transition-colors"
+            </a>
+            <a
+              href="/contact/"
+              className="border border-[var(--border-hover)] text-[var(--text-secondary)] hover:bg-[var(--surface)] font-semibold py-3 px-8 rounded-xl transition-colors duration-150"
             >
               Contact
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
