@@ -26,6 +26,10 @@ const points = [
     title: "International client experience",
     description: "Worked with teams across time zones. Async-friendly and responsive.",
   },
+  {
+    title: "Quality-first approach",
+    description: "Clean code, tests where it matters, and documentation you can rely on.",
+  },
 ];
 
 export default function WhyClientsChooseMe() {
@@ -41,16 +45,18 @@ export default function WhyClientsChooseMe() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 mb-8">
           {points.map((item) => (
             <div
               key={item.title}
-              className="flex gap-4 p-6 sm:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-colors"
+              className="group/card relative flex gap-4 p-6 sm:p-7 rounded-3xl bg-[var(--bg-elevated)]/60 border border-[var(--border-subtle)] border-l-4 border-l-[var(--primary)] transition-all duration-300 min-h-[160px] flex flex-col justify-center hover:border-l-[var(--primary-light)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
             >
-              <FaCheckCircle className="text-[var(--primary)] shrink-0 mt-0.5 text-xl" />
-              <div>
-                <h3 className="font-heading font-semibold text-[var(--text-primary)] mb-1">{item.title}</h3>
-                <p className="text-[var(--text-secondary)] text-base leading-7">{item.description}</p>
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--primary)]/15 text-[var(--primary)] group-hover/card:bg-[var(--primary)]/25 transition-colors">
+                <FaCheckCircle className="text-xl" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-heading font-semibold text-lg text-[var(--text-primary)] mb-2 tracking-tight">{item.title}</h3>
+                <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed">{item.description}</p>
               </div>
             </div>
           ))}

@@ -40,10 +40,16 @@ export default function WorkProcess() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step) => (
-            <div key={step.title} className="text-center">
-              <div className="inline-flex p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--primary)] mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {steps.map((step, i) => (
+            <div
+              key={step.title}
+              className="relative rounded-xl border-2 border-dashed border-[var(--border-subtle)] bg-[var(--bg-card)]/50 p-6 text-center transition-all duration-300 hover:border-[var(--primary)]/40 hover:bg-[var(--bg-card)] hover:shadow-lg"
+            >
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white shadow-md">
+                {i + 1}
+              </div>
+              <div className="inline-flex p-4 rounded-xl bg-[var(--surface)] text-[var(--primary)] mt-2 mb-4">
                 <step.icon className="text-2xl" />
               </div>
               <h3 className="font-heading font-semibold text-[var(--text-primary)] text-lg mb-2">{step.title}</h3>

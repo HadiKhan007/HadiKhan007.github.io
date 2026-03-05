@@ -32,16 +32,17 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="rounded-2xl p-6 sm:p-7 bg-[var(--bg-card)]/95 border border-[var(--border-subtle)] backdrop-blur-xl"
+              className="relative rounded-3xl pl-8 pr-6 py-6 sm:pl-10 sm:pr-8 sm:py-7 bg-gradient-to-br from-[var(--bg-card)] to-[var(--bg-elevated)]/80 border-l-4 border-l-[var(--primary)] border border-[var(--border-subtle)] shadow-inner"
             >
-              <p className="text-[var(--text-secondary)] text-base sm:text-lg leading-7 mb-4 max-w-2xl">&ldquo;{t.quote}&rdquo;</p>
+              <span className="absolute left-6 top-6 text-5xl font-serif text-[var(--primary)]/20 leading-none select-none" aria-hidden>&ldquo;</span>
+              <p className="text-[var(--text-secondary)] text-base sm:text-lg leading-7 mb-5 max-w-2xl italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="flex items-center gap-4">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] font-semibold text-sm shrink-0"
+                  className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--primary)]/15 border-2 border-[var(--primary)]/30 text-[var(--text-primary)] font-semibold text-sm shrink-0"
                   aria-hidden
                 >
                   {t.initials}

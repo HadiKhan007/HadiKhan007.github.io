@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useMotionTemplate, useMotionValue, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useRef } from "react";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
 import ProjectCard from "../ProjectCard";
 import Container from "../ui/Container";
@@ -84,32 +83,30 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <TiltCard key={project.title}>
-              <div>
-                <ProjectCard
-                  title={project.title}
-                  description={project.description}
-                  image={project.image}
-                  technologies={project.technologies}
-                  live={project.live}
-                  slug={project.slug}
-                  featured={project.featured}
-                  github={project.github}
-                />
-                {project.caseStudy && (
-                  <div className="mt-4 flex justify-end">
-                    <button
-                      type="button"
-                      onClick={() => setModalProject(project)}
-                      className="text-sm font-medium text-[var(--primary)] hover:text-[var(--primary-light)] transition-colors"
-                    >
-                      View case study
-                    </button>
-                  </div>
-                )}
-              </div>
-            </TiltCard>
+          {projects.map((project) => (
+            <div key={project.title} className="transition-transform duration-200 hover:-translate-y-1">
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                image={project.image}
+                technologies={project.technologies}
+                live={project.live}
+                slug={project.slug}
+                featured={project.featured}
+                github={project.github}
+              />
+              {project.caseStudy && (
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setModalProject(project)}
+                    className="text-sm font-medium text-[var(--primary)] hover:text-[var(--primary-light)] transition-colors"
+                  >
+                    View case study
+                  </button>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </Container>
@@ -170,46 +167,3 @@ export default function FeaturedProjects() {
   );
 }
 
-function TiltCard({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const transform = useMotionTemplate`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const relX = (e.clientX - centerX) / (rect.width / 2);
-    const relY = (e.clientY - centerY) / (rect.height / 2);
-    rotateY.set(Math.max(-6, Math.min(6, relX * 6)));
-    rotateX.set(Math.max(-6, Math.min(6, -relY * 6)));
-  };
-
-  const handleMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={isMobile ? undefined : { transform }}
-      className="transition-transform duration-200 ease-out origin-center"
-    >
-      {children}
-    </motion.div>
-  );
-}

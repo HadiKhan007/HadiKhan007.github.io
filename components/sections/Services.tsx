@@ -37,24 +37,27 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((item, i) => (
+          {services.map((item) => (
             <div
               key={item.title}
-              className="group relative rounded-2xl p-6 sm:p-7 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)] hover:-translate-y-1"
+              className="group relative rounded-2xl overflow-hidden bg-[var(--bg-card)] border border-[var(--border-subtle)] transition-all duration-300 hover:border-[var(--primary)]/25 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
             >
-              <div className="inline-flex p-4 rounded-xl bg-[var(--surface)] text-[var(--primary)] mb-6 group-hover:bg-[var(--primary)]/10 transition-colors">
-                <item.icon className="text-2xl" />
+              <div className="h-1.5 w-full bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)]" aria-hidden />
+              <div className="p-6 sm:p-7">
+                <div className="inline-flex p-3.5 rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] mb-5 group-hover:scale-105 transition-transform">
+                  <item.icon className="text-2xl" />
+                </div>
+                <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] mb-3">{item.title}</h3>
+                <p className="text-[var(--text-secondary)] text-base sm:text-lg leading-7 mb-6 max-w-2xl">{item.description}</p>
+                <ul className="space-y-2">
+                  {item.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2 text-sm text-[var(--text-muted)] leading-7">
+                      <FaCheckCircle className="text-[var(--primary)] shrink-0 text-xs" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] mb-3">{item.title}</h3>
-              <p className="text-[var(--text-secondary)] text-base sm:text-lg leading-7 mb-6 max-w-2xl">{item.description}</p>
-              <ul className="space-y-2">
-                {item.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-[var(--text-muted)] leading-7">
-                    <FaCheckCircle className="text-[var(--primary)] shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>

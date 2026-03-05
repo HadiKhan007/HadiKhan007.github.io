@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: "%s | Ali Haider",
   },
   description:
-    "Full Stack Developer: React Native, Next.js, Node.js, Firebase. Ship mobile and web products that scale. Clear communication, on-time delivery. Available for new projects.",
+    "4.5+ years building web and mobile apps. React Native, Node.js, Firebase from UI and UX to backend APIs and deployment. Full stack, on-time delivery. Available for new projects.",
   keywords: [
     "Full Stack Developer",
     "React Native",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ali Haider - Full Stack React Native Developer",
-    description: "Ship mobile and web products that scale. React Native, Next.js, Node.js.",
+    description: "4.5+ years building web and mobile apps. React Native, Node.js, Firebase from UI to backend.",
   },
 };
 
@@ -81,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth hide-scrollbar">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

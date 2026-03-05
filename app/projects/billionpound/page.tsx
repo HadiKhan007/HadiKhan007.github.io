@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa";
+import ScreenshotLightbox from "../../../components/ui/ScreenshotLightbox";
 
 export default function BillionPound() {
   const images = [
@@ -11,6 +12,14 @@ export default function BillionPound() {
     "/images/BillionPound/b4.jpg",
     "/images/BillionPound/b5.png",
     "/images/BillionPound/b6.png",
+  ];
+  const screenshotLabels = [
+    "Login & Onboarding",
+    "Home & Dashboard",
+    "Workout Plans",
+    "Progress & Analytics",
+    "Exercise Library",
+    "Profile & Settings",
   ];
 
   const technologies = [
@@ -213,34 +222,12 @@ export default function BillionPound() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">
-            Screenshots
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {images.map((image, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)]/30 transition-colors"
-              >
-                <div className="aspect-[9/16] relative bg-[var(--bg-elevated)] rounded-lg overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={image}
-                    alt={`Billion Pound Screenshot ${index + 1}`}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <div className="absolute bottom-4 left-4 text-[var(--text-primary)] font-medium text-sm">
-                  Screenshot {index + 1}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ScreenshotLightbox
+            images={images}
+            title="Screenshots"
+            altPrefix="Billion Pound"
+            labels={screenshotLabels}
+          />
         </motion.div>
 
         {/* Call to Action */}

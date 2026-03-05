@@ -147,7 +147,7 @@ export default function About() {
               Ali <span className="gradient-text text-glow">Haider</span>
             </>
           }
-          subtitle="4.5 years building web and mobile apps. React Native, Node.js, Firebase. UI to backend."
+          subtitle="4.5+ years building web and mobile apps end to end. React Native for cross-platform apps, Node.js and Firebase for backends and real-time features. From UI and UX to APIs and deployment."
           gradientTitle={false}
         />
 
@@ -238,7 +238,7 @@ export default function About() {
             <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-2">
               Skills
             </h2>
-            <p className="text-[var(--text-secondary)]">
+            <p className="text-[var(--text-secondary)] text-base sm:text-lg max-w-2xl mx-auto px-4 leading-relaxed">
               Next.js, Node.js, MongoDB, PostgreSQL, Firebase
             </p>
           </div>
@@ -297,7 +297,7 @@ export default function About() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all text-left">
               <div className="flex items-center gap-4 mb-6">
                 <div
                   className="p-3 rounded-xl"
@@ -307,9 +307,9 @@ export default function About() {
                 </div>
                 <h3 className="font-heading text-xl font-bold text-[var(--text-primary)]">Background</h3>
               </div>
-              <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
+              <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed text-left prose-detail">
                 <p>
-                  4.5+ years in full stack. Built Tijarat (eCommerce), Billion Pound (fitness), SpotSwap (parking). React Native, Node.js, Firebase.
+                  4.5+ years building web and mobile apps end to end. Shipped Tijarat (eCommerce), Billion Pound (fitness), SpotSwap (parking), WinRate (gaming). React Native, Node.js, Firebase. From UI and UX to backend APIs and deployment.
                 </p>
                 <p>
                   I handle UI, APIs, auth, databases, and deployment. Shipped 15+ projects.
@@ -317,7 +317,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-3xl p-6 sm:p-8 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/20 transition-all text-left">
               <div className="flex items-center gap-4 mb-6">
                 <div
                   className="p-3 rounded-xl"
@@ -328,17 +328,17 @@ export default function About() {
                 <h3 className="font-heading text-xl font-bold text-[var(--text-primary)]">What I do</h3>
               </div>
               <div className="space-y-4">
-                <div className="flex gap-3">
+                <div className="flex gap-3 text-left">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1] mt-2 shrink-0" />
-                  <p className="text-[var(--text-secondary)] text-sm">React Native, web, Node.js, Firebase</p>
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed">React Native and web (Next.js), Node.js and Firebase for backends, APIs, and real-time features</p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 text-left">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] mt-2 shrink-0" />
-                  <p className="text-[var(--text-secondary)] text-sm">REST APIs, auth, real-time sync</p>
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed">REST APIs, auth, real-time sync</p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 text-left">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] mt-2 shrink-0" />
-                  <p className="text-[var(--text-secondary)] text-sm">TypeScript, clean code, CI/CD</p>
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed">TypeScript, clean code, CI/CD</p>
                 </div>
               </div>
             </motion.div>

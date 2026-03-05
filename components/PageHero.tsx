@@ -21,7 +21,7 @@ export default function PageHero({ badge, title, subtitle, children, className =
         {title}
       </h1>
       {subtitle && (
-        <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto leading-7">
+        <p className="text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed px-4 sm:px-6 text-center">
           {subtitle}
         </p>
       )}

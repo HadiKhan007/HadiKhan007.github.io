@@ -19,7 +19,7 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
     scrollRestoration: true,
     optimizePackageImports: ["react-icons/fa", "react-icons/si"],
   },

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaHome, FaUser, FaBriefcase, FaEnvelope, FaPhone, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa6";
 
@@ -20,8 +21,15 @@ const contactLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const isActive = (href: string) => {
+    const base = href.replace(/\/$/, "") || "/";
+    const path = (pathname || "/").replace(/\/$/, "") || "/";
+    return path === base;
   };
 
   return (
@@ -59,19 +67,35 @@ export default function Footer() {
           role="navigation"
           aria-label="Footer navigation"
         >
-          {navItems.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className="group flex items-center gap-2.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300 rounded-xl px-4 py-3 text-sm font-medium hover:bg-[var(--surface)] hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-page)]"
-            >
-              <Icon className="text-sm text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors shrink-0" />
-              <span className="relative">
-                {label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#6366f1] to-[#ec4899] group-hover:w-full transition-all duration-300 rounded-full" />
-              </span>
-            </Link>
-          ))}
+          {navItems.map(({ href, label, icon: Icon }) => {
+            const active = isActive(href);
+            const className = "group flex items-center gap-2.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300 rounded-xl px-4 py-3 text-sm font-medium hover:bg-[var(--surface)] hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-page)]";
+            if (active) {
+              return (
+                <button
+                  key={href}
+                  type="button"
+                  onClick={scrollToTop}
+                  className={className}
+                >
+                  <Icon className="text-sm text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors shrink-0" />
+                  <span className="relative">
+                    {label}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#6366f1] to-[#ec4899] group-hover:w-full transition-all duration-300 rounded-full" />
+                  </span>
+                </button>
+              );
+            }
+            return (
+              <Link key={href} href={href} className={className}>
+                <Icon className="text-sm text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors shrink-0" />
+                <span className="relative">
+                  {label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#6366f1] to-[#ec4899] group-hover:w-full transition-all duration-300 rounded-full" />
+                </span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Divider */}
@@ -110,8 +134,8 @@ export default function Footer() {
           <p className="text-[var(--text-primary)] text-sm font-semibold">
             &copy; {new Date().getFullYear()} Ali Haider · Lahore
           </p>
-          <p className="text-[var(--text-muted)] mt-1 text-xs max-w-md mx-auto">
-            Senior React Native Developer · Next.js, Node.js, Firebase. Building scalable web & mobile products.
+          <p className="text-[var(--text-muted)] mt-1 text-xs max-w-xl mx-auto px-4 leading-relaxed">
+            4.5+ years building web and mobile apps. React Native, Node.js, Firebase. From UI and UX to backend APIs and deployment.
           </p>
         </div>
 

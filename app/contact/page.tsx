@@ -172,8 +172,8 @@ export default function Contact() {
               <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold mb-2 text-[var(--text-primary)]">
                 Contact
               </h2>
-              <p className="text-[var(--text-secondary)] text-base">
-                Email, GitHub, LinkedIn pick what works.
+              <p className="text-[var(--text-secondary)] text-base leading-relaxed">
+                Email, GitHub, LinkedIn. Pick what works.
               </p>
             </div>
 
@@ -242,7 +242,7 @@ export default function Contact() {
                   Response time
                 </h3>
               </div>
-              <p className="text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-[var(--text-secondary)] leading-relaxed text-left">
                 I usually reply within a few hours. Quick turnaround is the norm.
               </p>
             </motion.div>

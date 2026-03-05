@@ -24,6 +24,8 @@ type Props = {
   slug?: string;
   featured?: boolean;
   github?: string;
+  /** Use CSS-only transitions (no Framer Motion) for lag-free scroll on projects page */
+  reduceMotion?: boolean;
 };
 
 export default function ProjectCard({
@@ -35,6 +37,7 @@ export default function ProjectCard({
   slug,
   featured = false,
   github,
+  reduceMotion = false,
 }: Props) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -44,6 +47,103 @@ export default function ProjectCard({
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
+  const wrapperClass = "group relative overflow-hidden rounded-2xl card-luxury focus-professional transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.02]";
+
+  if (reduceMotion) {
+    return (
+      <div className={wrapperClass} role="article" tabIndex={0}>
+        {featured && (
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
+            <div className="flex items-center gap-1 px-2.5 py-1 sm:px-3 bg-gradient-to-r from-[#6366f1] to-[#ec4899] text-white text-[10px] sm:text-xs font-semibold rounded-lg shadow-lg whitespace-nowrap">
+              <FaStar className="text-xs" />
+              Featured
+            </div>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-[#ec4899]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
+        <div className="relative h-56 overflow-hidden rounded-t-2xl">
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-[var(--bg-elevated)] flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin" />
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10 opacity-30 group-hover:opacity-80 transition-opacity duration-300" />
+          <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src={image}
+              alt={`${title} project screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+              className="object-cover"
+              loading="lazy"
+              onLoad={handleImageLoad}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA}
+            />
+          </div>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+            {slug && (
+              <a href={detailsUrl} className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg focus-professional" title="View Project Details" aria-label={`View details for ${title}`}>
+                <FaEye size={20} />
+              </a>
+            )}
+            {live && live !== "#" && (
+              <a href={live} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg" title="View Live Demo" aria-label={`View live demo for ${title}`}>
+                <FaExternalLinkAlt size={20} />
+              </a>
+            )}
+            {github && github !== "#" && (
+              <a href={github} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg" title="View Source Code" aria-label={`View source code for ${title}`}>
+                <FaGithub size={20} />
+              </a>
+            )}
+          </div>
+          <div className="absolute top-4 left-4 z-20 hidden sm:flex flex-wrap gap-2">
+            {technologies.slice(0, 2).map((tech) => (
+              <span key={tech} className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20 shadow-lg">{tech}</span>
+            ))}
+            {technologies.length > 2 && (
+              <span className="px-3 py-1.5 bg-gradient-to-r from-[#6366f1]/80 to-[#ec4899]/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg">+{technologies.length - 2} more</span>
+            )}
+          </div>
+        </div>
+        <div className="relative z-10 p-4 sm:p-6">
+          <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)] group-hover:text-[var(--primary)] transition-colors duration-200">{title}</h3>
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">{description}</p>
+          {technologies.length > 0 && (
+            <div className="mb-4 sm:mb-5 flex flex-wrap gap-2">
+              {technologies.map((tech) => (
+                <span key={tech} className="px-3 py-1.5 bg-[var(--surface)] text-[var(--text-primary)] text-xs font-medium rounded-lg border border-[var(--border)] hover:border-[var(--primary)]/40 transition-colors duration-200 cursor-default">{tech}</span>
+              ))}
+            </div>
+          )}
+          <div className="flex flex-col gap-3">
+            {slug && (
+              <a href={detailsUrl} className="group/btn relative w-full overflow-hidden btn-luxury hover-lift focus-professional min-h-[48px] flex items-center justify-center rounded-xl" aria-label={`View details for ${title}`}>
+                <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
+                  <FaEye className="text-sm shrink-0" />
+                  View Details
+                </span>
+              </a>
+            )}
+            <div className="flex gap-2">
+              {live && live !== "#" && (
+                <a href={live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
+                  <FaPlay className="text-sm" /> Live Demo
+                </a>
+              )}
+              {github && github !== "#" && (
+                <a href={github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
+                  <FaCode className="text-sm" /> Code
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div

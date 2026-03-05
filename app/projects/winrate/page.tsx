@@ -13,6 +13,15 @@ export default function WinRate() {
     "/images/WinRate/w6.png",
     "/images/WinRate/w7.png",
   ];
+  const screenshotLabels = [
+    "Main Menu",
+    "Lobby",
+    "In-Game",
+    "Leaderboard",
+    "Character Customization",
+    "Weapon Progression",
+    "Spectator Mode",
+  ];
 
   const technologies = [
     "Unity Engine",
@@ -234,17 +243,17 @@ export default function WinRate() {
                 viewport={{ once: true }}
                 className="group relative overflow-hidden rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)]/30 transition-colors"
               >
-                <div className="aspect-video relative bg-[var(--bg-elevated)] rounded-lg overflow-hidden">
+                <div className="aspect-[9/16] relative bg-[var(--bg-elevated)] rounded-t-lg overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image}
-                    alt={`WinRate Screenshot ${index + 1}`}
+                    alt={`WinRate ${screenshotLabels[index]}`}
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="absolute bottom-4 left-4 text-[var(--text-primary)] font-medium">
-                  Screenshot {index + 1}
+                <div className="px-4 py-3 bg-[var(--bg-elevated)] border-t border-[var(--border)] rounded-b-lg">
+                  <span className="text-[var(--text-primary)] font-semibold text-sm">{screenshotLabels[index]}</span>
                 </div>
               </motion.div>
             ))}

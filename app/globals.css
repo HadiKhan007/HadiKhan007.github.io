@@ -244,6 +244,22 @@ html {
   max-width: min(100%, 75ch);
 }
 
+/* Detail paragraphs: proper alignment and spacing for web & mobile */
+.prose-detail {
+  text-align: left;
+  max-width: 65ch;
+  line-height: 1.75;
+}
+.prose-detail p + p {
+  margin-top: 1rem;
+}
+@media (max-width: 640px) {
+  .prose-detail {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
 /* Android-specific optimizations */
 @media screen and (max-width: 768px) {
   /* Ensure proper touch targets */
@@ -361,15 +377,19 @@ body {
   }
 }
 
-/* GPU acceleration for better performance */
+/* GPU acceleration – only on hover to avoid lag during scroll */
 .glass, .glass-dark, .glass-card, .card-professional {
-  will-change: transform;
   transform: translateZ(0);
+}
+.glass:hover, .glass-dark:hover, .glass-card:hover, .card-professional:hover {
+  will-change: transform;
 }
 
 .btn-premium, .magnetic-hover {
-  will-change: transform;
   transform: translateZ(0);
+}
+.btn-premium:hover, .magnetic-hover:hover {
+  will-change: transform;
 }
 
 /* Perfect responsive typography – Sora for headings */
@@ -517,16 +537,35 @@ html {
   scroll-padding-top: 100px;
 }
 
-/* Hide scrollbar for clean look (Lenis handles scrolling) */
+/* Hide scrollbar everywhere – no vertical bar on any screen */
 html,
-body {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+body,
+#__next,
+main {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-x: hidden;
 }
 
 html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
+body::-webkit-scrollbar,
+#__next::-webkit-scrollbar,
+main::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Responsive media and overflow - prevent horizontal scroll on any device */
