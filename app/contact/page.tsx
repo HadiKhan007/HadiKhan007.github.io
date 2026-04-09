@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { motion } from "@/components/ui/motion";
 import {
   FaEnvelope,
   FaGithub,
@@ -74,7 +74,7 @@ export default function Contact() {
       };
 
       // Send email
-      const response = await emailjs.send(
+      await emailjs.send(
         serviceId,
         templateId,
         templateParams,
@@ -131,30 +131,21 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] relative overflow-hidden pb-8 sm:pb-12">
-      <div className="bg-animation" aria-hidden="true" />
-      {/* Floating background elements */}
-      <motion.div className="absolute top-40 left-16 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -16, 0], rotate: [0, 4, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}>
-        <FaEnvelope className="text-[#6366f1] text-6xl" />
-      </motion.div>
-      <motion.div className="absolute bottom-40 right-20 opacity-[0.06] hidden lg:block pointer-events-none" animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}>
-        <FaPaperPlane className="text-[#ec4899] text-5xl" />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen pb-8 sm:pb-12">
+      <div className="section-shell">
         <PageHero
-          badge={
-            <>
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06b6d4] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#06b6d4]" />
-              </span>
-              Available for new projects
-            </>
-          }
+          badge="Available for new projects"
           title="Say hello"
-          subtitle="Have a project in mind? I check email daily."
+          subtitle={
+            <div className="mx-auto max-w-xl rounded-2xl border border-cyan-500/30 bg-[var(--bg-surface)] px-5 py-4 sm:px-7 sm:py-5 shadow-[0_12px_40px_-16px_rgba(6,182,212,0.25),inset_0_1px_0_rgba(255,255,255,0.06)]">
+              <p className="text-base sm:text-lg font-semibold text-[var(--text-primary)] leading-snug">
+                I usually reply within a few hours.
+              </p>
+              <p className="mt-2 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+                Quick turnaround is the norm.
+              </p>
+            </div>
+          }
           className="!pb-4 sm:!pb-6"
         />
 
@@ -168,8 +159,8 @@ export default function Contact() {
             className="space-y-4"
           >
             <div className="text-center lg:text-left mb-4">
-              <div className="section-tag mb-2">Reach me</div>
-              <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold mb-2 text-[var(--text-primary)]">
+              <div className="section-kicker mb-2">Reach me</div>
+              <h2 className="section-title text-2xl sm:text-3xl font-bold mb-2 text-[var(--text-primary)]">
                 Contact
               </h2>
               <p className="text-[var(--text-secondary)] text-base leading-relaxed">
@@ -188,7 +179,13 @@ export default function Contact() {
                   whileHover={{ y: -2 }}
                   className="group relative"
                 >
-                    <div className="relative rounded-2xl p-4 sm:p-5 bg-[var(--bg-card)] border border-[var(--border-subtle)]">
+                  <a
+                    href={method.href}
+                    target={method.href.startsWith("http") ? "_blank" : undefined}
+                    rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="block relative rounded-2xl p-4 sm:p-5 bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-colors"
+                    aria-label={`${method.title}: ${method.value}`}
+                  >
                     <div className="flex items-center gap-4">
                       <div
                         className="p-4 rounded-xl"
@@ -197,28 +194,15 @@ export default function Contact() {
                         <method.icon className="text-white text-2xl" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-heading text-xl font-semibold text-[var(--text-primary)] mb-1">
+                        <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">
                           {method.title}
                         </h3>
-                        <a
-                          href={method.href}
-                          target={
-                            method.href.startsWith("http")
-                              ? "_blank"
-                              : undefined
-                          }
-                          rel={
-                            method.href.startsWith("http")
-                              ? "noopener noreferrer"
-                              : undefined
-                          }
-                          className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors duration-200 text-lg"
-                        >
+                        <span className="text-[var(--text-secondary)] text-lg">
                           {method.value}
-                        </a>
+                        </span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -229,7 +213,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative rounded-3xl p-5 sm:p-6 bg-[var(--bg-card)] border border-[var(--border-subtle)]"
+              className="relative rounded-3xl p-5 sm:p-6 bg-[var(--bg-card)] border border-cyan-500/20 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]"
             >
               <div className="flex items-center gap-4 mb-3">
                 <div
@@ -238,12 +222,12 @@ export default function Contact() {
                 >
                   <FaRocket className="text-white text-xl" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-[var(--text-primary)]">
-                  Response time
+                <h3 className="text-xl font-semibold text-[var(--text-primary)]">
+                  Fast replies
                 </h3>
               </div>
-              <p className="text-[var(--text-secondary)] leading-relaxed text-left">
-                I usually reply within a few hours. Quick turnaround is the norm.
+              <p className="text-[var(--text-secondary)] leading-relaxed text-left text-sm sm:text-base">
+                Real responses from me, not a ticket queue. I read every message and answer in order, typically the same day.
               </p>
             </motion.div>
           </motion.div>
@@ -265,7 +249,7 @@ export default function Contact() {
                 >
                   <FaPaperPlane className="text-white text-xl" />
                 </div>
-                <h2 className="font-heading title-section text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                <h2 className="section-title text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
                   Send a message
                 </h2>
               </div>
@@ -374,21 +358,16 @@ export default function Contact() {
                   className={`w-full font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 focus-professional focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--bg-page)] min-h-[48px] ${
                     isSubmitting
                       ? "bg-[var(--bg-elevated)] cursor-not-allowed opacity-50 text-[var(--text-muted)]"
-                      : "btn-luxury text-white hover:-translate-y-0.5"
+                      : "text-white bg-gradient-to-r from-[#566bff] to-[#8b5cf6] hover:brightness-110"
                   }`}
                   style={!isSubmitting ? undefined : undefined}
                 >
                   <span className="flex items-center justify-center gap-2">
                     {isSubmitting ? (
                       <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                          className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                        <span
+                          className="inline-block h-5 w-5 shrink-0 rounded-full border-2 border-white/30 border-t-white motion-safe:animate-spin"
+                          aria-hidden
                         />
                         Sending...
                       </>

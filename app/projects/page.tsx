@@ -1,76 +1,23 @@
-"use client";
-
-import ProjectCard from "../../components/ProjectCard";
+import Image from "next/image";
+import Link from "next/link";
 import PageHero from "../../components/PageHero";
-import { FaCode, FaRocket, FaStar, FaHandSparkles } from "react-icons/fa";
+import { FaCode, FaRocket, FaStar } from "react-icons/fa";
+import { getProjects } from "../../lib/projects";
 
-export default function Projects() {
-  const projects = [
-    {
-      title: "Billion Pound",
-      description:
-        "A comprehensive fitness and gym tracking application that helps users monitor workouts, track progress, and achieve fitness goals. Features include workout plans, progress charts, exercise tracking, and personalized fitness recommendations.",
-      image: "/images/BillionPound/b1.jpg",
-      technologies: ["React Native", "Firebase", "Redux", "Charts"],
-      live: "#",
-      slug: "billionpound",
-      featured: true,
-      github: "#",
-    },
-    {
-      title: "SpotSwap",
-      description:
-        "A parking spot sharing platform that allows users to rent out their unused parking spaces and find available spots in real-time. Includes GPS navigation, booking system, payment integration, and user reviews.",
-      image: "/images/SpotSwap/s1.png",
-      technologies: ["React Native", "Firebase", "Maps API", "Stripe"],
-      live: "#",
-      slug: "spotswap",
-      featured: false,
-      github: "#",
-    },
-    {
-      title: "Tijarat",
-      description:
-        "A full-featured eCommerce platform with user authentication, product catalog, shopping cart, and payment integration. Designed for seamless online shopping experience with advanced search and filtering.",
-      image: "/images/Tijarat/t1.png",
-      technologies: ["React Native", "Redux Toolkit", "Firebase", "Stripe"],
-      live: "#",
-      slug: "tijarat",
-      featured: true,
-      github: "#",
-    },
-    {
-      title: "WinRate",
-      description:
-        "A gaming performance tracking app that analyzes player statistics, provides insights for improvement, and tracks competitive gaming achievements across multiple platforms.",
-      image: "/images/WinRate/w1.png",
-      technologies: ["React Native", "Firebase", "Charts", "Gaming APIs"],
-      live: "#",
-      slug: "winrate",
-      featured: false,
-      github: "#",
-    },
-  ];
+export default async function Projects() {
+  const projects = await getProjects();
 
   const stats = [
-    { number: "15+", label: "Projects Delivered", icon: FaRocket },
+    { number: "20+", label: "Client Projects Shipped", icon: FaRocket },
     { number: "12+", label: "Tech Stack Tools", icon: FaCode },
     { number: "4.5+", label: "Years Experience", icon: FaStar },
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] relative overflow-hidden">
-      <div className="bg-animation" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen">
+      <div className="section-shell">
         <PageHero
-          badge={
-            <>
-              <FaHandSparkles className="text-[#06b6d4] shrink-0" />
-              Featured Projects
-              <FaStar className="text-[#ec4899] shrink-0" />
-            </>
-          }
+          badge="Featured Projects"
           title="My Projects"
           subtitle="4.5+ years building web and mobile apps. React Native, Node.js, Firebase. From UI to backend. Full stack projects: Next.js, Express, MongoDB, PostgreSQL. Web & mobile with scalable backends."
         >
@@ -78,14 +25,14 @@ export default function Projects() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="rounded-2xl p-5 sm:p-6 bg-[var(--bg-card)] border border-[var(--border)] card-luxury focus-within:ring-2 focus-within:ring-[#6366f1]/20 focus-within:ring-offset-2 focus-within:ring-offset-[var(--bg-page)]">
-                  <div className="inline-flex p-3 rounded-xl bg-[var(--bg-elevated)] mb-4 text-[#6366f1]">
+                <div className="rounded-2xl p-5 sm:p-6 bg-[var(--bg-card)] border border-[var(--border)] premium-card focus-within:ring-2 focus-within:ring-[#6366f1]/20 focus-within:ring-offset-2 focus-within:ring-offset-[var(--bg-page)] flex flex-col items-center gap-4">
+                  <div className="inline-flex p-3 rounded-xl bg-[var(--bg-elevated)] text-[#6366f1]">
                     <stat.icon className="text-2xl" />
                   </div>
-                  <div className="text-2xl sm:text-3xl font-bold gradient-text mb-2">
+                  <div className="text-2xl sm:text-3xl font-bold gradient-text leading-none">
                     {stat.number}
                   </div>
-                  <div className="text-[var(--text-muted)] text-sm font-medium">
+                  <div className="text-[var(--text-muted)] text-sm font-medium leading-relaxed max-w-[14rem]">
                     {stat.label}
                   </div>
                 </div>
@@ -96,21 +43,68 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mb-14 sm:mb-16">
-          {projects.map((project) => (
-            <div key={project.title} className="h-full">
-              <ProjectCard {...project} reduceMotion />
-            </div>
+          {projects.map((project, index) => (
+            <article key={project.title} className="premium-card overflow-hidden">
+              <div className="relative aspect-[16/10] bg-[var(--bg-surface)]">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-contain p-2 sm:p-3"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+                  priority={index < 2}
+                  quality={62}
+                />
+              </div>
+              <div className="p-4 sm:p-5">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)]">{project.title}</h3>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">{project.description}</p>
+                {project.technologies?.length ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs px-2.5 py-1 rounded-md border border-[var(--border)] text-[var(--text-muted)]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.slug ? (
+                    <Link
+                      href={`/projects/${project.slug}/`}
+                      prefetch
+                      className="inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm text-white bg-gradient-to-r from-[#566bff] to-[#8b5cf6] hover:brightness-110 transition"
+                    >
+                      View Details
+                    </Link>
+                  ) : null}
+                  {project.live && project.live !== "#" ? (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                    >
+                      Live Demo
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
           ))}
         </div>
 
         {/* Call to Action Section */}
         <div className="text-center mt-4 mb-8 sm:mb-12">
-          <div className="rounded-2xl p-8 sm:p-10 lg:p-12 bg-[var(--bg-card)] border border-[var(--border)] card-luxury relative overflow-hidden max-w-2xl mx-auto">
+          <div className="rounded-2xl p-8 sm:p-10 lg:p-12 bg-[var(--bg-card)] border border-[var(--border)] premium-card relative overflow-hidden max-w-2xl mx-auto">
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#6366f1]/10 to-transparent rounded-full blur-2xl" />
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#6366f1] to-[#ec4899] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#6366f1]/30">
               <FaRocket className="text-white text-xl sm:text-2xl" />
             </div>
-            <h2 className="font-heading title-section text-2xl sm:text-3xl lg:text-4xl text-[var(--text-primary)] mb-4">
+            <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl text-[var(--text-primary)] mb-4">
               <span className="gradient-text text-glow">More Coming Soon</span>
             </h2>
             <p className="text-[var(--text-secondary)] text-sm sm:text-base max-w-xl mx-auto leading-relaxed px-4">

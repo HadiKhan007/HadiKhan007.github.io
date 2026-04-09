@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact | Ali Haider - Full Stack React Native Developer",
+  title: "Contact | Ali Haider, Full Stack React Native Developer",
   description:
-    "Have a project in mind? Get in touch. I check email often and reply quickly.",
+    "Get in touch. I usually reply within a few hours. Quick turnaround is the norm.",
 };
 
 export default function ContactLayout({

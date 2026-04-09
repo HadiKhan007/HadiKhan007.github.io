@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { FaCheckCircle, FaArrowRight } from "react-icons/fa";
 import Container from "../ui/Container";

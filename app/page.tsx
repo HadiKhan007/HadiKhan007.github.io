@@ -1,25 +1,23 @@
-"use client";
+import dynamic from "next/dynamic";
+import HeroSection from "@/components/home/HeroSection";
+import AboutSection from "@/components/home/AboutSection";
+import SkillsSection from "@/components/home/SkillsSection";
+import ProjectsSection from "@/components/home/ProjectsSection";
 
-import Hero from "../components/sections/Hero";
-import WhyClientsChooseMe from "../components/sections/WhyClientsChooseMe";
-import Services from "../components/sections/Services";
-import WorkProcess from "../components/sections/WorkProcess";
-import TechStack from "../components/sections/TechStack";
-import Testimonials from "../components/sections/Testimonials";
-import WhyHireMe from "../components/sections/WhyHireMe";
-import ContactSection from "../components/sections/ContactSection";
+const ExperienceSection = dynamic(() => import("@/components/home/ExperienceSection"));
+const HighlightsSection = dynamic(() => import("@/components/home/HighlightsSection"));
+const ContactSectionV2 = dynamic(() => import("@/components/home/ContactSectionV2"));
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <WhyClientsChooseMe />
-      <Services />
-      <WorkProcess />
-      <TechStack />
-      <Testimonials />
-      <WhyHireMe />
-      <ContactSection />
-    </>
+    <div className="pb-8 sm:pb-12">
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ExperienceSection />
+      <HighlightsSection />
+      <ContactSectionV2 />
+    </div>
   );
 }

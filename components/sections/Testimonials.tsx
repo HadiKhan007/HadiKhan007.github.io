@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Container from "../ui/Container";
 import Section from "../ui/Section";
 

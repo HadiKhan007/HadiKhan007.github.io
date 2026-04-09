@@ -1,5 +1,3 @@
-"use client";
-
 import { FaSearch, FaCode, FaRocket, FaHeadset } from "react-icons/fa";
 import Container from "../ui/Container";
 import Section from "../ui/Section";

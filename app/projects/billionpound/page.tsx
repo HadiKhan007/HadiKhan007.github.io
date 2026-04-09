@@ -1,266 +1,59 @@
-"use client";
+import ProjectDetailPage from "../../../components/projects/ProjectDetailPage";
 
-import { motion } from "framer-motion";
-import { FaArrowLeft } from "react-icons/fa";
-import ScreenshotLightbox from "../../../components/ui/ScreenshotLightbox";
-
-export default function BillionPound() {
-  const images = [
-    "/images/BillionPound/b1.jpg",
-    "/images/BillionPound/b2.jpg",
-    "/images/BillionPound/b3.png",
-    "/images/BillionPound/b4.jpg",
-    "/images/BillionPound/b5.png",
-    "/images/BillionPound/b6.png",
-  ];
-  const screenshotLabels = [
-    "Login & Onboarding",
-    "Home & Dashboard",
-    "Workout Plans",
-    "Progress & Analytics",
-    "Exercise Library",
-    "Profile & Settings",
-  ];
-
-  const technologies = [
-    "React Native",
-    "Firebase",
-    "Redux Toolkit",
-    "React Navigation",
-    "AsyncStorage",
-    "React Native Charts",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "JWT Authentication",
-    "Cloudinary",
-    "Socket.io",
-  ];
-
-  const features = [
-    "Advanced Workout Planning & Scheduling",
-    "Real-time Progress Tracking & Analytics",
-    "Personalized Exercise Recommendations",
-    "Comprehensive Exercise Library with Videos",
-    "Social Challenges & Community Features",
-    "Offline Mode with Data Synchronization",
-    "Customizable User Profiles & Goals",
-    "Integration with Wearable Devices",
-    "Nutrition Tracking & Meal Planning",
-    "Achievement System & Gamification",
-    "Push Notifications & Reminders",
-    "Cross-platform Data Sync",
-  ];
-
+export default function BillionPoundPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] pt-24 relative overflow-hidden">
-      <div className="bg-animation" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366f1]/[0.02] to-transparent pointer-events-none" />
-      <div className="relative z-10">
-        <div className="border-b border-[var(--border)] bg-[var(--bg-card)]/80 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <a
-              href="/projects/"
-              className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[#6366f1] transition-colors duration-150 mb-4"
-            >
-              <FaArrowLeft className="text-sm" />
-              Back to Projects
-            </a>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-4">
-                Billion Pound
-              </h1>
-              <p className="text-xl text-[var(--text-secondary)] max-w-3xl">
-              A comprehensive fitness and gym tracking application that helps
-              users monitor workouts, track progress, and achieve fitness goals
-              with advanced analytics and personalized recommendations.
-            </p>
-          </motion.div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Project Overview */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-          className="grid lg:grid-cols-2 gap-12 mb-16"
-        >
-          <div>
-            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
-              Project Overview
-            </h2>
-            <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
-              Billion Pound is a comprehensive fitness and wellness application
-              designed to transform how users approach their fitness journey.
-              Built with React Native for cross-platform compatibility, this app
-              serves as a complete fitness companion that combines advanced
-              workout tracking, detailed progress analytics, and social
-              connectivity features.
-            </p>
-
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
-                Key Features
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 text-[var(--text-secondary)]"
-                  >
-                    <div className="w-2 h-2 rounded-full shrink-0" style={{ background: "#6366f1" }}></div>
-                    {feature}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
-                Technical Architecture
-              </h3>
-              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-                The app utilizes a robust tech stack with Firebase for real-time
-                data synchronization, Redux for state management, and custom
-                charting libraries for detailed progress visualization. The
-                backend is powered by Node.js and Express with MongoDB for
-                scalable data storage.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-              Technologies Used
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  className="tech-tag"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Challenges & Solutions */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">
-            Challenges & Solutions
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
-                Real-time Data Synchronization
-              </h3>
-              <p className="text-[var(--text-secondary)] mb-4">
-                Challenge: Seamless data sync across devices with offline support.
-              </p>
-              <p className="text-[#6366f1] text-sm">
-                Solution: Implemented Firebase Realtime Database with conflict
-                resolution algorithms and local caching using AsyncStorage.
-              </p>
-            </div>
-            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
-                Performance
-              </h3>
-              <p className="text-[var(--text-secondary)] mb-4">
-                Challenge: Large workout history and analytics without slowdown.
-              </p>
-              <p className="text-[#6366f1] text-sm">
-                Solution: Implemented data pagination, lazy loading, and
-                optimized database queries with proper indexing.
-              </p>
-            </div>
-            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
-                Cross-platform
-              </h3>
-              <p className="text-[var(--text-secondary)] mb-4">
-                Challenge: Consistent UI on iOS and Android across screen sizes.
-              </p>
-              <p className="text-[#6366f1] text-sm">
-                Solution: Used React Native&apos;s responsive design principles
-                with custom hooks for device detection and adaptive layouts.
-              </p>
-            </div>
-            <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)]">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
-                User engagement
-              </h3>
-              <p className="text-[var(--text-secondary)] mb-4">
-                Challenge: Keeping users motivated long-term.
-              </p>
-              <p className="text-[#6366f1] text-sm">
-                Solution: Implemented gamification elements, achievement
-                systems, and personalized recommendations based on user
-                behavior.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Image Gallery */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <ScreenshotLightbox
-            images={images}
-            title="Screenshots"
-            altPrefix="Billion Pound"
-            labels={screenshotLabels}
-          />
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-16"
-        >
-          <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-            Want to work together?
-          </h3>
-          <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
-            See more projects or reach out to discuss your next build.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/projects/"
-              className="text-white font-semibold py-3 px-8 rounded-xl transition-all duration-150 hover:-translate-y-0.5"
-              style={{ background: "linear-gradient(135deg,#6366f1,#ec4899)", boxShadow: "0 10px 30px rgba(99,102,241,0.3)" }}
-            >
-              View All Projects
-            </a>
-            <a
-              href="/contact/"
-              className="border border-[var(--border-hover)] text-[var(--text-secondary)] hover:bg-[var(--surface)] font-semibold py-3 px-8 rounded-xl transition-colors duration-150"
-            >
-              Contact
-            </a>
-          </div>
-        </motion.div>
-      </div>
-      </div>
-    </div>
+    <ProjectDetailPage
+      title="Billion Pound"
+      category="Fitness & Gym Tracking App"
+      description="A comprehensive fitness and gym tracking application that helps users monitor workouts, track progress, and achieve fitness goals with advanced analytics and personalized recommendations."
+      technologies={[
+        "React Native",
+        "Firebase",
+        "Redux Toolkit",
+        "React Navigation",
+        "AsyncStorage",
+        "React Native Charts",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "JWT Authentication",
+      ]}
+      keyHighlights={[
+        "Advanced workout planning and scheduling",
+        "Real-time progress tracking and analytics",
+        "Personalized exercise recommendations",
+        "Comprehensive exercise library",
+        "Offline mode with data sync",
+        "Achievement system and gamification",
+      ]}
+      challenges={[
+        {
+          title: "Real-time data synchronization",
+          challenge: "Syncing progress and workout history across devices with offline support.",
+          solution: "Implemented Firebase-based sync with local caching and conflict-safe updates.",
+        },
+        {
+          title: "Large data performance",
+          challenge: "Heavy workout history could slow list and chart rendering.",
+          solution: "Used pagination, lightweight rendering, and optimized query patterns.",
+        },
+      ]}
+      screenshots={[
+        "/images/BillionPound/b1.webp",
+        "/images/BillionPound/b2.webp",
+        "/images/BillionPound/b3.webp",
+        "/images/BillionPound/b4.webp",
+        "/images/BillionPound/b5.webp",
+        "/images/BillionPound/b6.webp",
+      ]}
+      screenshotLabels={[
+        "Login & Onboarding",
+        "Home & Dashboard",
+        "Workout Plans",
+        "Progress & Analytics",
+        "Exercise Library",
+        "Profile & Settings",
+      ]}
+    />
   );
 }

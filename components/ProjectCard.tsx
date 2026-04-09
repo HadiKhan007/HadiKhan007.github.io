@@ -1,19 +1,17 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  FaExternalLinkAlt,
   FaEye,
-  FaGithub,
   FaPlay,
   FaCode,
   FaStar,
 } from "react-icons/fa";
-import { useState } from "react";
+import { memo } from "react";
 
 const BLUR_DATA =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 224'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23f1f5f9' filter='url(%23b)'/%3E%3C/svg%3E";
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 224'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='10'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23111426' filter='url(%23b)'/%3E%3C/svg%3E";
 
 type Props = {
   title: string;
@@ -24,11 +22,11 @@ type Props = {
   slug?: string;
   featured?: boolean;
   github?: string;
-  /** Use CSS-only transitions (no Framer Motion) for lag-free scroll on projects page */
   reduceMotion?: boolean;
+  priority?: boolean;
 };
 
-export default function ProjectCard({
+function ProjectCard({
   title,
   description,
   image,
@@ -37,394 +35,89 @@ export default function ProjectCard({
   slug,
   featured = false,
   github,
-  reduceMotion = false,
+  reduceMotion = true,
+  priority = false,
 }: Props) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
   const detailsUrl = slug ? `/projects/${slug}/` : "#";
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  const wrapperClass = "group relative overflow-hidden rounded-2xl card-luxury focus-professional transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.02]";
-
-  if (reduceMotion) {
-    return (
-      <div className={wrapperClass} role="article" tabIndex={0}>
-        {featured && (
-          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
-            <div className="flex items-center gap-1 px-2.5 py-1 sm:px-3 bg-gradient-to-r from-[#6366f1] to-[#ec4899] text-white text-[10px] sm:text-xs font-semibold rounded-lg shadow-lg whitespace-nowrap">
-              <FaStar className="text-xs" />
-              Featured
-            </div>
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-[#ec4899]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
-        <div className="relative h-56 overflow-hidden rounded-t-2xl">
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-[var(--bg-elevated)] flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10 opacity-30 group-hover:opacity-80 transition-opacity duration-300" />
-          <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-110">
-            <Image
-              src={image}
-              alt={`${title} project screenshot`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              className="object-cover"
-              loading="lazy"
-              onLoad={handleImageLoad}
-              placeholder="blur"
-              blurDataURL={BLUR_DATA}
-            />
-          </div>
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-            {slug && (
-              <a href={detailsUrl} className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg focus-professional" title="View Project Details" aria-label={`View details for ${title}`}>
-                <FaEye size={20} />
-              </a>
-            )}
-            {live && live !== "#" && (
-              <a href={live} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg" title="View Live Demo" aria-label={`View live demo for ${title}`}>
-                <FaExternalLinkAlt size={20} />
-              </a>
-            )}
-            {github && github !== "#" && (
-              <a href={github} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-200 shadow-lg" title="View Source Code" aria-label={`View source code for ${title}`}>
-                <FaGithub size={20} />
-              </a>
-            )}
-          </div>
-          <div className="absolute top-4 left-4 z-20 hidden sm:flex flex-wrap gap-2">
-            {technologies.slice(0, 2).map((tech) => (
-              <span key={tech} className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20 shadow-lg">{tech}</span>
-            ))}
-            {technologies.length > 2 && (
-              <span className="px-3 py-1.5 bg-gradient-to-r from-[#6366f1]/80 to-[#ec4899]/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg">+{technologies.length - 2} more</span>
-            )}
-          </div>
-        </div>
-        <div className="relative z-10 p-4 sm:p-6">
-          <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)] group-hover:text-[var(--primary)] transition-colors duration-200">{title}</h3>
-          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">{description}</p>
-          {technologies.length > 0 && (
-            <div className="mb-4 sm:mb-5 flex flex-wrap gap-2">
-              {technologies.map((tech) => (
-                <span key={tech} className="px-3 py-1.5 bg-[var(--surface)] text-[var(--text-primary)] text-xs font-medium rounded-lg border border-[var(--border)] hover:border-[var(--primary)]/40 transition-colors duration-200 cursor-default">{tech}</span>
-              ))}
-            </div>
-          )}
-          <div className="flex flex-col gap-3">
-            {slug && (
-              <a href={detailsUrl} className="group/btn relative w-full overflow-hidden btn-luxury hover-lift focus-professional min-h-[48px] flex items-center justify-center rounded-xl" aria-label={`View details for ${title}`}>
-                <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
-                  <FaEye className="text-sm shrink-0" />
-                  View Details
-                </span>
-              </a>
-            )}
-            <div className="flex gap-2">
-              {live && live !== "#" && (
-                <a href={live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
-                  <FaPlay className="text-sm" /> Live Demo
-                </a>
-              )}
-              {github && github !== "#" && (
-                <a href={github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
-                  <FaCode className="text-sm" /> Code
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const wrapperClass = "group relative overflow-hidden rounded-2xl card-luxury focus-professional";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative overflow-hidden rounded-2xl card-luxury focus-professional"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      role="article"
-      tabIndex={0}
-    >
-      {/* Featured badge */}
-      <AnimatePresence>
-        {featured && (
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            exit={{ scale: 0, rotate: 180 }}
-            transition={{ type: "spring", stiffness: 200, damping: 10 }}
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30"
-          >
-            <div className="flex items-center gap-1 px-2.5 py-1 sm:px-3 bg-gradient-to-r from-[#6366f1] to-[#ec4899] text-white text-[10px] sm:text-xs font-semibold rounded-lg shadow-lg whitespace-nowrap">
-              <FaStar className="text-xs animate-pulse" />
-              Featured
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Animated background gradient on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-[#ec4899]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
-
-      {/* Image container with enhanced overlay */}
-      <div className="relative h-56 overflow-hidden rounded-t-2xl">
-        {/* Loading skeleton */}
-        <AnimatePresence>
-          {!imageLoaded && (
-            <motion.div
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-[var(--bg-elevated)] flex items-center justify-center"
-            >
-              <div className="w-8 h-8 border-2 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10"
-          animate={{ opacity: isHovered ? 0.8 : 0.3 }}
-          transition={{ duration: 0.3 }}
-        />
-        <motion.div
-          className="absolute inset-0"
-          animate={{ scale: isHovered ? 1.1 : 1 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
+    <div className={wrapperClass} role="article" tabIndex={0} data-reduce-motion={reduceMotion}>
+      {featured && (
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
+          <div className="flex items-center gap-1 px-2.5 py-1 sm:px-3 bg-gradient-to-r from-[#6366f1] to-[#ec4899] text-white text-[10px] sm:text-xs font-semibold rounded-lg shadow-lg whitespace-nowrap">
+            <FaStar className="text-xs" />
+            Featured
+          </div>
+        </div>
+      )}
+      <div className="relative h-56 overflow-hidden rounded-t-2xl bg-[#0b0f19]">
+        <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
+        <div className="absolute inset-0">
           <Image
             src={image}
             alt={`${title} project screenshot`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
             className="object-cover"
-            loading="lazy"
-            onLoad={handleImageLoad}
+            loading={priority ? "eager" : "lazy"}
+            priority={priority}
+            quality={62}
             placeholder="blur"
             blurDataURL={BLUR_DATA}
+            decoding="async"
           />
-        </motion.div>
-
-        {/* Enhanced hover overlay with quick actions */}
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 bg-black/70 backdrop-blur-sm z-20 flex items-center justify-center gap-4"
-            >
-              {slug && (
-                <motion.a
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  href={detailsUrl}
-                  className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 focus-professional"
-                  title="View Project Details"
-                  aria-label={`View details for ${title}`}
-                >
-                  <FaEye size={20} />
-                </motion.a>
-              )}
-
-              {live && live !== "#" && (
-                <motion.a
-                  whileHover={{ scale: 1.15, rotate: -5 }}
-                  href={live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-green-500/25"
-                  title="View Live Demo"
-                  aria-label={`View live demo for ${title}`}
-                >
-                  <FaExternalLinkAlt size={20} />
-                </motion.a>
-              )}
-
-              {github && github !== "#" && (
-                <motion.a
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-gray-500/25"
-                  title="View Source Code"
-                  aria-label={`View source code for ${title}`}
-                >
-                  <FaGithub size={20} />
-                </motion.a>
-              )}
-            </motion.div>
+        </div>
+        <div className="absolute top-4 left-4 z-20 hidden sm:flex flex-wrap gap-2">
+          {technologies.slice(0, 2).map((tech) => (
+            <span key={tech} className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20 shadow-lg">{tech}</span>
+          ))}
+          {technologies.length > 2 && (
+            <span className="px-3 py-1.5 bg-gradient-to-r from-[#6366f1]/80 to-[#ec4899]/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg">+{technologies.length - 2} more</span>
           )}
-        </AnimatePresence>
-
-        {/* Top tech tags - hidden on mobile to avoid overlap with Featured badge; bottom tags show full list */}
-        <div className="absolute top-4 left-4 z-20 hidden sm:block">
-          <motion.div
-            className="flex flex-wrap gap-2"
-            animate={{ opacity: isHovered ? 0.8 : 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {technologies.slice(0, 2).map((tech, index) => (
-              <motion.span
-                key={tech}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-                className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20 shadow-lg"
-              >
-                {tech}
-              </motion.span>
-            ))}
-            {technologies.length > 2 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                  className="px-3 py-1.5 bg-gradient-to-r from-[#6366f1]/80 to-[#ec4899]/80 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 shadow-lg"
-              >
-                +{technologies.length - 2} more
-              </motion.span>
-            )}
-          </motion.div>
         </div>
       </div>
-
-      {/* Enhanced content section */}
       <div className="relative z-10 p-4 sm:p-6">
-        <h3
-          className={`text-xl font-bold mb-3 transition-colors duration-200 ${isHovered ? "text-[var(--primary)]" : "text-[var(--text-primary)]"}`}
-        >
-          {title}
-        </h3>
-
-        <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">
-          {description}
-        </p>
-
-        {/* Full technology list - always visible, primary on mobile */}
+        <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)] group-hover:text-[var(--primary)] transition-colors duration-200">{title}</h3>
+        <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">{description}</p>
         {technologies.length > 0 && (
-          <motion.div
-            className="mb-4 sm:mb-5"
-            animate={{ opacity: isHovered ? 1 : 0.9 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex flex-wrap gap-2">
-              {technologies.map((tech, index) => (
-                <motion.span
-                  key={tech}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    delay: index * 0.05,
-                    type: "spring",
-                    stiffness: 300,
-                  }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="px-3 py-1.5 bg-[var(--surface)] text-[var(--text-primary)] text-xs font-medium rounded-lg border border-[var(--border)] hover:border-[var(--primary)]/40 transition-all duration-300 cursor-default"
-                >
-                  {tech}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
+          <div className="mb-4 sm:mb-5 flex flex-wrap gap-2">
+            {technologies.map((tech) => (
+              <span key={tech} className="px-3 py-1.5 bg-[var(--surface)] text-[var(--text-primary)] text-xs font-medium rounded-lg border border-[var(--border)] hover:border-[var(--primary)]/40 transition-colors duration-200 cursor-default">{tech}</span>
+            ))}
+          </div>
         )}
-
-        {/* Enhanced action buttons */}
         <div className="flex flex-col gap-3">
           {slug && (
-            <motion.a
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
+            <Link
               href={detailsUrl}
-              className="group/btn relative w-full overflow-hidden btn-luxury hover-lift focus-professional min-h-[48px] flex items-center justify-center rounded-xl"
+              prefetch
+              className="group/btn relative w-full min-h-[48px] flex items-center justify-center rounded-xl text-white font-semibold bg-gradient-to-r from-[#566bff] to-[#8b5cf6] hover:brightness-110 transition"
               aria-label={`View details for ${title}`}
             >
               <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
                 <FaEye className="text-sm shrink-0" />
                 View Details
               </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover/btn:opacity-20"
-                animate={{ opacity: isHovered ? 0.2 : 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
+            </Link>
           )}
-
           <div className="flex gap-2">
             {live && live !== "#" && (
-              <motion.a
-                whileHover={{ scale: 1.02, y: -1 }}
-                href={live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 group/btn flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-300 border border-white/20 focus-professional"
-                aria-label={`View live demo for ${title}`}
-              >
-                <FaPlay className="text-sm" />
-                Live Demo
-              </motion.a>
+              <a href={live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
+                <FaPlay className="text-sm" /> Live Demo
+              </a>
             )}
-
             {github && github !== "#" && (
-              <motion.a
-                whileHover={{ scale: 1.02, y: -1 }}
-                href={github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 group/btn flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-300 border border-white/20 focus-professional"
-                aria-label={`View source code for ${title}`}
-              >
-                <FaCode className="text-sm" />
-                Code
-              </motion.a>
+              <a href={github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 glass text-white hover:bg-white/20 rounded-lg transition-all duration-200 border border-white/20 focus-professional">
+                <FaCode className="text-sm" /> Code
+              </a>
             )}
           </div>
         </div>
       </div>
-
-      {/* Enhanced decorative elements */}
-      <motion.div
-        className="absolute -top-10 -right-10 w-24 h-24 bg-[#6366f1]/10 rounded-full blur-xl pointer-events-none"
-        animate={{
-          scale: isHovered ? 1.2 : 1,
-          opacity: isHovered ? 0.6 : 0.3,
-        }}
-        transition={{ duration: 0.5 }}
-      />
-      <motion.div
-        className="absolute -bottom-10 -left-10 w-20 h-20 bg-[#ec4899]/8 rounded-full blur-lg pointer-events-none"
-        animate={{
-          scale: isHovered ? 1.3 : 1,
-          opacity: isHovered ? 0.5 : 0.2,
-        }}
-        transition={{ duration: 0.7 }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#6366f1]/5 rounded-full blur-2xl pointer-events-none"
-        animate={{
-          scale: isHovered ? 1.5 : 1,
-          opacity: isHovered ? 0.4 : 0.1,
-        }}
-        transition={{ duration: 0.8 }}
-      />
-    </motion.div>
+    </div>
   );
 }
+
+export default memo(ProjectCard);

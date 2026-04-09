@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   FaArrowRight,
@@ -65,30 +64,15 @@ export default function Hero() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             {/* Left: Copy + CTAs */}
             <div className="text-center lg:text-left order-2 lg:order-1">
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-heading title-hero text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 max-w-4xl mx-auto lg:mx-0"
-          >
+          <h1 className="font-heading title-hero text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 max-w-4xl mx-auto lg:mx-0">
                 <span className="gradient-text">Hi, I&apos;m Ali Haider</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="text-[var(--text-secondary)] text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-5 leading-relaxed px-4 sm:px-0 text-center lg:text-left"
-          >
+          <p className="text-[var(--text-secondary)] text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-5 leading-relaxed px-4 sm:px-0 text-center lg:text-left">
                 Full-stack React Native developer with 4.5+ years of experience. I build web and mobile apps from idea to launch: clean UIs, scalable backends (Node.js, Firebase, PostgreSQL), and on-time delivery. One codebase for iOS and Android when it fits; custom APIs and real-time features when you need them.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.35 }}
-                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-8"
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-8">
             <Link
                   href="/projects/"
                   className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--primary)] text-white font-semibold hover:bg-[var(--primary-light)] transition-colors duration-200 min-h-[48px]"
@@ -113,18 +97,13 @@ export default function Hero() {
                     <FaHandPaper className="text-sm" />
                   </span>
             </Link>
-          </motion.div>
+          </div>
             </div>
 
             {/* Right: Code panel + floating cards (desktop only, hidden on mobile) */}
             <div className="relative order-1 lg:order-2 min-h-0 sm:min-h-[380px] w-full hidden lg:flex flex-col items-center justify-center gap-0 sm:gap-0">
               {/* Code snippet panel */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="relative w-full max-w-md rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-card)]/90 backdrop-blur-sm shadow-xl"
-              >
+              <div className="relative w-full max-w-md rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-card)]/90 backdrop-blur-sm shadow-xl">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)]/80">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]" />
                   <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]" />
@@ -160,21 +139,13 @@ export default function Hero() {
                     <span className="text-[var(--text-secondary)]">);</span>
                   </p>
                   <p className="text-[var(--text-muted)] mt-2">
-                    <span className="text-[#64748b]">// Result: Your product, shipped.</span>
+                    <span className="text-[#64748b]">{/* Result: Your product, shipped. */}</span>
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Floating feature cards - desktop: absolute around code */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: [0, -6, 0] }}
-                transition={{
-                  opacity: { duration: 0.4, delay: 0.5 },
-                  y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
-                }}
-                className="absolute -top-2 left-0 right-auto rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex"
-              >
+              <div className="absolute -top-2 left-0 right-auto rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex">
                 <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--surface)] ${floatingCards[0].color}`}>
                   <Card0Icon className="text-lg" />
                 </div>
@@ -182,16 +153,8 @@ export default function Hero() {
                   <p className="font-semibold text-[var(--text-primary)] text-sm">{floatingCards[0].title}</p>
                   <p className="text-xs text-[var(--text-muted)]">{floatingCards[0].subtitle}</p>
                 </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: [0, -5, 0] }}
-                transition={{
-                  opacity: { duration: 0.4, delay: 0.6 },
-                  y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.3 },
-                }}
-                className="absolute top-1/2 -translate-y-1/2 right-0 lg:-right-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex"
-              >
+              </div>
+              <div className="absolute top-1/2 -translate-y-1/2 right-0 lg:-right-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex">
                 <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--surface)] ${floatingCards[1].color}`}>
                   <Card1Icon className="text-lg" />
                 </div>
@@ -199,16 +162,8 @@ export default function Hero() {
                   <p className="font-semibold text-[var(--text-primary)] text-sm">{floatingCards[1].title}</p>
                   <p className="text-xs text-[var(--text-muted)]">{floatingCards[1].subtitle}</p>
                 </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: [0, -7, 0] }}
-                transition={{
-                  opacity: { duration: 0.4, delay: 0.7 },
-                  y: { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 },
-                }}
-                className="absolute -bottom-2 left-0 right-auto rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex"
-              >
+              </div>
+              <div className="absolute -bottom-2 left-0 right-auto rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 max-w-[180px] hidden sm:flex">
                 <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--surface)] ${floatingCards[2].color}`}>
                   <Card2Icon className="text-lg" />
                 </div>
@@ -216,21 +171,15 @@ export default function Hero() {
                   <p className="font-semibold text-[var(--text-primary)] text-sm">{floatingCards[2].title}</p>
                   <p className="text-xs text-[var(--text-muted)]">{floatingCards[2].subtitle}</p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Mobile: cards stacked below code, full labels visible, same float animation */}
               <div className="flex flex-col sm:hidden gap-3 mt-4 w-full max-w-md">
                 {[0, 1, 2].map((i) => {
                   const CardIcon = floatingCards[i].icon;
                   return (
-                    <motion.div
+                    <div
                       key={floatingCards[i].title}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: [0, -6, 0] }}
-                      transition={{
-                        opacity: { duration: 0.4, delay: 0.5 + i * 0.15 },
-                        y: { duration: 2.8 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 },
-                      }}
                       className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)]/95 backdrop-blur-sm px-4 py-3 shadow-lg flex items-center gap-3 w-full"
                     >
                       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--surface)] ${floatingCards[i].color}`}>
@@ -240,7 +189,7 @@ export default function Hero() {
                         <p className="font-semibold text-[var(--text-primary)] text-sm">{floatingCards[i].title}</p>
                         <p className="text-xs text-[var(--text-muted)]">{floatingCards[i].subtitle}</p>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
@@ -248,12 +197,7 @@ export default function Hero() {
           </div>
 
           {/* Stats row - BinaryBrix style */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.65 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10 lg:mt-14"
-          >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10 lg:mt-14">
             {stats.map((stat) => (
               <div
                 key={stat.label}
@@ -264,7 +208,7 @@ export default function Hero() {
                 <div className="text-xs sm:text-sm font-medium text-[var(--text-muted)] mt-0.5">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </Container>
     </section>
     </>

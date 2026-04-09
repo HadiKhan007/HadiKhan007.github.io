@@ -14,7 +14,10 @@ const projectRoot = getProjectRoot();
 const nextConfig = {
   output: "export",
   trailingSlash: true,
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    qualities: [62, 68, 72, 75],
+  },
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,

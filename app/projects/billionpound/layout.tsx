@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Billion Pound | Ali Haider - Fitness App Case Study",
+  title: "Billion Pound | Ali Haider, Fitness App Case Study",
   description:
     "Comprehensive fitness and gym tracking app. React Native, Firebase, Redux. Workout plans, progress analytics, personalized recommendations.",
 };
