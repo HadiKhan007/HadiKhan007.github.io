@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import ProjectDetailPage from "../../../components/projects/ProjectDetailPage";
 import { NEW_PROJECTS_BY_SLUG } from "../../../lib/newProjects";
 import { getProjects, BASE_PROJECTS_DETAILS } from "../../../lib/projects";
@@ -6,6 +7,33 @@ import { getProjects, BASE_PROJECTS_DETAILS } from "../../../lib/projects";
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  
+  // Check NEW_PROJECTS first
+  const newProject = NEW_PROJECTS_BY_SLUG.get(slug);
+  if (newProject) {
+    return {
+      title: `${newProject.title} | Ali Haider Portfolio`,
+      description: newProject.shortDescription,
+    };
+  }
+  
+  // Check BASE_PROJECTS
+  const baseProject = BASE_PROJECTS_DETAILS[slug];
+  if (baseProject) {
+    return {
+      title: `${baseProject.title} | Ali Haider Portfolio`,
+      description: baseProject.description,
+    };
+  }
+  
+  return {
+    title: "Project | Ali Haider Portfolio",
+    description: "Project details",
+  };
+}
 
 export async function generateStaticParams() {
   const projects = await getProjects();
