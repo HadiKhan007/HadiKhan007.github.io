@@ -19,10 +19,10 @@ export default async function ProjectsSection() {
 
       <div className="mt-6 grid md:grid-cols-2 xl:grid-cols-3 gap-4">
         {projects.map((project, index) => (
-          <Link
+          <a
             key={project.title}
-            href={project.slug ? `/projects/${project.slug}` : "/projects/"}
-            className="premium-card overflow-hidden group"
+            href={project.slug ? `/projects/${project.slug}/` : "/projects/"}
+            className="premium-card overflow-hidden group block"
           >
             <div className="relative aspect-[16/10] bg-[var(--bg-surface)]">
               <Image
@@ -46,7 +46,7 @@ export default async function ProjectsSection() {
                 ))}
               </div>
             </div>
-          </Link>
+          </a>
         ))}
       </div>
     </section>

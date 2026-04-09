@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   FaEye,
   FaPlay,
@@ -90,9 +89,8 @@ function ProjectCard({
         )}
         <div className="flex flex-col gap-3">
           {slug && (
-            <Link
+            <a
               href={detailsUrl}
-              prefetch
               className="group/btn relative w-full min-h-[48px] flex items-center justify-center rounded-xl text-white font-semibold bg-gradient-to-r from-[#566bff] to-[#8b5cf6] hover:brightness-110 transition"
               aria-label={`View details for ${title}`}
             >
@@ -100,7 +98,7 @@ function ProjectCard({
                 <FaEye className="text-sm shrink-0" />
                 View Details
               </span>
-            </Link>
+            </a>
           )}
           <div className="flex gap-2">
             {live && live !== "#" && (

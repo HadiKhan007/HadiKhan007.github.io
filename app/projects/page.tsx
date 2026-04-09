@@ -73,13 +73,12 @@ export default async function Projects() {
                 ) : null}
                 <div className="mt-4 flex flex-wrap gap-2">
                   {project.slug ? (
-                    <Link
+                    <a
                       href={`/projects/${project.slug}/`}
-                      prefetch
                       className="inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm text-white bg-gradient-to-r from-[#566bff] to-[#8b5cf6] hover:brightness-110 transition"
                     >
                       View Details
-                    </Link>
+                    </a>
                   ) : null}
                   {project.live && project.live !== "#" ? (
                     <a
