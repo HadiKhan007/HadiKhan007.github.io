@@ -27,7 +27,7 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
     slug: "fgs",
     title: "FGS",
     category: "Inventory Management App",
-    cardImage: imagePath("FGS", "card.webp"),
+    cardImage: imagePath("FGS", "6.5_ _ 1.png"),
     shortDescription:
       "A high-performance inventory management app with clean operations flow, stock visibility, and fast everyday usage.",
     fullDescription:
@@ -58,10 +58,10 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
       },
     ],
     screenshots: [
-      imagePath("FGS", "6.5_ _ 1.webp"),
-      imagePath("FGS", "6.5_ _ 3.webp"),
-      imagePath("FGS", "6.5_ _ 4.webp"),
-      imagePath("FGS", "6.5_ _ 5.webp"),
+      imagePath("FGS", "6.5_ _ 1.png"),
+      imagePath("FGS", "6.5_ _ 3.png"),
+      imagePath("FGS", "6.5_ _ 4.png"),
+      imagePath("FGS", "6.5_ _ 5.png"),
     ],
     screenshotLabels: [
       "Inventory Dashboard",
@@ -75,7 +75,7 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
     slug: "fibber-ai",
     title: "Fibber AI",
     category: "Voice Analysis AI App",
-    cardImage: imagePath("FibberAI", "8.webp"),
+    cardImage: imagePath("FibberAI", "8.png"),
     shortDescription:
       "A voice analysis AI app that transforms speech signals into practical insights through a fast and elegant interface.",
     fullDescription:
@@ -106,12 +106,12 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
       },
     ],
     screenshots: [
-      imagePath("FibberAI", "8.webp"),
-      imagePath("FibberAI", "9.webp"),
-      imagePath("FibberAI", "2049.webp"),
-      imagePath("FibberAI", "5 (1).webp"),
-      imagePath("FibberAI", "7.webp"),
-      imagePath("FibberAI", "11.webp"),
+      imagePath("FibberAI", "8.png"),
+      imagePath("FibberAI", "9.png"),
+      imagePath("FibberAI", "2049.png"),
+      imagePath("FibberAI", "5 (1).png"),
+      imagePath("FibberAI", "7.png"),
+      imagePath("FibberAI", "11.png"),
     ],
     screenshotLabels: [
       "Home screen",
@@ -127,7 +127,7 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
     slug: "spendsail",
     title: "SpendSail",
     category: "AI Expense Management App",
-    cardImage: imagePath("SpendSail", "card.webp"),
+    cardImage: imagePath("SpendSail", "1.png"),
     shortDescription:
       "An AI expense management app that simplifies tracking, categorization, and financial visibility for daily users and teams.",
     fullDescription:
@@ -158,11 +158,11 @@ export const NEW_PROJECTS: NewProjectDetail[] = [
       },
     ],
     screenshots: [
-      imagePath("SpendSail", "1.webp"),
-      imagePath("SpendSail", "2.webp"),
-      imagePath("SpendSail", "3.webp"),
-      imagePath("SpendSail", "4.webp"),
-      imagePath("SpendSail", "5.webp"),
+      imagePath("SpendSail", "1.png"),
+      imagePath("SpendSail", "2.png"),
+      imagePath("SpendSail", "3.png"),
+      imagePath("SpendSail", "4.png"),
+      imagePath("SpendSail", "5.png"),
     ],
     screenshotLabels: [
       "Expense Dashboard",
